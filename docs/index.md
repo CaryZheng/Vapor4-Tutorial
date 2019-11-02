@@ -4,7 +4,7 @@
 
 本教程主要是针对 Vapor 4 的速成指南。
 
-## Swift社区
+## Swift 社区
 
 SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
 
