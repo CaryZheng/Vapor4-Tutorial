@@ -1,0 +1,15 @@
+site_name: Vapor4 速成指南
+theme:
+  name: 'material'
+  palette:
+    primary: 'black'
+    accent: 'blue'
+pages:
+- 序: index.md
+- 安装 Vapor:
+  - macOS: install_mac.md
+  - Linux: install_linux.md
+- Hello World: hello_world.md
+- 项目结构: install_folder_structure.md
+- 数据库: install_database.md
+- 部署: deploy.md
