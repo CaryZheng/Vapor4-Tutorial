@@ -230,10 +230,112 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Hello World
+      </label>
+    
     <a href="./" title="Hello World" class="md-nav__link md-nav__link--active">
       Hello World
     </a>
     
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="创建项目" class="md-nav__link">
+    创建项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="运行项目" class="md-nav__link">
+    运行项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xcode" title="生成 Xcode 项目" class="md-nav__link">
+    生成 Xcode 项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="目录结构" class="md-nav__link">
+    目录结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public" title="Public" class="md-nav__link">
+    Public
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sources" title="Sources" class="md-nav__link">
+    Sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#app" title="App" class="md-nav__link">
+    App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" title="Run" class="md-nav__link">
+    Run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" title="Tests" class="md-nav__link">
+    Tests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packageswift" title="Package.swift" class="md-nav__link">
+    Package.swift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -243,19 +345,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install_folder_structure/" title="项目结构" class="md-nav__link">
-      项目结构
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../install_database/" title="数据库" class="md-nav__link">
+    <a href="../database/" title="数据库" class="md-nav__link">
       数据库
     </a>
   </li>
@@ -290,6 +380,95 @@
     
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="创建项目" class="md-nav__link">
+    创建项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="运行项目" class="md-nav__link">
+    运行项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xcode" title="生成 Xcode 项目" class="md-nav__link">
+    生成 Xcode 项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="目录结构" class="md-nav__link">
+    目录结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public" title="Public" class="md-nav__link">
+    Public
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sources" title="Sources" class="md-nav__link">
+    Sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#app" title="App" class="md-nav__link">
+    App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" title="Run" class="md-nav__link">
+    Run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" title="Tests" class="md-nav__link">
+    Tests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packageswift" title="Package.swift" class="md-nav__link">
+    Package.swift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -302,6 +481,119 @@
                 
                 
                 <h1 id="hello-world">Hello World</h1>
+<p>本章教程教将带你创建第一个 Vapor 项目。</p>
+<h2 id="_1">创建项目</h2>
+<p>通过 vapor 命令行工具创建项目，项目名称命名为 <code>Vapor4Example</code>。</p>
+<pre><code>vapor new Vapor4Example -branch=4
+</code></pre>
+
+<p>创建成功后，将输出如下信息。</p>
+<pre><code>Cloning Template [Done]
+Updating Package Name [Done]
+Initializing git repository [Done]
+
+                                             **
+                                           **~~**
+                                         **~~~~~~**
+                                       **~~~~~~~~~~**
+                                     **~~~~~~~~~~~~~~**
+                                   **~~~~~~~~~~~~~~~~~~**
+                                 **~~~~~~~~~~~~~~~~~~~~~~**
+                                **~~~~~~~~~~~~~~~~~~~~~~~~**
+                               **~~~~~~~~~~~~~~~~~~~~~~~~~~**
+                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+                              **~~~~~~~~~~~~~~~~~~~~~++++~~~**
+                               **~~~~~~~~~~~~~~~~~~~++++~~~**
+                                ***~~~~~~~~~~~~~~~++++~~~***
+                                  ****~~~~~~~~~~++++~~****
+                                     *****~~~~~~~~~*****
+                                        *************
+
+                               _       __    ___   ___   ___
+                              \ \  /  / /\  | |_) / / \ | |_)
+                               \_\/  /_/--\ |_|   \_\_/ |_| \
+                                 a web framework for Swift
+
+                          Project &quot;Vapor4Example&quot; has been created.
+                   Type `cd Vapor4Example` to enter the project directory.
+                   Use `vapor cloud deploy` to host your project for free!
+                                           Enjoy!
+</code></pre>
+
+<h2 id="_2">运行项目</h2>
+<p>此时，我们先不分析代码，先将该 vapor 项目 run 起来，看看最终效果。</p>
+<p>步骤如下：</p>
+<ul>
+<li>
+<p>执行 <code>cd Vapor4Example</code> 进入到刚创建好的项目目录中。</p>
+</li>
+<li>
+<p>通过如下命令 build 项目代码。</p>
+</li>
+</ul>
+<pre><code>vapor build
+</code></pre>
+
+<p>build 成功后将输出如下信息。</p>
+<pre><code>Building Project [Done]
+</code></pre>
+
+<ul>
+<li>通过如下命令 run 项目。</li>
+</ul>
+<pre><code>vapor run
+</code></pre>
+
+<p>这时候将输出如下信息。</p>
+<pre><code>Running app ...
+[ NOTICE ] Server starting on http://127.0.0.1:8080
+</code></pre>
+
+<p>然后访问 <code>http://127.0.0.1:8080</code> 地址，如果返回 <code>It works!</code>，则意味着你的第一个 vapor 项目已经 run 成功了。</p>
+<h2 id="xcode">生成 Xcode 项目</h2>
+<p>执行 <code>vapor xcode</code> 命令，将会自动生成一个完整的 Xcode 项目。</p>
+<pre><code>$ vapor xcode
+Generating Xcode Project [Done]
+Select the `Run` scheme to run.
+Open Xcode project?
+y/n&gt; y
+Opening Xcode project...
+</code></pre>
+
+<p>可以选择 Xcode 中的 <code>Run</code> scheme 进行编译运行。</p>
+<p>如图所示</p>
+<p><img alt="xcode" src="../img/xcode.png" /></p>
+<h2 id="_3">目录结构</h2>
+<p>接下来将具体分析下项目目录结构，如下所示。</p>
+<pre><code>.
+├── Public
+├── Sources
+│   ├── App
+│   │   ├── Controllers
+│   │   ├── Migrations
+│   │   ├── Models
+│   │   ├── app.swift
+│   │   ├── configure.swift
+│   │   └── routes.swift
+│   └── Run
+│       └── main.swift
+├── Tests
+│   └── AppTests
+└── Package.swift
+</code></pre>
+
+<h3 id="public">Public</h3>
+<p>TODO</p>
+<h3 id="sources">Sources</h3>
+<p>该目录用于存放源代码。</p>
+<h4 id="app">App</h4>
+<p>TODO</p>
+<h4 id="run">Run</h4>
+<p>TODO</p>
+<h4 id="tests">Tests</h4>
+<p>TODO</p>
+<h3 id="packageswift">Package.swift</h3>
 <p>TODO</p>
                 
                   
@@ -336,13 +628,13 @@
           </a>
         
         
-          <a href="../install_folder_structure/" title="项目结构" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../database/" title="数据库" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                项目结构
+                数据库
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

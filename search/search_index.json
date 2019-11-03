@@ -52,61 +52,71 @@
         }, 
         {
             "location": "/hello_world/", 
-            "text": "Hello World\n\n\nTODO", 
+            "text": "Hello World\n\n\n\u672c\u7ae0\u6559\u7a0b\u6559\u5c06\u5e26\u4f60\u521b\u5efa\u7b2c\u4e00\u4e2a Vapor \u9879\u76ee\u3002\n\n\n\u521b\u5efa\u9879\u76ee\n\n\n\u901a\u8fc7 vapor \u547d\u4ee4\u884c\u5de5\u5177\u521b\u5efa\u9879\u76ee\uff0c\u9879\u76ee\u540d\u79f0\u547d\u540d\u4e3a \nVapor4Example\n\u3002\n\n\nvapor new Vapor4Example -branch=4\n\n\n\n\n\u521b\u5efa\u6210\u529f\u540e\uff0c\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002\n\n\nCloning Template [Done]\nUpdating Package Name [Done]\nInitializing git repository [Done]\n\n                                             **\n                                           **~~**\n                                         **~~~~~~**\n                                       **~~~~~~~~~~**\n                                     **~~~~~~~~~~~~~~**\n                                   **~~~~~~~~~~~~~~~~~~**\n                                 **~~~~~~~~~~~~~~~~~~~~~~**\n                                **~~~~~~~~~~~~~~~~~~~~~~~~**\n                               **~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~++++~~~**\n                               **~~~~~~~~~~~~~~~~~~~++++~~~**\n                                ***~~~~~~~~~~~~~~~++++~~~***\n                                  ****~~~~~~~~~~++++~~****\n                                     *****~~~~~~~~~*****\n                                        *************\n\n                               _       __    ___   ___   ___\n                              \\ \\  /  / /\\  | |_) / / \\ | |_)\n                               \\_\\/  /_/--\\ |_|   \\_\\_/ |_| \\\n                                 a web framework for Swift\n\n                          Project \nVapor4Example\n has been created.\n                   Type `cd Vapor4Example` to enter the project directory.\n                   Use `vapor cloud deploy` to host your project for free!\n                                           Enjoy!\n\n\n\n\n\u8fd0\u884c\u9879\u76ee\n\n\n\u6b64\u65f6\uff0c\u6211\u4eec\u5148\u4e0d\u5206\u6790\u4ee3\u7801\uff0c\u5148\u5c06\u8be5 vapor \u9879\u76ee run \u8d77\u6765\uff0c\u770b\u770b\u6700\u7ec8\u6548\u679c\u3002\n\n\n\u6b65\u9aa4\u5982\u4e0b\uff1a\n\n\n\n\n\n\n\u6267\u884c \ncd Vapor4Example\n \u8fdb\u5165\u5230\u521a\u521b\u5efa\u597d\u7684\u9879\u76ee\u76ee\u5f55\u4e2d\u3002\n\n\n\n\n\n\n\u901a\u8fc7\u5982\u4e0b\u547d\u4ee4 build \u9879\u76ee\u4ee3\u7801\u3002\n\n\n\n\n\n\nvapor build\n\n\n\n\nbuild \u6210\u529f\u540e\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002\n\n\nBuilding Project [Done]\n\n\n\n\n\n\n\u901a\u8fc7\u5982\u4e0b\u547d\u4ee4 run \u9879\u76ee\u3002\n\n\n\n\nvapor run\n\n\n\n\n\u8fd9\u65f6\u5019\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002\n\n\nRunning app ...\n[ NOTICE ] Server starting on http://127.0.0.1:8080\n\n\n\n\n\u7136\u540e\u8bbf\u95ee \nhttp://127.0.0.1:8080\n \u5730\u5740\uff0c\u5982\u679c\u8fd4\u56de \nIt works!\n\uff0c\u5219\u610f\u5473\u7740\u4f60\u7684\u7b2c\u4e00\u4e2a vapor \u9879\u76ee\u5df2\u7ecf run \u6210\u529f\u4e86\u3002\n\n\n\u751f\u6210 Xcode \u9879\u76ee\n\n\n\u6267\u884c \nvapor xcode\n \u547d\u4ee4\uff0c\u5c06\u4f1a\u81ea\u52a8\u751f\u6210\u4e00\u4e2a\u5b8c\u6574\u7684 Xcode \u9879\u76ee\u3002\n\n\n$ vapor xcode\nGenerating Xcode Project [Done]\nSelect the `Run` scheme to run.\nOpen Xcode project?\ny/n\n y\nOpening Xcode project...\n\n\n\n\n\u53ef\u4ee5\u9009\u62e9 Xcode \u4e2d\u7684 \nRun\n scheme \u8fdb\u884c\u7f16\u8bd1\u8fd0\u884c\u3002\n\n\n\u5982\u56fe\u6240\u793a\n\n\n\n\n\u76ee\u5f55\u7ed3\u6784\n\n\n\u63a5\u4e0b\u6765\u5c06\u5177\u4f53\u5206\u6790\u4e0b\u9879\u76ee\u76ee\u5f55\u7ed3\u6784\uff0c\u5982\u4e0b\u6240\u793a\u3002\n\n\n.\n\u251c\u2500\u2500 Public\n\u251c\u2500\u2500 Sources\n\u2502   \u251c\u2500\u2500 App\n\u2502   \u2502   \u251c\u2500\u2500 Controllers\n\u2502   \u2502   \u251c\u2500\u2500 Migrations\n\u2502   \u2502   \u251c\u2500\u2500 Models\n\u2502   \u2502   \u251c\u2500\u2500 app.swift\n\u2502   \u2502   \u251c\u2500\u2500 configure.swift\n\u2502   \u2502   \u2514\u2500\u2500 routes.swift\n\u2502   \u2514\u2500\u2500 Run\n\u2502       \u2514\u2500\u2500 main.swift\n\u251c\u2500\u2500 Tests\n\u2502   \u2514\u2500\u2500 AppTests\n\u2514\u2500\u2500 Package.swift\n\n\n\n\nPublic\n\n\nTODO\n\n\nSources\n\n\n\u8be5\u76ee\u5f55\u7528\u4e8e\u5b58\u653e\u6e90\u4ee3\u7801\u3002\n\n\nApp\n\n\nTODO\n\n\nRun\n\n\nTODO\n\n\nTests\n\n\nTODO\n\n\nPackage.swift\n\n\nTODO", 
             "title": "Hello World"
         }, 
         {
             "location": "/hello_world/#hello-world", 
-            "text": "TODO", 
+            "text": "\u672c\u7ae0\u6559\u7a0b\u6559\u5c06\u5e26\u4f60\u521b\u5efa\u7b2c\u4e00\u4e2a Vapor \u9879\u76ee\u3002", 
             "title": "Hello World"
         }, 
         {
-            "location": "/install_folder_structure/", 
-            "text": "\u76ee\u5f55\u7ed3\u6784\n\n\n\u672c\u7ae0\u8282\u4ecb\u7ecd Vapor \u9879\u76ee\u7684\u76ee\u5f55\u7ed3\u6784\uff0c\u57fa\u672c\u76ee\u5f55\u7ed3\u6784\u5982\u4e0b\u6240\u793a\u3002\n\n\n.\n\u251c\u2500\u2500 Public\n\u251c\u2500\u2500 Sources\n\u2502   \u251c\u2500\u2500 App\n\u2502   \u2502   \u251c\u2500\u2500 Controllers\n\u2502   \u2502   \u251c\u2500\u2500 Migrations\n\u2502   \u2502   \u251c\u2500\u2500 Models\n\u2502   \u2502   \u251c\u2500\u2500 app.swift\n\u2502   \u2502   \u251c\u2500\u2500 configure.swift\n\u2502   \u2502   \u2514\u2500\u2500 routes.swift\n\u2502   \u2514\u2500\u2500 Run\n\u2502       \u2514\u2500\u2500 main.swift\n\u251c\u2500\u2500 Tests\n\u2502   \u2514\u2500\u2500 AppTests\n\u2514\u2500\u2500 Package.swift\n\n\n\n\nPublic\n\n\nTODO\n\n\nSources\n\n\n\u8be5\u76ee\u5f55\u7528\u4e8e\u5b58\u653e\u6e90\u4ee3\u7801\u3002\n\n\nApp\n\n\nTODO\n\n\nRun\n\n\nTODO\n\n\nTests\n\n\nTODO\n\n\nPackage.swift\n\n\nTODO", 
-            "title": "\u9879\u76ee\u7ed3\u6784"
+            "location": "/hello_world/#_1", 
+            "text": "\u901a\u8fc7 vapor \u547d\u4ee4\u884c\u5de5\u5177\u521b\u5efa\u9879\u76ee\uff0c\u9879\u76ee\u540d\u79f0\u547d\u540d\u4e3a  Vapor4Example \u3002  vapor new Vapor4Example -branch=4  \u521b\u5efa\u6210\u529f\u540e\uff0c\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002  Cloning Template [Done]\nUpdating Package Name [Done]\nInitializing git repository [Done]\n\n                                             **\n                                           **~~**\n                                         **~~~~~~**\n                                       **~~~~~~~~~~**\n                                     **~~~~~~~~~~~~~~**\n                                   **~~~~~~~~~~~~~~~~~~**\n                                 **~~~~~~~~~~~~~~~~~~~~~~**\n                                **~~~~~~~~~~~~~~~~~~~~~~~~**\n                               **~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n                              **~~~~~~~~~~~~~~~~~~~~~++++~~~**\n                               **~~~~~~~~~~~~~~~~~~~++++~~~**\n                                ***~~~~~~~~~~~~~~~++++~~~***\n                                  ****~~~~~~~~~~++++~~****\n                                     *****~~~~~~~~~*****\n                                        *************\n\n                               _       __    ___   ___   ___\n                              \\ \\  /  / /\\  | |_) / / \\ | |_)\n                               \\_\\/  /_/--\\ |_|   \\_\\_/ |_| \\\n                                 a web framework for Swift\n\n                          Project  Vapor4Example  has been created.\n                   Type `cd Vapor4Example` to enter the project directory.\n                   Use `vapor cloud deploy` to host your project for free!\n                                           Enjoy!", 
+            "title": "\u521b\u5efa\u9879\u76ee"
         }, 
         {
-            "location": "/install_folder_structure/#_1", 
-            "text": "\u672c\u7ae0\u8282\u4ecb\u7ecd Vapor \u9879\u76ee\u7684\u76ee\u5f55\u7ed3\u6784\uff0c\u57fa\u672c\u76ee\u5f55\u7ed3\u6784\u5982\u4e0b\u6240\u793a\u3002  .\n\u251c\u2500\u2500 Public\n\u251c\u2500\u2500 Sources\n\u2502   \u251c\u2500\u2500 App\n\u2502   \u2502   \u251c\u2500\u2500 Controllers\n\u2502   \u2502   \u251c\u2500\u2500 Migrations\n\u2502   \u2502   \u251c\u2500\u2500 Models\n\u2502   \u2502   \u251c\u2500\u2500 app.swift\n\u2502   \u2502   \u251c\u2500\u2500 configure.swift\n\u2502   \u2502   \u2514\u2500\u2500 routes.swift\n\u2502   \u2514\u2500\u2500 Run\n\u2502       \u2514\u2500\u2500 main.swift\n\u251c\u2500\u2500 Tests\n\u2502   \u2514\u2500\u2500 AppTests\n\u2514\u2500\u2500 Package.swift", 
+            "location": "/hello_world/#_2", 
+            "text": "\u6b64\u65f6\uff0c\u6211\u4eec\u5148\u4e0d\u5206\u6790\u4ee3\u7801\uff0c\u5148\u5c06\u8be5 vapor \u9879\u76ee run \u8d77\u6765\uff0c\u770b\u770b\u6700\u7ec8\u6548\u679c\u3002  \u6b65\u9aa4\u5982\u4e0b\uff1a    \u6267\u884c  cd Vapor4Example  \u8fdb\u5165\u5230\u521a\u521b\u5efa\u597d\u7684\u9879\u76ee\u76ee\u5f55\u4e2d\u3002    \u901a\u8fc7\u5982\u4e0b\u547d\u4ee4 build \u9879\u76ee\u4ee3\u7801\u3002    vapor build  build \u6210\u529f\u540e\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002  Building Project [Done]   \u901a\u8fc7\u5982\u4e0b\u547d\u4ee4 run \u9879\u76ee\u3002   vapor run  \u8fd9\u65f6\u5019\u5c06\u8f93\u51fa\u5982\u4e0b\u4fe1\u606f\u3002  Running app ...\n[ NOTICE ] Server starting on http://127.0.0.1:8080  \u7136\u540e\u8bbf\u95ee  http://127.0.0.1:8080  \u5730\u5740\uff0c\u5982\u679c\u8fd4\u56de  It works! \uff0c\u5219\u610f\u5473\u7740\u4f60\u7684\u7b2c\u4e00\u4e2a vapor \u9879\u76ee\u5df2\u7ecf run \u6210\u529f\u4e86\u3002", 
+            "title": "\u8fd0\u884c\u9879\u76ee"
+        }, 
+        {
+            "location": "/hello_world/#xcode", 
+            "text": "\u6267\u884c  vapor xcode  \u547d\u4ee4\uff0c\u5c06\u4f1a\u81ea\u52a8\u751f\u6210\u4e00\u4e2a\u5b8c\u6574\u7684 Xcode \u9879\u76ee\u3002  $ vapor xcode\nGenerating Xcode Project [Done]\nSelect the `Run` scheme to run.\nOpen Xcode project?\ny/n  y\nOpening Xcode project...  \u53ef\u4ee5\u9009\u62e9 Xcode \u4e2d\u7684  Run  scheme \u8fdb\u884c\u7f16\u8bd1\u8fd0\u884c\u3002  \u5982\u56fe\u6240\u793a", 
+            "title": "\u751f\u6210 Xcode \u9879\u76ee"
+        }, 
+        {
+            "location": "/hello_world/#_3", 
+            "text": "\u63a5\u4e0b\u6765\u5c06\u5177\u4f53\u5206\u6790\u4e0b\u9879\u76ee\u76ee\u5f55\u7ed3\u6784\uff0c\u5982\u4e0b\u6240\u793a\u3002  .\n\u251c\u2500\u2500 Public\n\u251c\u2500\u2500 Sources\n\u2502   \u251c\u2500\u2500 App\n\u2502   \u2502   \u251c\u2500\u2500 Controllers\n\u2502   \u2502   \u251c\u2500\u2500 Migrations\n\u2502   \u2502   \u251c\u2500\u2500 Models\n\u2502   \u2502   \u251c\u2500\u2500 app.swift\n\u2502   \u2502   \u251c\u2500\u2500 configure.swift\n\u2502   \u2502   \u2514\u2500\u2500 routes.swift\n\u2502   \u2514\u2500\u2500 Run\n\u2502       \u2514\u2500\u2500 main.swift\n\u251c\u2500\u2500 Tests\n\u2502   \u2514\u2500\u2500 AppTests\n\u2514\u2500\u2500 Package.swift", 
             "title": "\u76ee\u5f55\u7ed3\u6784"
         }, 
         {
-            "location": "/install_folder_structure/#public", 
+            "location": "/hello_world/#public", 
             "text": "TODO", 
             "title": "Public"
         }, 
         {
-            "location": "/install_folder_structure/#sources", 
+            "location": "/hello_world/#sources", 
             "text": "\u8be5\u76ee\u5f55\u7528\u4e8e\u5b58\u653e\u6e90\u4ee3\u7801\u3002", 
             "title": "Sources"
         }, 
         {
-            "location": "/install_folder_structure/#app", 
+            "location": "/hello_world/#app", 
             "text": "TODO", 
             "title": "App"
         }, 
         {
-            "location": "/install_folder_structure/#run", 
+            "location": "/hello_world/#run", 
             "text": "TODO", 
             "title": "Run"
         }, 
         {
-            "location": "/install_folder_structure/#tests", 
+            "location": "/hello_world/#tests", 
             "text": "TODO", 
             "title": "Tests"
         }, 
         {
-            "location": "/install_folder_structure/#packageswift", 
+            "location": "/hello_world/#packageswift", 
             "text": "TODO", 
             "title": "Package.swift"
         }, 
         {
-            "location": "/install_database/", 
+            "location": "/database/", 
             "text": "\u6570\u636e\u5e93\n\n\nTODO", 
             "title": "\u6570\u636e\u5e93"
         }, 
         {
-            "location": "/install_database/#_1", 
+            "location": "/database/#_1", 
             "text": "TODO", 
             "title": "\u6570\u636e\u5e93"
         }, 

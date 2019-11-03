@@ -35,15 +35,7 @@
 
     
     <url>
-     <loc>/install_folder_structure/</loc>
-     <lastmod>2019-11-03</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/install_database/</loc>
+     <loc>/database/</loc>
      <lastmod>2019-11-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
