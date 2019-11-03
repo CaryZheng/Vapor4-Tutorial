@@ -156,16 +156,52 @@ func configure(_ app: Application) throws {
 
 #### App
 
-TODO
+主要是用来存放业务相关的代码。
+
+* Controllers：用于存放具体业务逻辑的实现代码。
+* Migrations：用于存放数据库迁移相关的代码。
+* Models：用于存放数据模型相关的代码。
+* app.swift：用于服务初始化相关的代码文件。
+* configure.swift：用于服务器配置相关的代码文件。
+* routes.swift：用于 API 请求的路由控制。
 
 #### Run
 
-TODO
+该目录下有一个 ```main.swift``` 文件，是整个程序的执行入口。
 
 #### Tests
 
-TODO
+该目录主要是用于存放测试相关的代码。
 
 ### Package.swift
 
-TODO
+Vapor 项目所依赖的库是通过 [SPM（Swift Package Manager）](https://github.com/apple/swift-package-manager) 来进行管理的。
+
+示例如下
+
+```
+// swift-tools-version:5.1
+import PackageDescription
+
+let package = Package(
+    name: "app",
+    platforms: [
+       .macOS(.v10_15)
+    ],
+    products: [
+        .executable(name: "Run", targets: ["Run"]),
+        .library(name: "App", targets: ["App"]),
+    ],
+    dependencies: [
+        // 💧 A server-side Swift web framework.
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-beta"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-beta"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-beta"),
+    ],
+    targets: [
+        .target(name: "App", dependencies: ["Fluent", "FluentSQLiteDriver", "Vapor"]),
+        .target(name: "Run", dependencies: ["App"]),
+        .testTarget(name: "AppTests", dependencies: ["App"])
+    ]
+)
+```
