@@ -125,7 +125,30 @@ Opening Xcode project...
 
 ### Public
 
-TODO
+该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。
+
+首先，需修改 ```configure.swift``` 文件来开启使用 ```FileMiddleware``` 中间件。
+
+```
+// Called before your application initializes.
+func configure(_ app: Application) throws {
+    ......
+
+    // Register middleware
+    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+        // Serves files from `Public/` directory
+        middlewares.use(app.make(FileMiddleware.self))
+    }
+    
+    ......
+}
+```
+
+然后，所有 ```Public/``` 目录下的资源文件均可直接被访问了。比如 ```Public/``` 目录下有一张图片（命名为 ```sample.png```），在本地服务已启动的情况下（假设所占端口为 ```8080```），访问 ```http://localhost:8080/sample.png``` 地址可直接显示 ```Public/``` 目录下的 ```sample.png``` 图片。
+
+效果如下
+
+![public_resource_sample](img/public_resource_sample.png)
 
 ### Sources
 

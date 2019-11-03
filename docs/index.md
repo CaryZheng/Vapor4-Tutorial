@@ -10,3 +10,9 @@ SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
 
 ## Contact
 QQ群 (Vapor交流)： 566732724
+
+联系作者：CaryZhengMy#gmail.com (#替换成@)
+
+## 声明
+
+本教程版权归作者 [CaryZheng](https://github.com/CaryZheng) 所有，未经作者许可，不得用于商业用途。
