@@ -10,6 +10,5 @@ pages:
   - macOS: install_mac.md
   - Linux: install_linux.md
 - Hello World: hello_world.md
-- 项目结构: install_folder_structure.md
-- 数据库: install_database.md
+- 数据库: database.md
 - 部署: deploy.md
