@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,13 +13,13 @@
         
     <url>
      <loc>/install_mac/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/install_linux/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -28,7 +28,7 @@
     
     <url>
      <loc>/hello_world/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +36,7 @@
     
     <url>
      <loc>/database/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +44,7 @@
     
     <url>
      <loc>/deploy/</loc>
-     <lastmod>2019-11-03</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

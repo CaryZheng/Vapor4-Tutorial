@@ -606,13 +606,47 @@ func configure(_ app: Application) throws {
 <h3 id="sources">Sources</h3>
 <p>该目录用于存放源代码。</p>
 <h4 id="app">App</h4>
-<p>TODO</p>
+<p>主要是用来存放业务相关的代码。</p>
+<ul>
+<li>Controllers：用于存放具体业务逻辑的实现代码。</li>
+<li>Migrations：用于存放数据库迁移相关的代码。</li>
+<li>Models：用于存放数据模型相关的代码。</li>
+<li>app.swift：用于服务初始化相关的代码文件。</li>
+<li>configure.swift：用于服务器配置相关的代码文件。</li>
+<li>routes.swift：用于 API 请求的路由控制。</li>
+</ul>
 <h4 id="run">Run</h4>
-<p>TODO</p>
+<p>该目录下有一个 <code>main.swift</code> 文件，是整个程序的执行入口。</p>
 <h4 id="tests">Tests</h4>
-<p>TODO</p>
+<p>该目录主要是用于存放测试相关的代码。</p>
 <h3 id="packageswift">Package.swift</h3>
-<p>TODO</p>
+<p>Vapor 项目所依赖的库是通过 <a href="https://github.com/apple/swift-package-manager">SPM（Swift Package Manager）</a> 来进行管理的。</p>
+<p>示例如下</p>
+<pre><code>// swift-tools-version:5.1
+import PackageDescription
+
+let package = Package(
+    name: &quot;app&quot;,
+    platforms: [
+       .macOS(.v10_15)
+    ],
+    products: [
+        .executable(name: &quot;Run&quot;, targets: [&quot;Run&quot;]),
+        .library(name: &quot;App&quot;, targets: [&quot;App&quot;]),
+    ],
+    dependencies: [
+        // 💧 A server-side Swift web framework.
+        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0-beta&quot;),
+        .package(url: &quot;https://github.com/vapor/fluent.git&quot;, from: &quot;4.0.0-beta&quot;),
+        .package(url: &quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;, from: &quot;4.0.0-beta&quot;),
+    ],
+    targets: [
+        .target(name: &quot;App&quot;, dependencies: [&quot;Fluent&quot;, &quot;FluentSQLiteDriver&quot;, &quot;Vapor&quot;]),
+        .target(name: &quot;Run&quot;, dependencies: [&quot;App&quot;]),
+        .testTarget(name: &quot;AppTests&quot;, dependencies: [&quot;App&quot;])
+    ]
+)
+</code></pre>
                 
                   
                 
