@@ -584,7 +584,25 @@ Opening Xcode project...
 </code></pre>
 
 <h3 id="public">Public</h3>
-<p>TODO</p>
+<p>该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。</p>
+<p>首先，需修改 <code>configure.swift</code> 文件来开启使用 <code>FileMiddleware</code> 中间件。</p>
+<pre><code>// Called before your application initializes.
+func configure(_ app: Application) throws {
+    ......
+
+    // Register middleware
+    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+        // Serves files from `Public/` directory
+        middlewares.use(app.make(FileMiddleware.self))
+    }
+
+    ......
+}
+</code></pre>
+
+<p>然后，所有 <code>Public/</code> 目录下的资源文件均可直接被访问了。比如 <code>Public/</code> 目录下有一张图片（命名为 <code>sample.png</code>），在本地服务已启动的情况下（假设所占端口为 <code>8080</code>），访问 <code>http://localhost:8080/sample.png</code> 地址可直接显示 <code>Public/</code> 目录下的 <code>sample.png</code> 图片。</p>
+<p>效果如下</p>
+<p><img alt="public_resource_sample" src="../img/public_resource_sample.png" /></p>
 <h3 id="sources">Sources</h3>
 <p>该目录用于存放源代码。</p>
 <h4 id="app">App</h4>
