@@ -2,8 +2,10 @@ site_name: Vapor 4 速成指南
 theme:
   name: 'material'
   palette:
-    primary: 'black'
-    accent: 'blue'
+    primary: 'indigo'
+    accent: 'indigo'
+  favicon: 'favicon.ico'
+  logo: 'logo.png'
 pages:
 - 序: index.md
 - 安装 Vapor:
