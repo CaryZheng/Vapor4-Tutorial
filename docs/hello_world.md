@@ -102,7 +102,7 @@ Opening Xcode project...
 
 ## 目录结构
 
-接下来将具体分析下项目目录结构，如下所示。
+接下来将分析下项目的目录结构，如下所示。
 
 
 ```
@@ -162,7 +162,7 @@ func configure(_ app: Application) throws {
 * Migrations：用于存放数据库迁移相关的代码。
 * Models：用于存放数据模型相关的代码。
 * app.swift：用于服务初始化相关的代码文件。
-* configure.swift：用于服务器配置相关的代码文件。
+* configure.swift：用于服务配置相关的代码文件。
 * routes.swift：用于 API 请求的路由控制。
 
 #### Run
@@ -205,3 +205,169 @@ let package = Package(
     ]
 )
 ```
+
+## 简析 Vapor 启动过程
+
+接下来我们简单分析下 Vapor 示例项目启动的过程。
+
+首先来看下 ```main.swift``` 文件，这个是整个程序执行的入口。
+
+```
+import App
+
+try app(.detect()).run()
+```
+
+只有简短的两行代码，第一行 ```import App``` 是用来导入 ```App``` library 的，然后再执行 ```try app(.detect()).run()``` 运行服务。
+
+其中，```.detect()``` 方法是用来检测当前运行环境，源码如下
+
+```
+public static func detect(arguments: [String] = CommandLine.arguments) throws -> Environment {
+    var commandInput = CommandInput(arguments: arguments)
+    return try Environment.detect(from: &commandInput)
+}
+```
+
+```detect()``` 将返回一个 ```Environment``` 实例，并作为参数传递给 ```app()``` 方法，```app()``` 方法定义在 ```app.swift``` 中，源码如下
+
+```
+public func app(_ environment: Environment) throws -> Application {
+    var environment = environment
+    try LoggingSystem.bootstrap(from: &environment)
+    let app = Application(environment: environment)
+    try configure(app)
+    return app
+}
+```
+
+从中可以看出，根据 `environment` 参数，先初始化了日志系统 ```LoggingSystem```，然后创建了 ```Application``` 实例对象，最后再调用 ```configure()``` 方法来初始化配置。
+
+```configure()``` 方法定义在 ```configure.swift``` 中，源码如下
+
+```
+// Called before your application initializes.
+func configure(_ app: Application) throws {
+    // Register providers first
+    app.provider(FluentProvider())
+
+    // Register middleware
+    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+        // Serves files from `Public/` directory
+        middlewares.use(app.make(FileMiddleware.self))
+    }
+    
+    app.databases.sqlite(
+        configuration: .init(storage: .connection(.file(path: "db.sqlite"))),
+        threadPool: app.make(),
+        poolConfiguration: app.make(),
+        logger: app.make(),
+        on: app.make()
+    )
+    
+    app.register(Migrations.self) { c in
+        var migrations = Migrations()
+        migrations.add(CreateTodo(), to: .sqlite)
+        return migrations
+    }
+    
+    try routes(app)
+}
+```
+
+从源码中可见，`configure()` 方法内部注册了 `provider`（比如：`FluentProvider`）、```middleware```（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Provider`、`Middleware` 等等，后续章节将进行详细介绍。）
+
+接下来，我们看下 `routes()` 方法的实现，它是定义在 `routes.swift` 文件中，源码如下
+
+```
+func routes(_ app: Application) throws {
+    app.get { req in
+        return "It works!"
+    }
+    
+    app.get("hello") { req in
+        return "Hello, world!"
+    }
+
+    let todoController = TodoController()
+    app.get("todos", use: todoController.index)
+    app.post("todos", use: todoController.create)
+    app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+}
+```
+
+之前，访问 ```http://127.0.0.1:8080``` 地址，返回了 ```It works!``` 文本，其实对应的就是这部分代码。
+
+```
+app.get { req in
+    return "It works!"
+}
+```
+
+这是在根路径下，监听了 `GET` 行为，当通过 `GET` 方式请求根路径（比如：`http://127.0.0.1:8080`）时，将返回一串文本 `It works!` 。
+
+同理，第二段代码
+
+```
+app.get("hello") { req in
+    return "Hello, world!"
+}
+```
+
+监听了路径为 `hello` 的 `GET` 请求，当通过 `GET` 方式请求对应路径（比如：`http://127.0.0.1:8080/hello`）时，将返回一串文本 `Hello, world!` 。
+
+再看下第三段代码
+
+```
+let todoController = TodoController()
+
+// 请求路径：todos，请求方法: GET，响应方法：index。
+app.get("todos", use: todoController.index)
+
+// 请求路径：todos，请求方法: POST，响应方法：create。
+app.post("todos", use: todoController.create)
+
+// 请求路径：todos，请求方法: DELETE，响应方法：delete。
+app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+```
+
+路径为 `todos` 的请求（`GET`、`POST`、`DELETE`）都将被映射到 `TodoController` 中，在该 `Controller` 中可以处理相关的业务逻辑。
+
+```
+struct TodoController {
+    func index(req: Request) throws -> EventLoopFuture<[Todo]> {
+        ......
+    }
+
+    func create(req: Request) throws -> EventLoopFuture<Todo> {
+        ......
+    }
+
+    func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
+        ......
+    }
+}
+```
+
+回到 ```main.swift``` 文件，当 ```app()``` 方法执行完毕后，最后将执行 ```run()``` 方法来启动服务。
+
+```
+try app(.detect()).run()
+```
+
+```run()``` 源码如下
+
+```
+public func run() throws {
+    defer { self.shutdown() }
+    do {
+        try self.start()
+        try self.running?.onStop.wait()
+    } catch {
+        self.logger.report(error: error)
+        throw error
+    }
+}
+```
+
+至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。
