@@ -9,8 +9,18 @@ theme:
 pages:
 - 序: index.md
 - 安装 Vapor:
-  - macOS: install_mac.md
-  - Linux: install_linux.md
+  - macOS: install/install_mac.md
+  - Linux: install/install_linux.md
 - Hello World: hello_world.md
-- 数据库: database.md
+- Toolbox: toolbox.md
+- 基础组件:
+  - Application: base/application.md
+  - Controller: base/controller.md
+  - Routing: base/middleware.md
+  - Provider: base/provider.md
+  - Middleware: base/routing.md
+- 数据库:
+  - MySQL: database/mysql.md
+  - Redis: database/redis.md
+- 测试: test.md
 - 部署: deploy.md
