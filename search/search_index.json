@@ -26,32 +26,32 @@
             "title": "\u58f0\u660e"
         }, 
         {
-            "location": "/install_mac/", 
+            "location": "/install/install_mac/", 
             "text": "macOS \u5b89\u88c5 Vapor\n\n\n\u5b89\u88c5 Xcode\n\n\n\u56e0\u4e3a Vapor 4 \u9700\u8981 Swift 5.1\uff08\u6216\u4ee5\u4e0a\uff09 \u7248\u672c\uff0c\u6240\u4ee5\u9700\u8981\u5148\u5b89\u88c5 Xcode 11\uff08\u6216\u4ee5\u4e0a\uff09\u3002\n\n\n\u901a\u8fc7\u4ee5\u4e0b\u547d\u4ee4\u6765\u786e\u8ba4\u5f53\u524d Swift \u7248\u672c\u3002\n\n\nswift --version\n\n\n\n\n\u5c06\u663e\u793a\u5bf9\u5e94\u7684 Swift \u7248\u672c\u4fe1\u606f\u3002\n\n\nApple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)\nTarget: x86_64-apple-darwin19.0.0\n\n\n\n\n\u5b89\u88c5 Toolbox\n\n\n\u6267\u884c\u4ee5\u4e0b\u547d\u4ee4\u3002\n\n\nbrew install vapor/tap/vapor\n\n\n\n\n\u5b89\u88c5\u6210\u529f\u540e\uff0c\u6267\u884c\u4ee5\u4e0b\u547d\u4ee4\uff0c\u5c06\u663e\u793a\u53ef\u7528\u7684\u547d\u4ee4\u5217\u8868\u3002\n\n\n$ vapor -help\nUsage: vapor command\n\nJoin our team chat if you have questions, need help,\nor want to contribute: http://vapor.team\n\nCommands:\n       new Creates a new Vapor application from a template.\n           Use --template=repo/template for github templates\n           Use --template=full-url-here.git for non github templates\n           Use --web to create a new web app\n           Use --auth to create a new authenticated API app\n           Use --api (default) to create a new API\n     build Compiles the application.\n       run Runs the compiled application.\n     fetch Fetches the application's dependencies.\n    update Updates your dependencies.\n     clean Cleans temporary files--usually fixes\n           a plethora of bizarre build errors.\n      test Runs the application's tests.\n     xcode Generates an Xcode project for development.\n           Additionally links commonly used libraries.\n   version Displays Vapor CLI version\n     cloud Commands for interacting with Vapor Cloud.\n    heroku Commands to help deploy to Heroku.\n  provider Commands to help manage providers.\n\nUse `vapor command --help` for more information on a command.", 
             "title": "macOS"
         }, 
         {
-            "location": "/install_mac/#macos-vapor", 
+            "location": "/install/install_mac/#macos-vapor", 
             "text": "", 
             "title": "macOS \u5b89\u88c5 Vapor"
         }, 
         {
-            "location": "/install_mac/#xcode", 
+            "location": "/install/install_mac/#xcode", 
             "text": "\u56e0\u4e3a Vapor 4 \u9700\u8981 Swift 5.1\uff08\u6216\u4ee5\u4e0a\uff09 \u7248\u672c\uff0c\u6240\u4ee5\u9700\u8981\u5148\u5b89\u88c5 Xcode 11\uff08\u6216\u4ee5\u4e0a\uff09\u3002  \u901a\u8fc7\u4ee5\u4e0b\u547d\u4ee4\u6765\u786e\u8ba4\u5f53\u524d Swift \u7248\u672c\u3002  swift --version  \u5c06\u663e\u793a\u5bf9\u5e94\u7684 Swift \u7248\u672c\u4fe1\u606f\u3002  Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)\nTarget: x86_64-apple-darwin19.0.0", 
             "title": "\u5b89\u88c5 Xcode"
         }, 
         {
-            "location": "/install_mac/#toolbox", 
+            "location": "/install/install_mac/#toolbox", 
             "text": "\u6267\u884c\u4ee5\u4e0b\u547d\u4ee4\u3002  brew install vapor/tap/vapor  \u5b89\u88c5\u6210\u529f\u540e\uff0c\u6267\u884c\u4ee5\u4e0b\u547d\u4ee4\uff0c\u5c06\u663e\u793a\u53ef\u7528\u7684\u547d\u4ee4\u5217\u8868\u3002  $ vapor -help\nUsage: vapor command\n\nJoin our team chat if you have questions, need help,\nor want to contribute: http://vapor.team\n\nCommands:\n       new Creates a new Vapor application from a template.\n           Use --template=repo/template for github templates\n           Use --template=full-url-here.git for non github templates\n           Use --web to create a new web app\n           Use --auth to create a new authenticated API app\n           Use --api (default) to create a new API\n     build Compiles the application.\n       run Runs the compiled application.\n     fetch Fetches the application's dependencies.\n    update Updates your dependencies.\n     clean Cleans temporary files--usually fixes\n           a plethora of bizarre build errors.\n      test Runs the application's tests.\n     xcode Generates an Xcode project for development.\n           Additionally links commonly used libraries.\n   version Displays Vapor CLI version\n     cloud Commands for interacting with Vapor Cloud.\n    heroku Commands to help deploy to Heroku.\n  provider Commands to help manage providers.\n\nUse `vapor command --help` for more information on a command.", 
             "title": "\u5b89\u88c5 Toolbox"
         }, 
         {
-            "location": "/install_linux/", 
+            "location": "/install/install_linux/", 
             "text": "Linux \u5b89\u88c5 Vapor\n\n\nTODO", 
             "title": "Linux"
         }, 
         {
-            "location": "/install_linux/#linux-vapor", 
+            "location": "/install/install_linux/#linux-vapor", 
             "text": "TODO", 
             "title": "Linux \u5b89\u88c5 Vapor"
         }, 
@@ -121,14 +121,94 @@
             "title": "\u7b80\u6790 Vapor \u542f\u52a8\u8fc7\u7a0b"
         }, 
         {
-            "location": "/database/", 
-            "text": "\u6570\u636e\u5e93\n\n\nTODO", 
-            "title": "\u6570\u636e\u5e93"
+            "location": "/toolbox/", 
+            "text": "Toolbox\n\n\nTODO", 
+            "title": "Toolbox"
         }, 
         {
-            "location": "/database/#_1", 
+            "location": "/toolbox/#toolbox", 
             "text": "TODO", 
-            "title": "\u6570\u636e\u5e93"
+            "title": "Toolbox"
+        }, 
+        {
+            "location": "/base/application/", 
+            "text": "Application\n\n\nTODO", 
+            "title": "Application"
+        }, 
+        {
+            "location": "/base/application/#application", 
+            "text": "TODO", 
+            "title": "Application"
+        }, 
+        {
+            "location": "/base/controller/", 
+            "text": "Controller\n\n\nTODO", 
+            "title": "Controller"
+        }, 
+        {
+            "location": "/base/controller/#controller", 
+            "text": "TODO", 
+            "title": "Controller"
+        }, 
+        {
+            "location": "/base/middleware/", 
+            "text": "Middleware\n\n\nTODO", 
+            "title": "Routing"
+        }, 
+        {
+            "location": "/base/middleware/#middleware", 
+            "text": "TODO", 
+            "title": "Middleware"
+        }, 
+        {
+            "location": "/base/provider/", 
+            "text": "Provider\n\n\nTODO", 
+            "title": "Provider"
+        }, 
+        {
+            "location": "/base/provider/#provider", 
+            "text": "TODO", 
+            "title": "Provider"
+        }, 
+        {
+            "location": "/base/routing/", 
+            "text": "Routing\n\n\nTODO", 
+            "title": "Middleware"
+        }, 
+        {
+            "location": "/base/routing/#routing", 
+            "text": "TODO", 
+            "title": "Routing"
+        }, 
+        {
+            "location": "/database/mysql/", 
+            "text": "MySQL\n\n\nTODO", 
+            "title": "MySQL"
+        }, 
+        {
+            "location": "/database/mysql/#mysql", 
+            "text": "TODO", 
+            "title": "MySQL"
+        }, 
+        {
+            "location": "/database/redis/", 
+            "text": "Redis\n\n\nTODO", 
+            "title": "Redis"
+        }, 
+        {
+            "location": "/database/redis/#redis", 
+            "text": "TODO", 
+            "title": "Redis"
+        }, 
+        {
+            "location": "/test/", 
+            "text": "\u6d4b\u8bd5\n\n\nTODO", 
+            "title": "\u6d4b\u8bd5"
+        }, 
+        {
+            "location": "/test/#_1", 
+            "text": "TODO", 
+            "title": "\u6d4b\u8bd5"
         }, 
         {
             "location": "/deploy/", 

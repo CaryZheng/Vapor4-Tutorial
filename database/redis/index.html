@@ -27,22 +27,22 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="shortcut icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.5.0">
     
     
       
-        <title>部署 - Vapor 4 速成指南</title>
+        <title>Redis - Vapor 4 速成指南</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.2a88008a.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.2a88008a.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.792431c1.css">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -74,9 +74,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="Vapor 4 速成指南" class="md-header-nav__button md-logo">
+        <a href="../.." title="Vapor 4 速成指南" class="md-header-nav__button md-logo">
           
-            <img src="../logo.png" width="24" height="24">
+            <img src="../../logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -91,7 +91,7 @@
                 Vapor 4 速成指南
               </span>
               <span class="md-header-nav__topic">
-                部署
+                Redis
               </span>
             
           
@@ -148,7 +148,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <img src="../logo.png" width="24" height="24">
+        <img src="../../logo.png" width="24" height="24">
       
     </span>
     Vapor 4 速成指南
@@ -162,7 +162,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="序" class="md-nav__link">
+    <a href="../.." title="序" class="md-nav__link">
       序
     </a>
   </li>
@@ -193,7 +193,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/install_mac/" title="macOS" class="md-nav__link">
+    <a href="../../install/install_mac/" title="macOS" class="md-nav__link">
       macOS
     </a>
   </li>
@@ -205,7 +205,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/install_linux/" title="Linux" class="md-nav__link">
+    <a href="../../install/install_linux/" title="Linux" class="md-nav__link">
       Linux
     </a>
   </li>
@@ -222,7 +222,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../hello_world/" title="Hello World" class="md-nav__link">
+    <a href="../../hello_world/" title="Hello World" class="md-nav__link">
       Hello World
     </a>
   </li>
@@ -234,7 +234,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../toolbox/" title="Toolbox" class="md-nav__link">
+    <a href="../../toolbox/" title="Toolbox" class="md-nav__link">
       Toolbox
     </a>
   </li>
@@ -265,7 +265,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../base/application/" title="Application" class="md-nav__link">
+    <a href="../../base/application/" title="Application" class="md-nav__link">
       Application
     </a>
   </li>
@@ -277,7 +277,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../base/controller/" title="Controller" class="md-nav__link">
+    <a href="../../base/controller/" title="Controller" class="md-nav__link">
       Controller
     </a>
   </li>
@@ -289,7 +289,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../base/middleware/" title="Routing" class="md-nav__link">
+    <a href="../../base/middleware/" title="Routing" class="md-nav__link">
       Routing
     </a>
   </li>
@@ -301,7 +301,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../base/provider/" title="Provider" class="md-nav__link">
+    <a href="../../base/provider/" title="Provider" class="md-nav__link">
       Provider
     </a>
   </li>
@@ -313,7 +313,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../base/routing/" title="Middleware" class="md-nav__link">
+    <a href="../../base/routing/" title="Middleware" class="md-nav__link">
       Middleware
     </a>
   </li>
@@ -328,10 +328,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       数据库
@@ -349,7 +351,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../database/mysql/" title="MySQL" class="md-nav__link">
+    <a href="../mysql/" title="MySQL" class="md-nav__link">
       MySQL
     </a>
   </li>
@@ -359,11 +361,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../database/redis/" title="Redis" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="Redis" class="md-nav__link md-nav__link--active">
       Redis
     </a>
+    
   </li>
 
         
@@ -378,7 +389,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../test/" title="测试" class="md-nav__link">
+    <a href="../../test/" title="测试" class="md-nav__link">
       测试
     </a>
   </li>
@@ -388,20 +399,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-    <a href="./" title="部署" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../deploy/" title="部署" class="md-nav__link">
       部署
     </a>
-    
   </li>
 
     
@@ -433,7 +435,7 @@
               
                 
                 
-                <h1 id="_1">部署</h1>
+                <h1 id="redis">Redis</h1>
 <p>TODO</p>
                 
                   
@@ -453,7 +455,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../test/" title="测试" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../mysql/" title="MySQL" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -462,11 +464,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                测试
+                MySQL
               </span>
             </div>
           </a>
         
+        
+          <a href="../../test/" title="测试" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                测试
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
@@ -490,9 +506,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.ce2ab4bf.js"></script>
+      <script src="../../assets/javascripts/application.ce2ab4bf.js"></script>
       
-      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.2",url:{base:"../.."}})</script>
       
     
     
