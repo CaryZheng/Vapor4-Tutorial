@@ -27,7 +27,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../favicon.ico">
       <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.5.0">
     
     
@@ -58,7 +58,7 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="blue">
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -76,7 +76,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="Vapor 4 速成指南" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -148,7 +148,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../logo.png" width="24" height="24">
       
     </span>
     Vapor 4 速成指南
@@ -330,6 +330,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#vapor" title="简析 Vapor 启动过程" class="md-nav__link">
+    简析 Vapor 启动过程
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -465,6 +472,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#vapor" title="简析 Vapor 启动过程" class="md-nav__link">
+    简析 Vapor 启动过程
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -565,7 +579,7 @@ Opening Xcode project...
 <p>如图所示</p>
 <p><img alt="xcode" src="../img/xcode.png" /></p>
 <h2 id="_3">目录结构</h2>
-<p>接下来将具体分析下项目目录结构，如下所示。</p>
+<p>接下来将分析下项目的目录结构，如下所示。</p>
 <pre><code>.
 ├── Public
 ├── Sources
@@ -612,7 +626,7 @@ func configure(_ app: Application) throws {
 <li>Migrations：用于存放数据库迁移相关的代码。</li>
 <li>Models：用于存放数据模型相关的代码。</li>
 <li>app.swift：用于服务初始化相关的代码文件。</li>
-<li>configure.swift：用于服务器配置相关的代码文件。</li>
+<li>configure.swift：用于服务配置相关的代码文件。</li>
 <li>routes.swift：用于 API 请求的路由控制。</li>
 </ul>
 <h4 id="run">Run</h4>
@@ -647,6 +661,143 @@ let package = Package(
     ]
 )
 </code></pre>
+
+<h2 id="vapor">简析 Vapor 启动过程</h2>
+<p>接下来我们简单分析下 Vapor 示例项目启动的过程。</p>
+<p>首先来看下 <code>main.swift</code> 文件，这个是整个程序执行的入口。</p>
+<pre><code>import App
+
+try app(.detect()).run()
+</code></pre>
+
+<p>只有简短的两行代码，第一行 <code>import App</code> 是用来导入 <code>App</code> library 的，然后再执行 <code>try app(.detect()).run()</code> 运行服务。</p>
+<p>其中，<code>.detect()</code> 方法是用来检测当前运行环境，源码如下</p>
+<pre><code>public static func detect(arguments: [String] = CommandLine.arguments) throws -&gt; Environment {
+    var commandInput = CommandInput(arguments: arguments)
+    return try Environment.detect(from: &amp;commandInput)
+}
+</code></pre>
+
+<p><code>detect()</code> 将返回一个 <code>Environment</code> 实例，并作为参数传递给 <code>app()</code> 方法，<code>app()</code> 方法定义在 <code>app.swift</code> 中，源码如下</p>
+<pre><code>public func app(_ environment: Environment) throws -&gt; Application {
+    var environment = environment
+    try LoggingSystem.bootstrap(from: &amp;environment)
+    let app = Application(environment: environment)
+    try configure(app)
+    return app
+}
+</code></pre>
+
+<p>从中可以看出，根据 <code>environment</code> 参数，先初始化了日志系统 <code>LoggingSystem</code>，然后创建了 <code>Application</code> 实例对象，最后再调用 <code>configure()</code> 方法来初始化配置。</p>
+<p><code>configure()</code> 方法定义在 <code>configure.swift</code> 中，源码如下</p>
+<pre><code>// Called before your application initializes.
+func configure(_ app: Application) throws {
+    // Register providers first
+    app.provider(FluentProvider())
+
+    // Register middleware
+    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+        // Serves files from `Public/` directory
+        middlewares.use(app.make(FileMiddleware.self))
+    }
+
+    app.databases.sqlite(
+        configuration: .init(storage: .connection(.file(path: &quot;db.sqlite&quot;))),
+        threadPool: app.make(),
+        poolConfiguration: app.make(),
+        logger: app.make(),
+        on: app.make()
+    )
+
+    app.register(Migrations.self) { c in
+        var migrations = Migrations()
+        migrations.add(CreateTodo(), to: .sqlite)
+        return migrations
+    }
+
+    try routes(app)
+}
+</code></pre>
+
+<p>从源码中可见，<code>configure()</code> 方法内部注册了 <code>provider</code>（比如：<code>FluentProvider</code>）、<code>middleware</code>（比如：<code>FileMiddleware</code>）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 <code>Provider</code>、<code>Middleware</code> 等等，后续章节将进行详细介绍。）</p>
+<p>接下来，我们看下 <code>routes()</code> 方法的实现，它是定义在 <code>routes.swift</code> 文件中，源码如下</p>
+<pre><code>func routes(_ app: Application) throws {
+    app.get { req in
+        return &quot;It works!&quot;
+    }
+
+    app.get(&quot;hello&quot;) { req in
+        return &quot;Hello, world!&quot;
+    }
+
+    let todoController = TodoController()
+    app.get(&quot;todos&quot;, use: todoController.index)
+    app.post(&quot;todos&quot;, use: todoController.create)
+    app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.delete)
+}
+</code></pre>
+
+<p>之前，访问 <code>http://127.0.0.1:8080</code> 地址，返回了 <code>It works!</code> 文本，其实对应的就是这部分代码。</p>
+<pre><code>app.get { req in
+    return &quot;It works!&quot;
+}
+</code></pre>
+
+<p>这是在根路径下，监听了 <code>GET</code> 行为，当通过 <code>GET</code> 方式请求根路径（比如：<code>http://127.0.0.1:8080</code>）时，将返回一串文本 <code>It works!</code> 。</p>
+<p>同理，第二段代码</p>
+<pre><code>app.get(&quot;hello&quot;) { req in
+    return &quot;Hello, world!&quot;
+}
+</code></pre>
+
+<p>监听了路径为 <code>hello</code> 的 <code>GET</code> 请求，当通过 <code>GET</code> 方式请求对应路径（比如：<code>http://127.0.0.1:8080/hello</code>）时，将返回一串文本 <code>Hello, world!</code> 。</p>
+<p>再看下第三段代码</p>
+<pre><code>let todoController = TodoController()
+
+// 请求路径：todos，请求方法: GET，响应方法：index。
+app.get(&quot;todos&quot;, use: todoController.index)
+
+// 请求路径：todos，请求方法: POST，响应方法：create。
+app.post(&quot;todos&quot;, use: todoController.create)
+
+// 请求路径：todos，请求方法: DELETE，响应方法：delete。
+app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.delete)
+</code></pre>
+
+<p>路径为 <code>todos</code> 的请求（<code>GET</code>、<code>POST</code>、<code>DELETE</code>）都将被映射到 <code>TodoController</code> 中，在该 <code>Controller</code> 中可以处理相关的业务逻辑。</p>
+<pre><code>struct TodoController {
+    func index(req: Request) throws -&gt; EventLoopFuture&lt;[Todo]&gt; {
+        ......
+    }
+
+    func create(req: Request) throws -&gt; EventLoopFuture&lt;Todo&gt; {
+        ......
+    }
+
+    func delete(req: Request) throws -&gt; EventLoopFuture&lt;HTTPStatus&gt; {
+        ......
+    }
+}
+</code></pre>
+
+<p>回到 <code>main.swift</code> 文件，当 <code>app()</code> 方法执行完毕后，最后将执行 <code>run()</code> 方法来启动服务。</p>
+<pre><code>try app(.detect()).run()
+</code></pre>
+
+<p><code>run()</code> 源码如下</p>
+<pre><code>public func run() throws {
+    defer { self.shutdown() }
+    do {
+        try self.start()
+        try self.running?.onStop.wait()
+    } catch {
+        self.logger.report(error: error)
+        throw error
+    }
+}
+</code></pre>
+
+<p>至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。</p>
                 
                   
                 
