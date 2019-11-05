@@ -6,7 +6,7 @@ theme:
     accent: 'indigo'
   favicon: 'favicon.ico'
   logo: 'logo.png'
-pages:
+nav:
 - 序: index.md
 - 安装 Vapor:
   - macOS: install/install_mac.md
@@ -16,9 +16,9 @@ pages:
 - 基础组件:
   - Application: base/application.md
   - Controller: base/controller.md
-  - Routing: base/middleware.md
+  - Routing: base/routing.md
   - Provider: base/provider.md
-  - Middleware: base/routing.md
+  - Middleware: base/middleware.md
 - 数据库:
   - MySQL: database/mysql.md
   - Redis: database/redis.md
