@@ -52,7 +52,22 @@ extension Application: RoutesBuilder {
 * `services`：主要用于管理各种类型的服务组件。
 * `routes`：主要用于管理 API 路由。
 
-接下来，我们来看下 `App` 目录下的 `configure.swift` 文件。
+接下来，我们来看下 `App` 目录中的 `app.swift` 文件。
+
+```
+public func app(_ environment: Environment) throws -> Application {
+    var environment = environment
+    try LoggingSystem.bootstrap(from: &environment)
+
+    // 此处构造出了 Application 实例对象
+    let app = Application(environment: environment)
+
+    try configure(app)
+    return app
+}
+```
+
+还有 `configure.swift` 文件。
 
 ```
 // Called before your application initializes.
@@ -84,7 +99,7 @@ func configure(_ app: Application) throws {
 }
 ```
 
-还有 `routes.swift` 文件。
+最后是 `routes.swift` 文件。
 
 ```
 func routes(_ app: Application) throws {
@@ -103,4 +118,4 @@ func routes(_ app: Application) throws {
 }
 ```
 
-从中可以看出来，`Application` 管理着各类基础组件（比如：Provider、Middleware、Database、Route 等等），并贯穿于程序的整个生命周期。
+从中可以看出，`Application` 管理着各类基础组件（比如：Provider、Middleware、Database、Route 等等），并贯穿于程序的整个生命周期。
