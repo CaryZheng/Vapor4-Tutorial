@@ -2,7 +2,7 @@
 
 [Vapor](https://vapor.codes) 是基于 Swift 实现的 Web 框架，可运行于 macOS 和 Ubuntu 系统上。
 
-本教程主要是针对 Vapor 4 的速成指南。
+本教程主要是针对 Vapor 4 的速成指南。（注：逐步更新中）
 
 ## Swift 社区
 
