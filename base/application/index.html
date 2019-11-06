@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -19,6 +19,10 @@
       
         <meta name="lang:search.language" content="en">
       
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
         <meta name="lang:search.result.none" content="No matching documents">
       
         <meta name="lang:search.result.one" content="1 matching document">
@@ -28,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.5.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -36,25 +40,34 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.2a88008a.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.792431c1.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
     
     
   </head>
-  
   
     
     
@@ -66,9 +79,14 @@
         
       </defs>
     </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
-    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#application" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -81,33 +99,32 @@
         </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Vapor 4 速成指南
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              Vapor 4 速成指南
+            </span>
+            <span class="md-header-nav__topic">
+              
                 Application
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="search"></label>
+  <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="search"></label>
+      <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
       </button>
@@ -124,7 +141,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -137,7 +153,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -145,12 +161,12 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="drawer">
-    <span class="md-nav__button md-logo">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Vapor 4 速成指南" class="md-nav__button md-logo">
       
-        <img src="../../logo.png" width="24" height="24">
+        <img src="../../logo.png" width="48" height="48">
       
-    </span>
+    </a>
     Vapor 4 速成指南
   </label>
   
@@ -270,7 +286,7 @@
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
       
     
@@ -300,7 +316,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../middleware/" title="Routing" class="md-nav__link">
+    <a href="../routing/" title="Routing" class="md-nav__link">
       Routing
     </a>
   </li>
@@ -324,7 +340,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../routing/" title="Middleware" class="md-nav__link">
+    <a href="../middleware/" title="Middleware" class="md-nav__link">
       Middleware
     </a>
   </li>
@@ -436,13 +452,124 @@
                 
                 
                 <h1 id="application">Application</h1>
-<p>TODO</p>
+<p><code>Application</code> 是 Vapor 中一个非常重要的类，负责管理各类基础组件（比如：Provider、Middleware、Database、Route 等等）。</p>
+<p><code>Application</code> 的部分源码如下</p>
+<pre><code>public final class Application {
+    public var environment: Environment
+    public var services: Services
+    public let sync: Lock
+    public var userInfo: [AnyHashable: Any]
+    public private(set) var didShutdown: Bool
+    internal let eventLoopGroup: EventLoopGroup
+    public var logger: Logger
+    private var isBooted: Bool
+
+    public var providers: [Provider] {
+        return self.services.providers
+    }
+
+    public init(environment: Environment = .development) {
+        self.environment = environment
+        self.services = .init()
+        self.sync = .init()
+        self.userInfo = [:]
+        self.didShutdown = false
+        self.eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
+        self.logger = .init(label: &quot;codes.vapor.application&quot;)
+        self.isBooted = false
+        self.registerDefaultServices()
+    }
+
+    ......
+}
+
+extension Application: RoutesBuilder {
+    public func add(_ route: Route) {
+        self.routes.add(route)
+    }
+
+    public var routes: Routes {
+        return self.make()
+    }
+}
+</code></pre>
+
+<p>其中</p>
+<ul>
+<li><code>environment</code>：主要用于存放程序当前运行环境相关的数据。</li>
+<li><code>providers</code>：主要用于管理各种类型的 <code>Provider</code> 。</li>
+<li><code>services</code>：主要用于管理各种类型的服务组件。</li>
+<li><code>routes</code>：主要用于管理 API 路由。</li>
+</ul>
+<p>接下来，我们来看下 <code>App</code> 目录中的 <code>app.swift</code> 文件。</p>
+<pre><code>public func app(_ environment: Environment) throws -&gt; Application {
+    var environment = environment
+    try LoggingSystem.bootstrap(from: &amp;environment)
+
+    // 此处构造出了 Application 实例对象
+    let app = Application(environment: environment)
+
+    try configure(app)
+    return app
+}
+</code></pre>
+
+<p>还有 <code>configure.swift</code> 文件。</p>
+<pre><code>// Called before your application initializes.
+func configure(_ app: Application) throws {
+    // Register providers first
+    app.provider(FluentProvider())
+
+    // Register middleware
+    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+        // Serves files from `Public/` directory
+        middlewares.use(app.make(FileMiddleware.self))
+    }
+
+    app.databases.sqlite(
+        configuration: .init(storage: .connection(.file(path: &quot;db.sqlite&quot;))),
+        threadPool: app.make(),
+        poolConfiguration: app.make(),
+        logger: app.make(),
+        on: app.make()
+    )
+
+    app.register(Migrations.self) { c in
+        var migrations = Migrations()
+        migrations.add(CreateTodo(), to: .sqlite)
+        return migrations
+    }
+
+    try routes(app)
+}
+</code></pre>
+
+<p>最后是 <code>routes.swift</code> 文件。</p>
+<pre><code>func routes(_ app: Application) throws {
+    app.get { req in
+        return &quot;It works!&quot;
+    }
+
+    app.get(&quot;hello&quot;) { req in
+        return &quot;Hello, world!&quot;
+    }
+
+    let todoController = TodoController()
+    app.get(&quot;todos&quot;, use: todoController.index)
+    app.post(&quot;todos&quot;, use: todoController.create)
+    app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.delete)
+}
+</code></pre>
+
+<p>从中可以看出，<code>Application</code> 管理着各类基础组件（比如：Provider、Middleware、Database、Route 等等），并贯穿于程序的整个生命周期。</p>
                 
                   
                 
               
               
                 
+
+
               
             </article>
           </div>
@@ -492,13 +619,11 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="http://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org">MkDocs</a>
         and
         <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
       </div>
-      
-        
       
     </div>
   </div>
@@ -506,12 +631,9 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.ce2ab4bf.js"></script>
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
       
-      <script>app.initialize({version:"0.17.2",url:{base:"../.."}})</script>
-      
-    
-    
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
     
   </body>
