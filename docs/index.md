@@ -6,7 +6,7 @@
 
 ## 在线阅读
 
-[https://vapor4.swiftmic.com/](https://vapor4.swiftmic.com/)
+[https://vapor4.swiftmic.com](https://vapor4.swiftmic.com)
 
 ## Swift 社区
 
