@@ -14,4 +14,10 @@ func routes(_ app: Application) throws {
     app.get("todos", use: todoController.index)
     app.post("todos", use: todoController.create)
     app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+    
+    let testController = TestController()
+    app.post("test", use: testController.createUser)
+    app.put("test", use: testController.updateUser)
+    app.get("test", ":userId", use: testController.findUser)
+    app.delete("test", ":userId", use: testController.deleteUser)
 }
