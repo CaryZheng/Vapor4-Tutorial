@@ -4,6 +4,10 @@
 
 本教程主要是针对 Vapor 4 (Beta) 的速成指南。（注：逐步更新中）
 
+## 在线阅读
+
+[https://vapor4.swiftmic.com/](https://vapor4.swiftmic.com/)
+
 ## Swift 社区
 
 SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
@@ -12,11 +16,11 @@ SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
 
 QQ群 (Vapor交流)： 566732724
 
+微信公众号：SwiftMic
+
+![swiftmic_wechat_logo](img/swiftmic_wechat_logo.png)
+
 联系作者：CaryZhengMy#gmail.com （# 替换成 @）
-
-## 在线阅读
-
-[https://vapor4.swiftmic.com/](https://vapor4.swiftmic.com/)
 
 ## 声明
 
