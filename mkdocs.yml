@@ -1,4 +1,8 @@
 site_name: Vapor 4 速成指南
+site_description: 'Vapor 4 速成指南'
+site_author: 'Cary Zheng'
+site_url: 'https://vapor4.swiftmic.com'
+copyright: 'Copyright &copy; 2019 CaryZheng'
 theme:
   name: 'material'
   palette:
