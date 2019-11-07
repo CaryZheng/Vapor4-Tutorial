@@ -303,9 +303,86 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Controller
+      </label>
+    
     <a href="./" title="Controller" class="md-nav__link md-nav__link--active">
       Controller
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controller_1" class="md-nav__link">
+    创建 Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controller_2" class="md-nav__link">
+    绑定 Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    测试 API
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    PUT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -440,6 +517,70 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controller_1" class="md-nav__link">
+    创建 Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controller_2" class="md-nav__link">
+    绑定 Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    测试 API
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    PUT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -452,7 +593,116 @@
                 
                 
                 <h1 id="controller">Controller</h1>
-<p>TODO</p>
+<p><code>Controller</code> 可以使得代码结构更清晰，它是处理 request 和 response 的一系列方法集合。</p>
+<h2 id="controller_1">创建 Controller</h2>
+<p>首先，我们在 <code>Controllers</code> 目录下创建一个新的 <code>TestController.swift</code> 文件 ，代码如下</p>
+<pre><code>import Vapor
+
+struct TestController {
+
+    func createUser(req: Request) -&gt; String {
+        return &quot;Create SwiftMic test user&quot;
+    }
+
+    func updateUser(req: Request) -&gt; String {
+        return &quot;Update SwiftMic test user&quot;
+    }
+
+    func findUser(req: Request) -&gt; String {
+        let userId = req.parameters.get(&quot;userId&quot;)
+        if nil == userId || userId!.isEmpty {
+            return &quot;Require param: userId&quot;
+        }
+
+        return &quot;Find SwiftMic test user: &quot; + userId!
+    }
+
+    func deleteUser(req: Request) -&gt; String {
+        let userId = req.parameters.get(&quot;userId&quot;)
+        if nil == userId || userId!.isEmpty {
+            return &quot;Require param: userId&quot;
+        }
+
+        return &quot;Delete SwiftMic test user: &quot; + userId!
+    }
+}
+</code></pre>
+
+<p>此处，<code>TestController</code> 结构体中定义了 4 个方法（<code>createUser</code>、<code>updateUser</code>、<code>findUser</code>、<code>deleteUser</code>），它们都接收了一个 <code>Request</code> 请求，处理完后返回一个 <code>Response</code>（此处为 <code>String</code> 类型）。</p>
+<h2 id="controller_2">绑定 Controller</h2>
+<p>接下来，在 <code>routes.swift</code> 文件中进行绑定操作。</p>
+<pre><code>func routes(_ app: Application) throws {
+    ......
+
+    let testController = TestController()
+
+    // 请求路径：test，请求方法: POST，响应方法：createUser。
+    app.post(&quot;test&quot;, use: testController.createUser)
+
+    // 请求路径：test，请求方法: PUT，响应方法：updateUser。
+    app.put(&quot;test&quot;, use: testController.updateUser)
+
+    // 请求路径：test，参数：&lt;userId&gt;, 请求方法: GET，响应方法：findUser。
+    app.get(&quot;test&quot;, &quot;:userId&quot;, use: testController.findUser)
+
+    // 请求路径：test，参数：&lt;userId&gt;, 请求方法: DELETE，响应方法：deleteUser。
+    app.delete(&quot;test&quot;, &quot;:userId&quot;, use: testController.deleteUser)
+}
+</code></pre>
+
+<h2 id="api">测试 API</h2>
+<p>最后，通过 <a href="https://curl.haxx.se/">CURL</a> 工具模拟 HTTP 请求来测试下这 4 个接口。</p>
+<h3 id="get">GET</h3>
+<ul>
+<li>Request</li>
+</ul>
+<pre><code>curl -X GET http://localhost:8080/test/1
+</code></pre>
+
+<ul>
+<li>Response</li>
+</ul>
+<pre><code>Find SwiftMic test user: 1
+</code></pre>
+
+<h3 id="post">POST</h3>
+<ul>
+<li>Request</li>
+</ul>
+<pre><code>curl -X POST http://localhost:8080/test
+</code></pre>
+
+<ul>
+<li>Response</li>
+</ul>
+<pre><code>Create SwiftMic test user
+</code></pre>
+
+<h3 id="put">PUT</h3>
+<ul>
+<li>Request</li>
+</ul>
+<pre><code>curl -X PUT http://localhost:8080/test
+</code></pre>
+
+<ul>
+<li>Response</li>
+</ul>
+<pre><code>Update SwiftMic test user
+</code></pre>
+
+<h3 id="delete">DELETE</h3>
+<ul>
+<li>Request</li>
+</ul>
+<pre><code>curl -X DELETE http://localhost:8080/test/1
+</code></pre>
+
+<ul>
+<li>Response</li>
+</ul>
+<pre><code>Delete SwiftMic test user: 1
+</code></pre>
                 
                   
                 
