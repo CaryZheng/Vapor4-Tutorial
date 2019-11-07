@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/install/install_mac/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/install/install_linux/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/hello_world/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/toolbox/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/base/application/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/base/controller/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/base/routing/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/base/provider/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/base/middleware/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/database/mysql/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/database/redis/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/test/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
+     <loc>https://vapor4.swiftmic.com/deploy/</loc>
      <lastmod>2019-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
