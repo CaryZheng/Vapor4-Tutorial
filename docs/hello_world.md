@@ -4,7 +4,7 @@
 
 ## 创建项目
 
-通过 vapor 命令行工具创建项目，项目名称命名为 ```Vapor4Example```。
+通过 vapor 命令行工具创建项目，项目名称命名为 ```Vapor4Example```。（注：当前 Vapor 4 还处于 Beta 阶段）
 
 ```
 vapor new Vapor4Example -branch=4
