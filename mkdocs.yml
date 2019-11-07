@@ -5,6 +5,7 @@ site_url: 'https://vapor4.swiftmic.com'
 copyright: 'Copyright &copy; 2019 CaryZheng'
 theme:
   name: 'material'
+  language: 'zh'
   palette:
     primary: 'indigo'
     accent: 'indigo'
