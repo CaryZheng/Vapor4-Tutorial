@@ -7,7 +7,7 @@ theme:
   favicon: 'favicon.ico'
   logo: 'logo.png'
 google_analytics:
-  - 'UA-113865151-1'
+  - 'UA-113865151-2'
   - 'auto'
 nav:
 - 序: index.md
