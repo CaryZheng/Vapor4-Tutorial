@@ -25,3 +25,11 @@ QQ群 (Vapor交流)： 566732724
 ## 声明
 
 本教程版权归作者 [CaryZheng](https://github.com/CaryZheng) 所有，未经作者许可，不得用于商业用途。
+
+## 捐赠
+
+如果此教程对你有所帮助，可以赠送作者一杯 “咖啡”。
+
+* 微信支付
+
+![donate_wechat](donate_wechat.png)
