@@ -6,7 +6,7 @@
 
 首先，我们在 `Controllers` 目录下创建一个新的 ```TestController.swift``` 文件 ，代码如下
 
-```
+``` swift
 import Vapor
 
 struct TestController {
@@ -45,7 +45,7 @@ struct TestController {
 
 接下来，在 `routes.swift` 文件中进行绑定操作。
 
-```
+``` swift
 func routes(_ app: Application) throws {
     ......
     

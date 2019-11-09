@@ -129,7 +129,7 @@ Opening Xcode project...
 
 首先，需修改 ```configure.swift``` 文件来开启使用 ```FileMiddleware``` 中间件。
 
-```
+``` swift
 // Called before your application initializes.
 func configure(_ app: Application) throws {
     ......
@@ -179,7 +179,7 @@ Vapor 项目所依赖的库是通过 [SPM（Swift Package Manager）](https://gi
 
 示例如下
 
-```
+``` swift
 // swift-tools-version:5.1
 import PackageDescription
 
@@ -212,7 +212,7 @@ let package = Package(
 
 首先来看下 ```main.swift``` 文件，这个是整个程序执行的入口。
 
-```
+``` swift
 import App
 
 try app(.detect()).run()
@@ -222,7 +222,7 @@ try app(.detect()).run()
 
 其中，```.detect()``` 方法是用来检测当前运行环境，源码如下
 
-```
+``` swift
 public static func detect(arguments: [String] = CommandLine.arguments) throws -> Environment {
     var commandInput = CommandInput(arguments: arguments)
     return try Environment.detect(from: &commandInput)
@@ -231,7 +231,7 @@ public static func detect(arguments: [String] = CommandLine.arguments) throws ->
 
 ```detect()``` 将返回一个 ```Environment``` 实例，并作为参数传递给 ```app()``` 方法，```app()``` 方法定义在 ```app.swift``` 中，源码如下
 
-```
+``` swift
 public func app(_ environment: Environment) throws -> Application {
     var environment = environment
     try LoggingSystem.bootstrap(from: &environment)
@@ -245,7 +245,7 @@ public func app(_ environment: Environment) throws -> Application {
 
 ```configure()``` 方法定义在 ```configure.swift``` 中，源码如下
 
-```
+``` swift
 // Called before your application initializes.
 func configure(_ app: Application) throws {
     // Register providers first
@@ -279,7 +279,7 @@ func configure(_ app: Application) throws {
 
 接下来，我们看下 `routes()` 方法的实现，它是定义在 `routes.swift` 文件中，源码如下
 
-```
+``` swift
 func routes(_ app: Application) throws {
     app.get { req in
         return "It works!"
@@ -298,7 +298,7 @@ func routes(_ app: Application) throws {
 
 之前，访问 ```http://127.0.0.1:8080``` 地址，返回了 ```It works!``` 文本，其实对应的就是这部分代码。
 
-```
+``` swift
 app.get { req in
     return "It works!"
 }
@@ -308,7 +308,7 @@ app.get { req in
 
 同理，第二段代码
 
-```
+``` swift
 app.get("hello") { req in
     return "Hello, world!"
 }
@@ -318,7 +318,7 @@ app.get("hello") { req in
 
 再看下第三段代码
 
-```
+``` swift
 let todoController = TodoController()
 
 // 请求路径：todos，请求方法: GET，响应方法：index。
@@ -333,7 +333,7 @@ app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
 
 路径为 `todos` 的请求（`GET`、`POST`、`DELETE`）都将被映射到 `TodoController` 中，在该 `Controller` 中可以处理相关的业务逻辑。
 
-```
+``` swift
 struct TodoController {
     func index(req: Request) throws -> EventLoopFuture<[Todo]> {
         ......
@@ -351,13 +351,13 @@ struct TodoController {
 
 回到 ```main.swift``` 文件，当 ```app()``` 方法执行完毕后，最后将执行 ```run()``` 方法来启动服务。
 
-```
+``` swift
 try app(.detect()).run()
 ```
 
 ```run()``` 源码如下
 
-```
+``` swift
 public func run() throws {
     defer { self.shutdown() }
     do {

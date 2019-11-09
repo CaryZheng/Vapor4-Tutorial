@@ -2,7 +2,9 @@ site_name: Vapor 4 速成指南
 site_description: 'Vapor 4 速成指南'
 site_author: 'Cary Zheng'
 site_url: 'https://vapor4.swiftmic.com'
+
 copyright: 'Copyright &copy; 2019 CaryZheng'
+
 theme:
   name: 'material'
   language: 'zh'
@@ -11,9 +13,24 @@ theme:
     accent: 'indigo'
   favicon: 'favicon.ico'
   logo: 'logo.png'
+
 google_analytics:
   - 'UA-113865151-2'
   - 'auto'
+
+extra:
+  social:
+    - type: globe
+      link: https://www.carymic.com
+    - type: github-alt
+      link: https://github.com/CaryZheng
+
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+
 nav:
 - 序: index.md
 - 安装 Vapor:

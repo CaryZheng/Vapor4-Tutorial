@@ -4,7 +4,7 @@
 
 `Application` 的部分源码如下
 
-```
+``` swift
 public final class Application {
     public var environment: Environment
     public var services: Services
@@ -54,7 +54,7 @@ extension Application: RoutesBuilder {
 
 接下来，我们来看下 `App` 目录中的 `app.swift` 文件。
 
-```
+``` swift
 public func app(_ environment: Environment) throws -> Application {
     var environment = environment
     try LoggingSystem.bootstrap(from: &environment)
@@ -69,7 +69,7 @@ public func app(_ environment: Environment) throws -> Application {
 
 还有 `configure.swift` 文件。
 
-```
+``` swift
 // Called before your application initializes.
 func configure(_ app: Application) throws {
     // Register providers first
@@ -101,7 +101,7 @@ func configure(_ app: Application) throws {
 
 最后是 `routes.swift` 文件。
 
-```
+``` swift
 func routes(_ app: Application) throws {
     app.get { req in
         return "It works!"
