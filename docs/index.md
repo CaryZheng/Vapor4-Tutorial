@@ -4,10 +4,6 @@
 
 本教程主要是针对 Vapor 4 (Beta) 的速成指南。（注：逐步更新中）
 
-## 在线阅读
-
-[https://vapor4.swiftmic.com](https://vapor4.swiftmic.com)
-
 ## Swift 社区
 
 SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
