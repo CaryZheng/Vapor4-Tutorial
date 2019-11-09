@@ -689,15 +689,16 @@
               
                 
                 
-                <h1 id="hello-world">Hello World</h1>
+                <h1 id="hello-world">Hello World<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h1>
 <p>本章教程教将带你创建第一个 Vapor 项目。</p>
-<h2 id="_1">创建项目</h2>
+<h2 id="_1">创建项目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>通过 vapor 命令行工具创建项目，项目名称命名为 <code>Vapor4Example</code>。（注：当前 Vapor 4 还处于 Beta 阶段）</p>
-<pre><code>vapor new Vapor4Example -branch=4
-</code></pre>
+<div class="codehilite"><pre><span></span>vapor new Vapor4Example -branch=4
+</pre></div>
+
 
 <p>创建成功后，将输出如下信息。</p>
-<pre><code>Cloning Template [Done]
+<div class="codehilite"><pre><span></span>Cloning Template [Done]
 Updating Package Name [Done]
 Initializing git repository [Done]
 
@@ -728,9 +729,10 @@ Initializing git repository [Done]
                    Type `cd Vapor4Example` to enter the project directory.
                    Use `vapor cloud deploy` to host your project for free!
                                            Enjoy!
-</code></pre>
+</pre></div>
 
-<h2 id="_2">运行项目</h2>
+
+<h2 id="_2">运行项目<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>此时，我们先不分析代码，先将该 vapor 项目 run 起来，看看最终效果。</p>
 <p>步骤如下：</p>
 <ul>
@@ -741,41 +743,46 @@ Initializing git repository [Done]
 <p>通过如下命令 build 项目代码。</p>
 </li>
 </ul>
-<pre><code>vapor build
-</code></pre>
+<div class="codehilite"><pre><span></span>vapor build
+</pre></div>
+
 
 <p>build 成功后将输出如下信息。</p>
-<pre><code>Building Project [Done]
-</code></pre>
+<div class="codehilite"><pre><span></span>Building Project [Done]
+</pre></div>
+
 
 <ul>
 <li>通过如下命令 run 项目。</li>
 </ul>
-<pre><code>vapor run
-</code></pre>
+<div class="codehilite"><pre><span></span>vapor run
+</pre></div>
+
 
 <p>这时候将输出如下信息。</p>
-<pre><code>Running app ...
+<div class="codehilite"><pre><span></span>Running app ...
 [ NOTICE ] Server starting on http://127.0.0.1:8080
-</code></pre>
+</pre></div>
+
 
 <p>然后访问 <code>http://127.0.0.1:8080</code> 地址，如果返回 <code>It works!</code>，则意味着你的第一个 vapor 项目已经 run 成功了。</p>
-<h2 id="xcode">生成 Xcode 项目</h2>
+<h2 id="xcode">生成 Xcode 项目<a class="headerlink" href="#xcode" title="Permanent link">&para;</a></h2>
 <p>执行 <code>vapor xcode</code> 命令，将会自动生成一个完整的 Xcode 项目。</p>
-<pre><code>$ vapor xcode
+<div class="codehilite"><pre><span></span>$ vapor xcode
 Generating Xcode Project [Done]
 Select the `Run` scheme to run.
 Open Xcode project?
 y/n&gt; y
 Opening Xcode project...
-</code></pre>
+</pre></div>
+
 
 <p>可以选择 Xcode 中的 <code>Run</code> scheme 进行编译运行。</p>
 <p>如图所示</p>
 <p><img alt="xcode" src="../img/xcode.png" /></p>
-<h2 id="_3">目录结构</h2>
+<h2 id="_3">目录结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>接下来将分析下项目的目录结构，如下所示。</p>
-<pre><code>.
+<div class="codehilite"><pre><span></span>.
 ├── Public
 ├── Sources
 │   ├── App
@@ -790,31 +797,33 @@ Opening Xcode project...
 ├── Tests
 │   └── AppTests
 └── Package.swift
-</code></pre>
+</pre></div>
 
-<h3 id="public">Public</h3>
+
+<h3 id="public">Public<a class="headerlink" href="#public" title="Permanent link">&para;</a></h3>
 <p>该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。</p>
 <p>首先，需修改 <code>configure.swift</code> 文件来开启使用 <code>FileMiddleware</code> 中间件。</p>
-<pre><code>// Called before your application initializes.
-func configure(_ app: Application) throws {
-    ......
+<div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
+<span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="p">......</span>
 
-    // Register middleware
-    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-        // Serves files from `Public/` directory
-        middlewares.use(app.make(FileMiddleware.self))
-    }
+    <span class="c1">// Register middleware</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
+        <span class="c1">// Serves files from `Public/` directory</span>
+        <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
+    <span class="p">}</span>
 
-    ......
-}
-</code></pre>
+    <span class="p">......</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>然后，所有 <code>Public/</code> 目录下的资源文件均可直接被访问了。比如 <code>Public/</code> 目录下有一张图片（命名为 <code>sample.png</code>），在本地服务已启动的情况下（假设所占端口为 <code>8080</code>），访问 <code>http://localhost:8080/sample.png</code> 地址可直接显示 <code>Public/</code> 目录下的 <code>sample.png</code> 图片。</p>
 <p>效果如下</p>
 <p><img alt="public_resource_sample" src="../img/public_resource_sample.png" /></p>
-<h3 id="sources">Sources</h3>
+<h3 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h3>
 <p>该目录用于存放源代码。</p>
-<h4 id="app">App</h4>
+<h4 id="app">App<a class="headerlink" href="#app" title="Permanent link">&para;</a></h4>
 <p>主要是用来存放业务相关的代码。</p>
 <ul>
 <li>Controllers：用于存放具体业务逻辑的实现代码。</li>
@@ -824,173 +833,185 @@ func configure(_ app: Application) throws {
 <li>configure.swift：用于服务配置相关的代码文件。</li>
 <li>routes.swift：用于 API 请求的路由控制。</li>
 </ul>
-<h4 id="run">Run</h4>
+<h4 id="run">Run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h4>
 <p>该目录下有一个 <code>main.swift</code> 文件，是整个程序的执行入口。</p>
-<h4 id="tests">Tests</h4>
+<h4 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h4>
 <p>该目录主要是用于存放测试相关的代码。</p>
-<h3 id="packageswift">Package.swift</h3>
+<h3 id="packageswift">Package.swift<a class="headerlink" href="#packageswift" title="Permanent link">&para;</a></h3>
 <p>Vapor 项目所依赖的库是通过 <a href="https://github.com/apple/swift-package-manager">SPM（Swift Package Manager）</a> 来进行管理的。</p>
 <p>示例如下</p>
-<pre><code>// swift-tools-version:5.1
-import PackageDescription
+<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.1</span>
+<span class="kd">import</span> <span class="nc">PackageDescription</span>
 
-let package = Package(
-    name: &quot;app&quot;,
-    platforms: [
-       .macOS(.v10_15)
-    ],
-    products: [
-        .executable(name: &quot;Run&quot;, targets: [&quot;Run&quot;]),
-        .library(name: &quot;App&quot;, targets: [&quot;App&quot;]),
-    ],
-    dependencies: [
-        // 💧 A server-side Swift web framework.
-        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0-beta&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent.git&quot;, from: &quot;4.0.0-beta&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;, from: &quot;4.0.0-beta&quot;),
-    ],
-    targets: [
-        .target(name: &quot;App&quot;, dependencies: [&quot;Fluent&quot;, &quot;FluentSQLiteDriver&quot;, &quot;Vapor&quot;]),
-        .target(name: &quot;Run&quot;, dependencies: [&quot;App&quot;]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [&quot;App&quot;])
-    ]
-)
-</code></pre>
+<span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s">&quot;app&quot;</span><span class="p">,</span>
+    <span class="n">platforms</span><span class="p">:</span> <span class="p">[</span>
+       <span class="p">.</span><span class="n">macOS</span><span class="p">(.</span><span class="n">v10_15</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">products</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">executable</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Run&quot;</span><span class="p">]),</span>
+        <span class="p">.</span><span class="n">library</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="c1">// 💧 A server-side Swift web framework.</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="s">&quot;Vapor&quot;</span><span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">]),</span>
+        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
 
-<h2 id="vapor">简析 Vapor 启动过程</h2>
+
+<h2 id="vapor">简析 Vapor 启动过程<a class="headerlink" href="#vapor" title="Permanent link">&para;</a></h2>
 <p>接下来我们简单分析下 Vapor 示例项目启动的过程。</p>
 <p>首先来看下 <code>main.swift</code> 文件，这个是整个程序执行的入口。</p>
-<pre><code>import App
+<div class="codehilite"><pre><span></span><span class="kd">import</span> <span class="nc">App</span>
 
-try app(.detect()).run()
-</code></pre>
+<span class="k">try</span> <span class="n">app</span><span class="p">(.</span><span class="n">detect</span><span class="p">()).</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
 
 <p>只有简短的两行代码，第一行 <code>import App</code> 是用来导入 <code>App</code> library 的，然后再执行 <code>try app(.detect()).run()</code> 运行服务。</p>
 <p>其中，<code>.detect()</code> 方法是用来检测当前运行环境，源码如下</p>
-<pre><code>public static func detect(arguments: [String] = CommandLine.arguments) throws -&gt; Environment {
-    var commandInput = CommandInput(arguments: arguments)
-    return try Environment.detect(from: &amp;commandInput)
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">detect</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">=</span> <span class="n">CommandLine</span><span class="p">.</span><span class="n">arguments</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">Environment</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">commandInput</span> <span class="p">=</span> <span class="n">CommandInput</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">arguments</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">try</span> <span class="n">Environment</span><span class="p">.</span><span class="n">detect</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">commandInput</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p><code>detect()</code> 将返回一个 <code>Environment</code> 实例，并作为参数传递给 <code>app()</code> 方法，<code>app()</code> 方法定义在 <code>app.swift</code> 中，源码如下</p>
-<pre><code>public func app(_ environment: Environment) throws -&gt; Application {
-    var environment = environment
-    try LoggingSystem.bootstrap(from: &amp;environment)
-    let app = Application(environment: environment)
-    try configure(app)
-    return app
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">app</span><span class="p">(</span><span class="kc">_</span> <span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">Application</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">environment</span> <span class="p">=</span> <span class="n">environment</span>
+    <span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">environment</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">environment</span><span class="p">:</span> <span class="n">environment</span><span class="p">)</span>
+    <span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>从中可以看出，根据 <code>environment</code> 参数，先初始化了日志系统 <code>LoggingSystem</code>，然后创建了 <code>Application</code> 实例对象，最后再调用 <code>configure()</code> 方法来初始化配置。</p>
 <p><code>configure()</code> 方法定义在 <code>configure.swift</code> 中，源码如下</p>
-<pre><code>// Called before your application initializes.
-func configure(_ app: Application) throws {
-    // Register providers first
-    app.provider(FluentProvider())
+<div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
+<span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="c1">// Register providers first</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">provider</span><span class="p">(</span><span class="n">FluentProvider</span><span class="p">())</span>
 
-    // Register middleware
-    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-        // Serves files from `Public/` directory
-        middlewares.use(app.make(FileMiddleware.self))
-    }
+    <span class="c1">// Register middleware</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
+        <span class="c1">// Serves files from `Public/` directory</span>
+        <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
+    <span class="p">}</span>
 
-    app.databases.sqlite(
-        configuration: .init(storage: .connection(.file(path: &quot;db.sqlite&quot;))),
-        threadPool: app.make(),
-        poolConfiguration: app.make(),
-        logger: app.make(),
-        on: app.make()
-    )
+    <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">sqlite</span><span class="p">(</span>
+        <span class="n">configuration</span><span class="p">:</span> <span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">storage</span><span class="p">:</span> <span class="p">.</span><span class="n">connection</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s">&quot;db.sqlite&quot;</span><span class="p">))),</span>
+        <span class="n">threadPool</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
+        <span class="n">poolConfiguration</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
+        <span class="n">logger</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
+        <span class="n">on</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">()</span>
+    <span class="p">)</span>
 
-    app.register(Migrations.self) { c in
-        var migrations = Migrations()
-        migrations.add(CreateTodo(), to: .sqlite)
-        return migrations
-    }
+    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Migrations</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">c</span> <span class="k">in</span>
+        <span class="kd">var</span> <span class="nv">migrations</span> <span class="p">=</span> <span class="n">Migrations</span><span class="p">()</span>
+        <span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">(),</span> <span class="n">to</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">migrations</span>
+    <span class="p">}</span>
 
-    try routes(app)
-}
-</code></pre>
+    <span class="k">try</span> <span class="n">routes</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>从源码中可见，<code>configure()</code> 方法内部注册了 <code>provider</code>（比如：<code>FluentProvider</code>）、<code>middleware</code>（比如：<code>FileMiddleware</code>）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 <code>Provider</code>、<code>Middleware</code> 等等，后续章节将进行详细介绍。）</p>
 <p>接下来，我们看下 <code>routes()</code> 方法的实现，它是定义在 <code>routes.swift</code> 文件中，源码如下</p>
-<pre><code>func routes(_ app: Application) throws {
-    app.get { req in
-        return &quot;It works!&quot;
-    }
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;It works!&quot;</span>
+    <span class="p">}</span>
 
-    app.get(&quot;hello&quot;) { req in
-        return &quot;Hello, world!&quot;
-    }
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+    <span class="p">}</span>
 
-    let todoController = TodoController()
-    app.get(&quot;todos&quot;, use: todoController.index)
-    app.post(&quot;todos&quot;, use: todoController.create)
-    app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.delete)
-}
-</code></pre>
+    <span class="kd">let</span> <span class="nv">todoController</span> <span class="p">=</span> <span class="n">TodoController</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">create</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">DELETE</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="s">&quot;:todoID&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">delete</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>之前，访问 <code>http://127.0.0.1:8080</code> 地址，返回了 <code>It works!</code> 文本，其实对应的就是这部分代码。</p>
-<pre><code>app.get { req in
-    return &quot;It works!&quot;
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;It works!&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>这是在根路径下，监听了 <code>GET</code> 行为，当通过 <code>GET</code> 方式请求根路径（比如：<code>http://127.0.0.1:8080</code>）时，将返回一串文本 <code>It works!</code> 。</p>
 <p>同理，第二段代码</p>
-<pre><code>app.get(&quot;hello&quot;) { req in
-    return &quot;Hello, world!&quot;
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>监听了路径为 <code>hello</code> 的 <code>GET</code> 请求，当通过 <code>GET</code> 方式请求对应路径（比如：<code>http://127.0.0.1:8080/hello</code>）时，将返回一串文本 <code>Hello, world!</code> 。</p>
 <p>再看下第三段代码</p>
-<pre><code>let todoController = TodoController()
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nv">todoController</span> <span class="p">=</span> <span class="n">TodoController</span><span class="p">()</span>
 
-// 请求路径：todos，请求方法: GET，响应方法：index。
-app.get(&quot;todos&quot;, use: todoController.index)
+<span class="c1">// 请求路径：todos，请求方法: GET，响应方法：index。</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
 
-// 请求路径：todos，请求方法: POST，响应方法：create。
-app.post(&quot;todos&quot;, use: todoController.create)
+<span class="c1">// 请求路径：todos，请求方法: POST，响应方法：create。</span>
+<span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">create</span><span class="p">)</span>
 
-// 请求路径：todos，请求方法: DELETE，响应方法：delete。
-app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.delete)
-</code></pre>
+<span class="c1">// 请求路径：todos，请求方法: DELETE，响应方法：delete。</span>
+<span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">DELETE</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="s">&quot;:todoID&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">delete</span><span class="p">)</span>
+</pre></div>
+
 
 <p>路径为 <code>todos</code> 的请求（<code>GET</code>、<code>POST</code>、<code>DELETE</code>）都将被映射到 <code>TodoController</code> 中，在该 <code>Controller</code> 中可以处理相关的业务逻辑。</p>
-<pre><code>struct TodoController {
-    func index(req: Request) throws -&gt; EventLoopFuture&lt;[Todo]&gt; {
-        ......
-    }
+<div class="codehilite"><pre><span></span><span class="kd">struct</span> <span class="nc">TodoController</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="o">&lt;</span><span class="p">[</span><span class="n">Todo</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="p">......</span>
+    <span class="p">}</span>
 
-    func create(req: Request) throws -&gt; EventLoopFuture&lt;Todo&gt; {
-        ......
-    }
+    <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Todo</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="p">......</span>
+    <span class="p">}</span>
 
-    func delete(req: Request) throws -&gt; EventLoopFuture&lt;HTTPStatus&gt; {
-        ......
-    }
-}
-</code></pre>
+    <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">HTTPStatus</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="p">......</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>回到 <code>main.swift</code> 文件，当 <code>app()</code> 方法执行完毕后，最后将执行 <code>run()</code> 方法来启动服务。</p>
-<pre><code>try app(.detect()).run()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="n">app</span><span class="p">(.</span><span class="n">detect</span><span class="p">()).</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
 
 <p><code>run()</code> 源码如下</p>
-<pre><code>public func run() throws {
-    defer { self.shutdown() }
-    do {
-        try self.start()
-        try self.running?.onStop.wait()
-    } catch {
-        self.logger.report(error: error)
-        throw error
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="k">defer</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">running</span><span class="p">?.</span><span class="n">onStop</span><span class="p">.</span><span class="n">wait</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">report</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="n">error</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="n">error</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。</p>
                 
@@ -1060,6 +1081,15 @@ app.on(.DELETE, &quot;todos&quot;, &quot;:todoID&quot;, use: todoController.dele
           Material for MkDocs</a>
       </div>
       
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://www.carymic.com" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/CaryZheng" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+
     </div>
   </div>
 </footer>

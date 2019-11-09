@@ -623,117 +623,126 @@
               
                 
                 
-                <h1 id="controller">Controller</h1>
+                <h1 id="controller">Controller<a class="headerlink" href="#controller" title="Permanent link">&para;</a></h1>
 <p><code>Controller</code> 可以使得代码结构更清晰，它是处理 request 和 response 的一系列方法集合。</p>
-<h2 id="controller_1">创建 Controller</h2>
+<h2 id="controller_1">创建 Controller<a class="headerlink" href="#controller_1" title="Permanent link">&para;</a></h2>
 <p>首先，我们在 <code>Controllers</code> 目录下创建一个新的 <code>TestController.swift</code> 文件 ，代码如下</p>
-<pre><code>import Vapor
+<div class="codehilite"><pre><span></span><span class="kd">import</span> <span class="nc">Vapor</span>
 
-struct TestController {
+<span class="kd">struct</span> <span class="nc">TestController</span> <span class="p">{</span>
 
-    func createUser(req: Request) -&gt; String {
-        return &quot;Create SwiftMic test user&quot;
-    }
+    <span class="kd">func</span> <span class="nf">createUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;Create SwiftMic test user&quot;</span>
+    <span class="p">}</span>
 
-    func updateUser(req: Request) -&gt; String {
-        return &quot;Update SwiftMic test user&quot;
-    }
+    <span class="kd">func</span> <span class="nf">updateUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;Update SwiftMic test user&quot;</span>
+    <span class="p">}</span>
 
-    func findUser(req: Request) -&gt; String {
-        let userId = req.parameters.get(&quot;userId&quot;)
-        if nil == userId || userId!.isEmpty {
-            return &quot;Require param: userId&quot;
-        }
+    <span class="kd">func</span> <span class="nf">findUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">userId</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="kc">nil</span> <span class="p">==</span> <span class="n">userId</span> <span class="o">||</span> <span class="n">userId</span><span class="p">!.</span><span class="bp">isEmpty</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&quot;Require param: userId&quot;</span>
+        <span class="p">}</span>
 
-        return &quot;Find SwiftMic test user: &quot; + userId!
-    }
+        <span class="k">return</span> <span class="s">&quot;Find SwiftMic test user: &quot;</span> <span class="o">+</span> <span class="n">userId</span><span class="p">!</span>
+    <span class="p">}</span>
 
-    func deleteUser(req: Request) -&gt; String {
-        let userId = req.parameters.get(&quot;userId&quot;)
-        if nil == userId || userId!.isEmpty {
-            return &quot;Require param: userId&quot;
-        }
+    <span class="kd">func</span> <span class="nf">deleteUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">userId</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="kc">nil</span> <span class="p">==</span> <span class="n">userId</span> <span class="o">||</span> <span class="n">userId</span><span class="p">!.</span><span class="bp">isEmpty</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&quot;Require param: userId&quot;</span>
+        <span class="p">}</span>
 
-        return &quot;Delete SwiftMic test user: &quot; + userId!
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="s">&quot;Delete SwiftMic test user: &quot;</span> <span class="o">+</span> <span class="n">userId</span><span class="p">!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>此处，<code>TestController</code> 结构体中定义了 4 个方法（<code>createUser</code>、<code>updateUser</code>、<code>findUser</code>、<code>deleteUser</code>），它们都接收了一个 <code>Request</code> 请求，处理完后返回一个 <code>Response</code>（此处为 <code>String</code> 类型）。</p>
-<h2 id="controller_2">绑定 Controller</h2>
+<h2 id="controller_2">绑定 Controller<a class="headerlink" href="#controller_2" title="Permanent link">&para;</a></h2>
 <p>接下来，在 <code>routes.swift</code> 文件中进行绑定操作。</p>
-<pre><code>func routes(_ app: Application) throws {
-    ......
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="p">......</span>
 
-    let testController = TestController()
+    <span class="kd">let</span> <span class="nv">testController</span> <span class="p">=</span> <span class="n">TestController</span><span class="p">()</span>
 
-    // 请求路径：test，请求方法: POST，响应方法：createUser。
-    app.post(&quot;test&quot;, use: testController.createUser)
+    <span class="c1">// 请求路径：test，请求方法: POST，响应方法：createUser。</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">createUser</span><span class="p">)</span>
 
-    // 请求路径：test，请求方法: PUT，响应方法：updateUser。
-    app.put(&quot;test&quot;, use: testController.updateUser)
+    <span class="c1">// 请求路径：test，请求方法: PUT，响应方法：updateUser。</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">updateUser</span><span class="p">)</span>
 
-    // 请求路径：test，参数：&lt;userId&gt;, 请求方法: GET，响应方法：findUser。
-    app.get(&quot;test&quot;, &quot;:userId&quot;, use: testController.findUser)
+    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: GET，响应方法：findUser。</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">findUser</span><span class="p">)</span>
 
-    // 请求路径：test，参数：&lt;userId&gt;, 请求方法: DELETE，响应方法：deleteUser。
-    app.delete(&quot;test&quot;, &quot;:userId&quot;, use: testController.deleteUser)
-}
-</code></pre>
+    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: DELETE，响应方法：deleteUser。</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">deleteUser</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
 
-<h2 id="api">测试 API</h2>
+
+<h2 id="api">测试 API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>最后，通过 <a href="https://curl.haxx.se/">CURL</a> 工具模拟 HTTP 请求来测试下这 4 个接口。</p>
-<h3 id="get">GET</h3>
+<h3 id="get">GET<a class="headerlink" href="#get" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Request</li>
 </ul>
-<pre><code>curl -X GET http://localhost:8080/test/1
-</code></pre>
+<div class="codehilite"><pre><span></span>curl -X GET http://localhost:8080/test/1
+</pre></div>
+
 
 <ul>
 <li>Response</li>
 </ul>
-<pre><code>Find SwiftMic test user: 1
-</code></pre>
+<div class="codehilite"><pre><span></span>Find SwiftMic test user: 1
+</pre></div>
 
-<h3 id="post">POST</h3>
+
+<h3 id="post">POST<a class="headerlink" href="#post" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Request</li>
 </ul>
-<pre><code>curl -X POST http://localhost:8080/test
-</code></pre>
+<div class="codehilite"><pre><span></span>curl -X POST http://localhost:8080/test
+</pre></div>
+
 
 <ul>
 <li>Response</li>
 </ul>
-<pre><code>Create SwiftMic test user
-</code></pre>
+<div class="codehilite"><pre><span></span>Create SwiftMic test user
+</pre></div>
 
-<h3 id="put">PUT</h3>
+
+<h3 id="put">PUT<a class="headerlink" href="#put" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Request</li>
 </ul>
-<pre><code>curl -X PUT http://localhost:8080/test
-</code></pre>
+<div class="codehilite"><pre><span></span>curl -X PUT http://localhost:8080/test
+</pre></div>
+
 
 <ul>
 <li>Response</li>
 </ul>
-<pre><code>Update SwiftMic test user
-</code></pre>
+<div class="codehilite"><pre><span></span>Update SwiftMic test user
+</pre></div>
 
-<h3 id="delete">DELETE</h3>
+
+<h3 id="delete">DELETE<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Request</li>
 </ul>
-<pre><code>curl -X DELETE http://localhost:8080/test/1
-</code></pre>
+<div class="codehilite"><pre><span></span>curl -X DELETE http://localhost:8080/test/1
+</pre></div>
+
 
 <ul>
 <li>Response</li>
 </ul>
-<pre><code>Delete SwiftMic test user: 1
-</code></pre>
+<div class="codehilite"><pre><span></span>Delete SwiftMic test user: 1
+</pre></div>
                 
                   
                 
@@ -801,6 +810,15 @@ struct TestController {
           Material for MkDocs</a>
       </div>
       
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://www.carymic.com" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/CaryZheng" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+
     </div>
   </div>
 </footer>
