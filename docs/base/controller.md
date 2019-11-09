@@ -4,7 +4,7 @@
 
 ## 创建 Controller
 
-首先，我们在 `Controllers` 目录下创建一个新的 ```TestController.swift``` 文件 ，代码如下
+首先，我们在 `Controllers` 目录下创建一个新的 `TestController.swift` 文件 ，代码如下
 
 ``` swift
 import Vapor

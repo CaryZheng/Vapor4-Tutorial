@@ -4,7 +4,7 @@
 
 ## 创建项目
 
-通过 vapor 命令行工具创建项目，项目名称命名为 ```Vapor4Example```。（注：当前 Vapor 4 还处于 Beta 阶段）
+通过 vapor 命令行工具创建项目，项目名称命名为 `Vapor4Example`。（注：当前 Vapor 4 还处于 Beta 阶段）
 
 ```
 vapor new Vapor4Example -branch=4
@@ -52,7 +52,7 @@ Initializing git repository [Done]
 
 步骤如下：
 
-* 执行 ```cd Vapor4Example``` 进入到刚创建好的项目目录中。
+* 执行 `cd Vapor4Example` 进入到刚创建好的项目目录中。
 
 * 通过如下命令 build 项目代码。
 
@@ -79,11 +79,11 @@ Running app ...
 [ NOTICE ] Server starting on http://127.0.0.1:8080
 ```
 
-然后访问 ```http://127.0.0.1:8080``` 地址，如果返回 ```It works!```，则意味着你的第一个 vapor 项目已经 run 成功了。
+然后访问 `http://127.0.0.1:8080` 地址，如果返回 `It works!`，则意味着你的第一个 vapor 项目已经 run 成功了。
 
 ## 生成 Xcode 项目
 
-执行 ```vapor xcode``` 命令，将会自动生成一个完整的 Xcode 项目。
+执行 `vapor xcode` 命令，将会自动生成一个完整的 Xcode 项目。
 
 ```
 $ vapor xcode
@@ -94,7 +94,7 @@ y/n> y
 Opening Xcode project...
 ```
 
-可以选择 Xcode 中的 ```Run``` scheme 进行编译运行。
+可以选择 Xcode 中的 `Run` scheme 进行编译运行。
 
 如图所示
 
@@ -127,7 +127,7 @@ Opening Xcode project...
 
 该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。
 
-首先，需修改 ```configure.swift``` 文件来开启使用 ```FileMiddleware``` 中间件。
+首先，需修改 `configure.swift` 文件来开启使用 `FileMiddleware` 中间件。
 
 ``` swift
 // Called before your application initializes.
@@ -144,7 +144,7 @@ func configure(_ app: Application) throws {
 }
 ```
 
-然后，所有 ```Public/``` 目录下的资源文件均可直接被访问了。比如 ```Public/``` 目录下有一张图片（命名为 ```sample.png```），在本地服务已启动的情况下（假设所占端口为 ```8080```），访问 ```http://localhost:8080/sample.png``` 地址可直接显示 ```Public/``` 目录下的 ```sample.png``` 图片。
+然后，所有 `Public/` 目录下的资源文件均可直接被访问了。比如 `Public/` 目录下有一张图片（命名为 `sample.png`），在本地服务已启动的情况下（假设所占端口为 `8080`），访问 `http://localhost:8080/sample.png` 地址可直接显示 `Public/` 目录下的 `sample.png` 图片。
 
 效果如下
 
@@ -167,7 +167,7 @@ func configure(_ app: Application) throws {
 
 #### Run
 
-该目录下有一个 ```main.swift``` 文件，是整个程序的执行入口。
+该目录下有一个 `main.swift` 文件，是整个程序的执行入口。
 
 #### Tests
 
@@ -210,7 +210,7 @@ let package = Package(
 
 接下来我们简单分析下 Vapor 示例项目启动的过程。
 
-首先来看下 ```main.swift``` 文件，这个是整个程序执行的入口。
+首先来看下 `main.swift` 文件，这个是整个程序执行的入口。
 
 ``` swift
 import App
@@ -218,9 +218,9 @@ import App
 try app(.detect()).run()
 ```
 
-只有简短的两行代码，第一行 ```import App``` 是用来导入 ```App``` library 的，然后再执行 ```try app(.detect()).run()``` 运行服务。
+只有简短的两行代码，第一行 `import App` 是用来导入 `App` library 的，然后再执行 `try app(.detect()).run()` 运行服务。
 
-其中，```.detect()``` 方法是用来检测当前运行环境，源码如下
+其中，`.detect()` 方法是用来检测当前运行环境，源码如下
 
 ``` swift
 public static func detect(arguments: [String] = CommandLine.arguments) throws -> Environment {
@@ -229,7 +229,7 @@ public static func detect(arguments: [String] = CommandLine.arguments) throws ->
 }
 ```
 
-```detect()``` 将返回一个 ```Environment``` 实例，并作为参数传递给 ```app()``` 方法，```app()``` 方法定义在 ```app.swift``` 中，源码如下
+`detect()` 将返回一个 `Environment` 实例，并作为参数传递给 `app()` 方法，`app()` 方法定义在 `app.swift` 中，源码如下
 
 ``` swift
 public func app(_ environment: Environment) throws -> Application {
@@ -241,9 +241,9 @@ public func app(_ environment: Environment) throws -> Application {
 }
 ```
 
-从中可以看出，根据 `environment` 参数，先初始化了日志系统 ```LoggingSystem```，然后创建了 ```Application``` 实例对象，最后再调用 ```configure()``` 方法来初始化配置。
+从中可以看出，根据 `environment` 参数，先初始化了日志系统 `LoggingSystem`，然后创建了 `Application` 实例对象，最后再调用 `configure()` 方法来初始化配置。
 
-```configure()``` 方法定义在 ```configure.swift``` 中，源码如下
+`configure()` 方法定义在 `configure.swift` 中，源码如下
 
 ``` swift
 // Called before your application initializes.
@@ -275,7 +275,7 @@ func configure(_ app: Application) throws {
 }
 ```
 
-从源码中可见，`configure()` 方法内部注册了 `provider`（比如：`FluentProvider`）、```middleware```（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Provider`、`Middleware` 等等，后续章节将进行详细介绍。）
+从源码中可见，`configure()` 方法内部注册了 `provider`（比如：`FluentProvider`）、`middleware`（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Provider`、`Middleware` 等等，后续章节将进行详细介绍。）
 
 接下来，我们看下 `routes()` 方法的实现，它是定义在 `routes.swift` 文件中，源码如下
 
@@ -296,7 +296,7 @@ func routes(_ app: Application) throws {
 }
 ```
 
-之前，访问 ```http://127.0.0.1:8080``` 地址，返回了 ```It works!``` 文本，其实对应的就是这部分代码。
+之前，访问 `http://127.0.0.1:8080` 地址，返回了 `It works!` 文本，其实对应的就是这部分代码。
 
 ``` swift
 app.get { req in
@@ -349,13 +349,13 @@ struct TodoController {
 }
 ```
 
-回到 ```main.swift``` 文件，当 ```app()``` 方法执行完毕后，最后将执行 ```run()``` 方法来启动服务。
+回到 `main.swift` 文件，当 `app()` 方法执行完毕后，最后将执行 `run()` 方法来启动服务。
 
 ``` swift
 try app(.detect()).run()
 ```
 
-```run()``` 源码如下
+`run()` 源码如下
 
 ``` swift
 public func run() throws {
