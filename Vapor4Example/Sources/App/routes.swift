@@ -20,4 +20,17 @@ func routes(_ app: Application) throws {
     app.put("test", use: testController.updateUser)
     app.get("test", ":userId", use: testController.findUser)
     app.delete("test", ":userId", use: testController.deleteUser)
+    
+    // 路由组
+    app.group("v1") { builder in
+        
+        // 此处定义的所有请求路径都是在路由组（"v1"）下面的。
+        builder.get("name") { req in
+            return "Request path: v1/name"
+        }
+        
+        builder.get("avatar") { req in
+            return "Request path: v1/avatar"
+        }
+    }
 }
