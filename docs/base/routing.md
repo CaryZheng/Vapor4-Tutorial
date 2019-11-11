@@ -52,7 +52,7 @@ app.get("hello") { req in
 
 如上代码的作用是，监听了 "hello" 路径，当客户端发起 `/hello` 为路径的 `GET` 请求时，将会出发该回调方法的执行，最终返回 "Hello, world!" 给客户端展现。
 
-接下来我们测试下。
+### 测试 `hello`
 
 * Request
 
@@ -108,7 +108,7 @@ app.group("v1") { builder in
 
 `name` 和 `avatar` 都是挂在 `v1` 后面，相当于 `v1/name` 和 `v1/avatar`。
 
-接下来我们测试下。
+### 测试 `v1/name`
 
 * Request
 
@@ -121,6 +121,8 @@ curl -X GET http://localhost:8080/v1/name
 ```
 Handle path: v1/name
 ```
+
+### 测试 `v1/avatar`
 
 * Request
 
