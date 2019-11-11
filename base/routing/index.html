@@ -390,9 +390,45 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Routing
+      </label>
+    
     <a href="./" title="Routing" class="md-nav__link md-nav__link--active">
       Routing
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    监听指定路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    监听指定路径集合
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -515,6 +551,29 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    监听指定路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    监听指定路径集合
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -529,7 +588,132 @@
                 
                 
                 <h1 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
+<p>路由是用来管理控制 HTTP 请求入口的。</p>
+<p>先看下 <code>App</code> 目录下的 <code>routes.swift</code> 文件，源码如下。</p>
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;It works!&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+    <span class="p">}</span>
+
+    <span class="kd">let</span> <span class="nv">todoController</span> <span class="p">=</span> <span class="n">TodoController</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">create</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">DELETE</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="s">&quot;:todoID&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">delete</span><span class="p">)</span>
+
+    <span class="kd">let</span> <span class="nv">testController</span> <span class="p">=</span> <span class="n">TestController</span><span class="p">()</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">createUser</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">updateUser</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">findUser</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">deleteUser</span><span class="p">)</span>
+
+    <span class="c1">// 路由组</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;v1&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">builder</span> <span class="k">in</span>
+
+        <span class="c1">// 此处定义的所有请求路径都是在路由组（&quot;v1&quot;）下面的。</span>
+        <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+            <span class="k">return</span> <span class="s">&quot;Handle path: v1/name&quot;</span>
+        <span class="p">}</span>
+
+        <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;avatar&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+            <span class="k">return</span> <span class="s">&quot;Handle path: v1/avatar&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>通过 <code>app</code>（<code>Application</code> 类实例）可以对路由进行相关的配置。</p>
+<h2 id="_1">监听指定路径<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span>app.get(&quot;hello&quot;) { req in
+    return &quot;Hello, world!&quot;
+}
+</pre></div>
+
+
+<p>如上代码的作用是，监听了 "hello" 路径，当客户端发起 <code>/hello</code> 为路径的 <code>GET</code> 请求时，将会出发该回调方法的执行，最终返回 "Hello, world!" 给客户端展现。</p>
+<p>接下来我们测试下。</p>
+<ul>
+<li>Request</li>
+</ul>
+<div class="codehilite"><pre><span></span>curl -X GET http://localhost:8080/hello
+</pre></div>
+
+
+<ul>
+<li>Response</li>
+</ul>
+<div class="codehilite"><pre><span></span>Hello, world!
+</pre></div>
+
+
+<p>同理，<code>POST</code>、<code>PUT</code>、<code>DELETE</code> 等操作行为也是类似的。</p>
+<p>示例如下</p>
+<div class="codehilite"><pre><span></span>// Method: POST, Path: test1
+app.post(&quot;test1&quot;) { req in
+    return &quot;Method: POST, Path: test1&quot;
+}
+
+// Method: PUT, Path: test2
+app.put(&quot;test2&quot;) { req in
+    return &quot;Method: PUT, Path: test2&quot;
+}
+
+// Method: DELETE, Path: test3
+app.delete(&quot;test3&quot;) { req in
+    return &quot;Method: DELETE, Path: test3&quot;
+}
+</pre></div>
+
+
+<h2 id="_2">监听指定路径集合<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>有时候定义的路径都是在某一个特定路径名下的（比如 <code>v1</code>），这时候就需要路由组来进行管理了。</p>
+<div class="codehilite"><pre><span></span>// 路由组
+app.group(&quot;v1&quot;) { builder in
+
+    // 此处定义的所有请求路径都是在路由组（&quot;v1&quot;）下面的。
+    builder.get(&quot;name&quot;) { req in
+        return &quot;Handle path: v1/name&quot;
+    }
+
+    builder.get(&quot;avatar&quot;) { req in
+        return &quot;Handle path: v1/avatar&quot;
+    }
+}
+</pre></div>
+
+
+<p><code>name</code> 和 <code>avatar</code> 都是挂在 <code>v1</code> 后面，相当于 <code>v1/name</code> 和 <code>v1/avatar</code>。</p>
+<p>接下来我们测试下。</p>
+<ul>
+<li>Request</li>
+</ul>
+<div class="codehilite"><pre><span></span>curl -X GET http://localhost:8080/v1/name
+</pre></div>
+
+
+<ul>
+<li>Response</li>
+</ul>
+<div class="codehilite"><pre><span></span>Handle path: v1/name
+</pre></div>
+
+
+<ul>
+<li>Request</li>
+</ul>
+<div class="codehilite"><pre><span></span>curl -X GET http://localhost:8080/v1/avatar
+</pre></div>
+
+
+<ul>
+<li>Response</li>
+</ul>
+<div class="codehilite"><pre><span></span>Handle path: v1/avatar
+</pre></div>
                 
                   
                 
