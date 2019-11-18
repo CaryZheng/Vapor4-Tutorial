@@ -729,7 +729,7 @@
 </pre></div>
 
 
-<p>查看 <code>FileMiddleware</code> 中的 <code>respond</code> 方法得知，如果 <code>FileManager.default.fileExists</code> 方法来 判断指定资源文件是否存在，如果存在的话，就直接将该资源文件返回给客户端，否则通过 <code>next.respond(to: request)</code> 来执行进一步的操作。</p>
+<p>查看 <code>FileMiddleware</code> 中的 <code>respond</code> 方法得知，通过 <code>FileManager.default.fileExists</code> 方法可以判断指定资源文件是否存在，如果存在的话，就直接将该资源文件返回给客户端，否则通过 <code>next.respond(to: request)</code> 来执行进一步的操作。</p>
 <h2 id="middleware_2">自定义 Middleware<a class="headerlink" href="#middleware_2" title="Permanent link">&para;</a></h2>
 <p>我们将自定义一个 <code>Middleware</code> 组件，作用是对 <code>Request</code> 请求处理完后返回的 <code>Response</code> 的 <code>Header</code> 信息中统一添加一个 Key（比如：<code>My-Key</code>）。</p>
 <h3 id="_2">创建<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
