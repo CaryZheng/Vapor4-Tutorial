@@ -85,7 +85,7 @@ public final class FileMiddleware: Middleware {
 }
 ```
 
-查看 `FileMiddleware` 中的 `respond` 方法得知，如果 `FileManager.default.fileExists` 方法来 判断指定资源文件是否存在，如果存在的话，就直接将该资源文件返回给客户端，否则通过 `next.respond(to: request)` 来执行进一步的操作。
+查看 `FileMiddleware` 中的 `respond` 方法得知，通过 `FileManager.default.fileExists` 方法可以判断指定资源文件是否存在，如果存在的话，就直接将该资源文件返回给客户端，否则通过 `next.respond(to: request)` 来执行进一步的操作。
 
 ## 自定义 Middleware
 
