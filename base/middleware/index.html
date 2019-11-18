@@ -414,9 +414,79 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Middleware
+      </label>
+    
     <a href="./" title="Middleware" class="md-nav__link md-nav__link--active">
       Middleware
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    如何使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#middleware_1" class="md-nav__link">
+    Middleware 源码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filemiddleware" class="md-nav__link">
+    FileMiddleware 源码分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#middleware_2" class="md-nav__link">
+    自定义 Middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    创建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -515,6 +585,63 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    如何使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#middleware_1" class="md-nav__link">
+    Middleware 源码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filemiddleware" class="md-nav__link">
+    FileMiddleware 源码分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#middleware_2" class="md-nav__link">
+    自定义 Middleware
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    创建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -529,7 +656,122 @@
                 
                 
                 <h1 id="middleware">Middleware<a class="headerlink" href="#middleware" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
+<p><code>Middleware</code> 是一个中间件组件，它可以在 <code>请求前</code> 和 <code>请求后</code> 做一些额外的处理。</p>
+<h2 id="_1">如何使用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>以系统中间件 <code>FileMiddleware</code> 为例。<code>FileMiddleware</code> 的作用是在接收到 <code>请求</code> 后，先在 <code>Public/</code> 目录下查找是否有匹配的资源文件，如果存在的话就直接返回该资源文件。</p>
+<p>只需要在 <code>configure.swift</code> 中配置下即可。</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Register middleware</span>
+<span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
+    <span class="c1">// Serves files from `Public/` directory</span>
+    <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>比如，我们将一张测试图片（比如：<code>sample.png</code>）存放到 <code>Public</code> 目录中，在本地服务已启动的情况下（假设所占端口为 <code>8080</code>），访问 <code>http://localhost:8080/sample.png</code> 地址可直接显示 <code>Public/</code> 目录下的 <code>sample.png</code> 图片。</p>
+<p>效果如下</p>
+<p><img alt="public_resource_sample" src="../../img/public_resource_sample.png" /></p>
+<h2 id="middleware_1">Middleware 源码<a class="headerlink" href="#middleware_1" title="Permanent link">&para;</a></h2>
+<p><code>Middleware</code> 其实是一个 <code>protocol</code> ，内部定义了 <code>respond</code> 方法，源码如下：</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">protocol</span> <span class="nc">Middleware</span> <span class="p">{</span>
+    <span class="c1">/// Called with each `Request` that passes through this middleware.</span>
+    <span class="c1">/// - parameters:</span>
+    <span class="c1">///     - request: The incoming `Request`.</span>
+    <span class="c1">///     - next: Next `Responder` in the chain, potentially another middleware or the main router.</span>
+    <span class="c1">/// - returns: An asynchronous `Response`.</span>
+    <span class="kd">func</span> <span class="nf">respond</span><span class="p">(</span><span class="n">to</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">chainingTo</span> <span class="n">next</span><span class="p">:</span> <span class="n">Responder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Response</span><span class="p">&gt;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>可以在 <code>respond</code> 方法中做一些额外的处理。</p>
+<h2 id="filemiddleware">FileMiddleware 源码分析<a class="headerlink" href="#filemiddleware" title="Permanent link">&para;</a></h2>
+<p><code>FileMiddleware</code> 源码如下：</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kr">final</span> <span class="kd">class</span> <span class="nc">FileMiddleware</span><span class="p">:</span> <span class="n">Middleware</span> <span class="p">{</span>
+    <span class="c1">/// The public directory.</span>
+    <span class="c1">/// - note: Must end with a slash.</span>
+    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">publicDirectory</span><span class="p">:</span> <span class="nb">String</span>
+
+    <span class="c1">/// Creates a new `FileMiddleware`.</span>
+    <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="n">publicDirectory</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">publicDirectory</span> <span class="p">=</span> <span class="n">publicDirectory</span><span class="p">.</span><span class="n">hasSuffix</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span> <span class="p">?</span> <span class="n">publicDirectory</span> <span class="p">:</span> <span class="n">publicDirectory</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// See `Middleware`.</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">respond</span><span class="p">(</span><span class="n">to</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">chainingTo</span> <span class="n">next</span><span class="p">:</span> <span class="n">Responder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Response</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="c1">// make a copy of the path</span>
+        <span class="kd">var</span> <span class="nv">path</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">url</span><span class="p">.</span><span class="n">path</span>
+
+        <span class="c1">// path must be relative.</span>
+        <span class="k">while</span> <span class="n">path</span><span class="p">.</span><span class="n">hasPrefix</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">path</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">())</span>
+        <span class="p">}</span>
+
+        <span class="c1">// protect against relative paths</span>
+        <span class="k">guard</span> <span class="o">!</span><span class="n">path</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="s">&quot;../&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">request</span><span class="p">.</span><span class="n">eventLoop</span><span class="p">.</span><span class="n">makeFailedFuture</span><span class="p">(</span><span class="n">Abort</span><span class="p">(.</span><span class="n">forbidden</span><span class="p">))</span>
+        <span class="p">}</span>
+
+        <span class="c1">// create absolute file path</span>
+        <span class="kd">let</span> <span class="nv">filePath</span> <span class="p">=</span> <span class="n">publicDirectory</span> <span class="o">+</span> <span class="n">path</span>
+
+        <span class="c1">// check if file exists and is not a directory</span>
+        <span class="kd">var</span> <span class="nv">isDir</span><span class="p">:</span> <span class="n">ObjCBool</span> <span class="p">=</span> <span class="kc">false</span>
+        <span class="k">guard</span> <span class="n">FileManager</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">fileExists</span><span class="p">(</span><span class="n">atPath</span><span class="p">:</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">isDirectory</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">isDir</span><span class="p">),</span> <span class="o">!</span><span class="n">isDir</span><span class="p">.</span><span class="n">boolValue</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">respond</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1">// stream the file</span>
+        <span class="kd">let</span> <span class="nv">res</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">fileio</span><span class="p">.</span><span class="n">streamFile</span><span class="p">(</span><span class="n">at</span><span class="p">:</span> <span class="n">filePath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">request</span><span class="p">.</span><span class="n">eventLoop</span><span class="p">.</span><span class="n">makeSucceededFuture</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>查看 <code>FileMiddleware</code> 中的 <code>respond</code> 方法得知，如果 <code>FileManager.default.fileExists</code> 方法来 判断指定资源文件是否存在，如果存在的话，就直接将该资源文件返回给客户端，否则通过 <code>next.respond(to: request)</code> 来执行进一步的操作。</p>
+<h2 id="middleware_2">自定义 Middleware<a class="headerlink" href="#middleware_2" title="Permanent link">&para;</a></h2>
+<p>我们将自定义一个 <code>Middleware</code> 组件，作用是对 <code>Request</code> 请求处理完后返回的 <code>Response</code> 的 <code>Header</code> 信息中统一添加一个 Key（比如：<code>My-Key</code>）。</p>
+<h3 id="_2">创建<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>创建 <code>MyMiddleware.swift</code> 文件，存放于 <code>App/Middleware/</code> 目录下。</p>
+<div class="codehilite"><pre><span></span><span class="kd">import</span> <span class="nc">Vapor</span>
+
+<span class="kd">public</span> <span class="kr">final</span> <span class="kd">class</span> <span class="nc">MyMiddleware</span><span class="p">:</span> <span class="n">Middleware</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">respond</span><span class="p">(</span><span class="n">to</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">chainingTo</span> <span class="n">next</span><span class="p">:</span> <span class="n">Responder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Response</span><span class="p">&gt;</span> <span class="p">{</span>
+
+        <span class="c1">// Handle request before</span>
+        <span class="c1">// ......</span>
+
+        <span class="c1">// Handle request</span>
+        <span class="kd">let</span> <span class="nv">resposneFuture</span> <span class="p">=</span> <span class="n">next</span><span class="p">.</span><span class="n">respond</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span>
+
+        <span class="c1">// Handle request after</span>
+        <span class="k">return</span> <span class="n">resposneFuture</span><span class="p">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+            <span class="n">response</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;My-Key&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s">&quot;Test123456&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">request</span><span class="p">.</span><span class="n">eventLoop</span><span class="p">.</span><span class="n">makeSucceededFuture</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>调用 <code>next.respond(to: request)</code> 将会唤起路由相关的回调，并对请求进行处理。然后通过 <code>response.headers.add(name: "My-Key", value: "Test123456")</code> 来给的 <code>Response</code> 的 <code>Header</code> 信息中添加一组 <code>Key-Value</code> 数据（示例中 Key 是 <code>My-Key</code>，Value 是 <code>Test123456</code>）。</p>
+<h3 id="_3">使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>在 <code>configure.swift</code> 文件中添加如下代码，<code>MyMiddleware</code> 中间件将立即生效：</p>
+<div class="codehilite"><pre><span></span>app.register(MyMiddleware.self) { app in
+    return MyMiddleware()
+}
+
+// Register middleware
+app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
+    middlewares.use(app.make(MyMiddleware.self))
+}
+</pre></div>
+
+
+<p>此时启动服务后，访问任意一个接口，返回的 <code>Reponse</code> 中的头信息中都将包含 <code>My-Key</code> 的信息。</p>
                 
                   
                 
