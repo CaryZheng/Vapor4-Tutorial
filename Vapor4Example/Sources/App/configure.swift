@@ -1,5 +1,6 @@
 import Fluent
-import FluentSQLiteDriver
+//import FluentSQLiteDriver
+import FluentMySQLDriver
 import Vapor
 
 // Called before your application initializes.
@@ -19,17 +20,26 @@ func configure(_ app: Application) throws {
         middlewares.use(app.make(MyMiddleware.self))
     }
     
-    app.databases.sqlite(
-        configuration: .init(storage: .connection(.file(path: "db.sqlite"))),
-        threadPool: app.make(),
-        poolConfiguration: app.make(),
-        logger: app.make(),
-        on: app.make()
-    )
+//    app.databases.sqlite(
+//        configuration: .init(storage: .connection(.file(path: "db.sqlite"))),
+//        threadPool: app.make(),
+//        poolConfiguration: app.make(),
+//        logger: app.make(),
+//        on: app.make()
+//    )
+    
+//    app.register(Migrations.self) { c in
+//        var migrations = Migrations()
+//        migrations.add(CreateTodo(), to: .sqlite)
+//        return migrations
+//    }
+    
+    let mysqlConfig = MySQLConfiguration(hostname: "127.0.0.1", port: 3306, username: "root", password: "xxxxxxxx", database: "swift_mic_test", tlsConfiguration: nil)
+    app.databases.mysql(configuration: mysqlConfig, on: app.make())
     
     app.register(Migrations.self) { c in
         var migrations = Migrations()
-        migrations.add(CreateTodo(), to: .sqlite)
+        migrations.add(CreateTodo(), to: .mysql)
         return migrations
     }
     

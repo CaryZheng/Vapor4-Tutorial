@@ -20,6 +20,7 @@ public final class MyMiddleware: Middleware {
         // Handle request after
         return resposneFuture.flatMap { response in
             response.headers.add(name: "My-Key", value: "Test123456")
+            response.headers.add(name: "Content-Type", value: "application/json")
             
             return request.eventLoop.makeSucceededFuture(response)
         }
