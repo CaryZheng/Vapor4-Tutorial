@@ -18,6 +18,8 @@ func routes(_ app: Application) throws {
     let userController = UserController()
     app.post("user", use: userController.createUser)
     app.get("user", ":userId", use: userController.findUser)
+    app.put("user", use: userController.updateUser)
+    app.delete("user", ":userId", use: userController.deleteUser)
     
     let testController = TestController()
     app.post("test", use: testController.createUser)
