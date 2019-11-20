@@ -22,6 +22,10 @@ QQ群 (Vapor交流)： 566732724
 
 联系作者：CaryZhengMy#gmail.com （# 替换成 @）
 
+## 反馈
+
+若发现教程中有任何问题，欢迎提 [Issue](https://github.com/CaryZheng/Vapor4-Tutorial) 和 [Pull Request](https://github.com/CaryZheng/Vapor4-Tutorial) 。
+
 ## 声明
 
 本教程版权归作者 [CaryZheng](https://github.com/CaryZheng) 所有，未经作者许可，不得用于商业用途。
