@@ -41,6 +41,7 @@ nav:
   - Linux: install/install_linux.md
 - Hello World: hello_world.md
 - Toolbox: toolbox.md
+- SPM: spm.md
 - 基础组件:
   - Application: base/application.md
   - Controller: base/controller.md
