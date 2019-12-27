@@ -8,13 +8,13 @@
 
 [https://vapor4.swiftmic.com](https://vapor4.swiftmic.com)
 
-## Swift 社区
-
-SwiftMic：[www.swiftmic.com](https://www.swiftmic.com)
-
 ## Contact
 
 QQ群 (Vapor交流)： 566732724
+
+Swift 技术博客：[CaryMic](https://www.carymic.com)
+
+Swift 社区：[www.swiftmic.com](https://www.swiftmic.com)
 
 微信公众号：SwiftMic
 
