@@ -12,7 +12,7 @@
 
 QQ群 (Vapor交流)： 566732724
 
-Swift 技术博客：[CaryMic](https://www.carymic.com)
+Swift 技术博客：[www.carymic.com](https://www.carymic.com)
 
 Swift 社区：[www.swiftmic.com](https://www.swiftmic.com)
 
