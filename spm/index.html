@@ -729,7 +729,7 @@
 </blockquote>
 <h2 id="package-manifest">Package Manifest<a class="headerlink" href="#package-manifest" title="Permanent link">&para;</a></h2>
 <p>首先看下 package 配置文件。它位于项目根目录中，并被命名为 <code>Package.swift</code> 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.1
+<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
@@ -742,12 +742,24 @@ let package = Package(
         .library(name: &quot;App&quot;, targets: [&quot;App&quot;]),
     ],
     dependencies: [
-        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0&quot;),
+        // 💧 A server-side Swift web framework.
+        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0-rc.1&quot;),
+        .package(url: &quot;https://github.com/vapor/fluent.git&quot;, from: &quot;4.0.0-rc.1&quot;),
+        .package(url: &quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;, from: &quot;4.0.0-rc.1&quot;),
     ],
     targets: [
-        .target(name: &quot;App&quot;, dependencies: [&quot;Fluent&quot;]),
-        .target(name: &quot;Run&quot;, dependencies: [&quot;App&quot;]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [&quot;App&quot;])
+        .target(name: &quot;App&quot;, dependencies: [
+            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
+            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
+            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
+        ]),
+        .target(name: &quot;Run&quot;, dependencies: [
+            .target(name: &quot;App&quot;),
+        ]),
+        .testTarget(name: &quot;AppTests&quot;, dependencies: [
+            .target(name: &quot;App&quot;),
+            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
+        ])
     ]
 )
 </pre></div>
@@ -755,7 +767,7 @@ let package = Package(
 
 <h3 id="tools-version">Tools Version<a class="headerlink" href="#tools-version" title="Permanent link">&para;</a></h3>
 <p>第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.1
+<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
 </pre></div>
 
 
@@ -764,7 +776,7 @@ let package = Package(
 <h3 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h3>
 <p><code>platforms</code> 字段代表当前支持的最低系统版本号。比如， <code>.macOS(.v10_15)</code> 表示当前支持的系统版本号是 v10.15 及以上。</p>
 <h3 id="products">Products<a class="headerlink" href="#products" title="Permanent link">&para;</a></h3>
-<p><code>products</code> 字段代表 <code>package</code> 构建的时候要生成的 <code>targets</code>。示例中，有两个 targets，一个是 library，另一个是 executable 。</p>
+<p><code>products</code> 字段代表 <code>package</code> 构建的时候要生成的 <code>targets</code>。示例中，有两种 target，一个是 library，另一个是 executable 。</p>
 <h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p><code>dependencies</code> 字段代表需要依赖的 SPM package。所有 Vapor 应用都依赖于 Vapor package ，但是你也可以添加其它想要的 dependency 。</p>
 <p>上面这个示例可见，<a href="https://github.com/vapor/vapor">Vapor</a> 4.0 或以上版本是这个 package 的 dependency 。当在 package 中添加了 dependency 后，接下来你必须设置 targets 。</p>
@@ -774,15 +786,24 @@ let package = Package(
 </blockquote>
 <h3 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h3>
 <p>Targets 包含了所有的 modules、executables 以及 tests 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.1
+<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
     ......
     targets: [
-        .target(name: &quot;App&quot;, dependencies: [&quot;Fluent&quot;]),
-        .target(name: &quot;Run&quot;, dependencies: [&quot;App&quot;]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [&quot;App&quot;])
+        .target(name: &quot;App&quot;, dependencies: [
+            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
+            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
+            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
+        ]),
+        .target(name: &quot;Run&quot;, dependencies: [
+            .target(name: &quot;App&quot;),
+        ]),
+        .testTarget(name: &quot;AppTests&quot;, dependencies: [
+            .target(name: &quot;App&quot;),
+            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
+        ])
     ]
 )
 </pre></div>
@@ -791,7 +812,7 @@ let package = Package(
 <p>虽然可以添加任意多的 targets 来组织代码，但大部分 Vapor 应用有 3 个 target 就足够了。每个 target 声明了它依赖的 module 。为了在代码中可以 <code>import</code> 这些 modules ，你必须添加 module 名字。一个 target 可以依赖于工程中其它的 target 或者暴露出来的 modules 。</p>
 <blockquote>
 <p>提示</p>
-<p>Executable targets (包含 <code>main.swift</code> 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 <code>App</code> 和 <code>Run</code> 两个 target。任何包含在 <code>App</code> 中的代码都可以在 <code>AppTests</code> 中被测试验证。</p>
+<p>Executable targets (包含 <code>main.swift</code> 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 <code>App</code> 和 <code>Run</code> 两种 target。任何包含在 <code>App</code> 中的代码都可以在 <code>AppTests</code> 中被测试验证。</p>
 </blockquote>
 <h2 id="_1">目录结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>以下是典型的 SPM package 目录结构。</p>

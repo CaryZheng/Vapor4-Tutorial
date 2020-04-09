@@ -861,14 +861,11 @@ Opening Xcode project...
 <p>该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。</p>
 <p>首先，需修改 <code>configure.swift</code> 文件来开启使用 <code>FileMiddleware</code> 中间件。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
-<span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
     <span class="p">......</span>
 
-    <span class="c1">// Register middleware</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
-        <span class="c1">// Serves files from `Public/` directory</span>
-        <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
-    <span class="p">}</span>
+    <span class="c1">// Serves files from `Public/` directory</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">(</span><span class="n">publicDirectory</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">directory</span><span class="p">.</span><span class="n">publicDirectory</span><span class="p">))</span>
 
     <span class="p">......</span>
 <span class="p">}</span>
