@@ -404,18 +404,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../provider/" title="Provider" class="md-nav__link">
-      Provider
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -673,10 +661,7 @@
 <p>以系统中间件 <code>FileMiddleware</code> 为例。<code>FileMiddleware</code> 的作用是在接收到 <code>请求</code> 后，先在 <code>Public/</code> 目录下查找是否有匹配的资源文件，如果存在的话就直接返回该资源文件。</p>
 <p>只需要在 <code>configure.swift</code> 中配置下即可。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Register middleware</span>
-<span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
-    <span class="c1">// Serves files from `Public/` directory</span>
-    <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
-<span class="p">}</span>
+<span class="n">app</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">(</span><span class="n">publicDirectory</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">directory</span><span class="p">.</span><span class="n">publicDirectory</span><span class="p">))</span>
 </pre></div>
 
 
@@ -771,19 +756,12 @@
 
 <p>调用 <code>next.respond(to: request)</code> 将会唤起路由相关的回调，并对请求进行处理。然后通过 <code>response.headers.add(name: "My-Key", value: "Test123456")</code> 来给的 <code>Response</code> 的 <code>Header</code> 信息中添加一组 <code>Key-Value</code> 数据（示例中 Key 是 <code>My-Key</code>，Value 是 <code>Test123456</code>）。</p>
 <h3 id="_3">使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>在 <code>configure.swift</code> 文件中添加如下代码，<code>MyMiddleware</code> 中间件将立即生效：</p>
-<div class="codehilite"><pre><span></span>app.register(MyMiddleware.self) { app in
-    return MyMiddleware()
-}
-
-// Register middleware
-app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-    middlewares.use(app.make(MyMiddleware.self))
-}
+<p>在 <code>configure.swift</code> 文件中添加如下代码：</p>
+<div class="codehilite"><pre><span></span>app.middleware.use(MyMiddleware())
 </pre></div>
 
 
-<p>此时启动服务后，访问任意一个接口，返回的 <code>Reponse</code> 中的头信息中都将包含 <code>My-Key</code> 的信息。</p>
+<p>此时启动服务后，<code>MyMiddleware</code> 中间件将立即生效，访问任意一个接口，返回的 <code>Reponse</code> 中的头信息中都将包含 <code>My-Key</code> 的信息。</p>
                 
                   
                 
@@ -804,7 +782,7 @@ app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../provider/" title="Provider" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../routing/" title="Routing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -813,7 +791,7 @@ app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Provider
+                Routing
               </span>
             </div>
           </a>

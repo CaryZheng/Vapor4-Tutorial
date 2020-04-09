@@ -415,18 +415,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../provider/" title="Provider" class="md-nav__link">
-      Provider
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../middleware/" title="Middleware" class="md-nav__link">
       Middleware
     </a>
@@ -545,28 +533,43 @@
 <p><code>Application</code> 的部分源码如下</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kr">final</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">var</span> <span class="nv">environment</span><span class="p">:</span> <span class="n">Environment</span>
-    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">services</span><span class="p">:</span> <span class="n">Services</span>
-    <span class="kd">public</span> <span class="kd">let</span> <span class="nv">sync</span><span class="p">:</span> <span class="n">Lock</span>
-    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">userInfo</span><span class="p">:</span> <span class="p">[</span><span class="n">AnyHashable</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]</span>
+    <span class="kd">public</span> <span class="kd">let</span> <span class="nv">eventLoopGroupProvider</span><span class="p">:</span> <span class="n">EventLoopGroupProvider</span>
+    <span class="kd">public</span> <span class="kd">let</span> <span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="n">EventLoopGroup</span>
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">storage</span><span class="p">:</span> <span class="n">Storage</span>
     <span class="kd">public</span> <span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span> <span class="kd">var</span> <span class="nv">didShutdown</span><span class="p">:</span> <span class="nb">Bool</span>
-    <span class="kd">internal</span> <span class="kd">let</span> <span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="n">EventLoopGroup</span>
     <span class="kd">public</span> <span class="kd">var</span> <span class="nv">logger</span><span class="p">:</span> <span class="n">Logger</span>
     <span class="kd">private</span> <span class="kd">var</span> <span class="nv">isBooted</span><span class="p">:</span> <span class="nb">Bool</span>
 
-    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">providers</span><span class="p">:</span> <span class="p">[</span><span class="n">Provider</span><span class="p">]</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">services</span><span class="p">.</span><span class="n">providers</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span> <span class="p">=</span> <span class="p">.</span><span class="n">development</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span>
+        <span class="kc">_</span> <span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span> <span class="p">=</span> <span class="p">.</span><span class="n">development</span><span class="p">,</span>
+        <span class="kc">_</span> <span class="n">eventLoopGroupProvider</span><span class="p">:</span> <span class="n">EventLoopGroupProvider</span> <span class="p">=</span> <span class="p">.</span><span class="n">createNew</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">Backtrace</span><span class="p">.</span><span class="n">install</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">environment</span> <span class="p">=</span> <span class="n">environment</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">services</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">()</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">sync</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">()</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">userInfo</span> <span class="p">=</span> <span class="p">[:]</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">eventLoopGroupProvider</span> <span class="p">=</span> <span class="n">eventLoopGroupProvider</span>
+        <span class="k">switch</span> <span class="n">eventLoopGroupProvider</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="p">.</span><span class="n">shared</span><span class="p">(</span><span class="kd">let</span> <span class="nv">group</span><span class="p">):</span>
+            <span class="kc">self</span><span class="p">.</span><span class="n">eventLoopGroup</span> <span class="p">=</span> <span class="n">group</span>
+        <span class="k">case</span> <span class="p">.</span><span class="n">createNew</span><span class="p">:</span>
+            <span class="kc">self</span><span class="p">.</span><span class="n">eventLoopGroup</span> <span class="p">=</span> <span class="n">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="n">numberOfThreads</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">coreCount</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">locks</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">didShutdown</span> <span class="p">=</span> <span class="kc">false</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">eventLoopGroup</span> <span class="p">=</span> <span class="n">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="n">numberOfThreads</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">coreCount</span><span class="p">)</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">logger</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="s">&quot;codes.vapor.application&quot;</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">storage</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">logger</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">lifecycle</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">isBooted</span> <span class="p">=</span> <span class="kc">false</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">registerDefaultServices</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">views</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">memory</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">responder</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">responder</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="k">default</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">commands</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">server</span><span class="p">.</span><span class="n">command</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="s">&quot;serve&quot;</span><span class="p">,</span> <span class="n">isDefault</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">commands</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">RoutesCommand</span><span class="p">(),</span> <span class="k">as</span><span class="p">:</span> <span class="s">&quot;routes&quot;</span><span class="p">)</span>
+        <span class="c1">// Load specific .env first since values are not overridden.</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">loadDotEnv</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&quot;.env.</span><span class="si">\(</span><span class="kc">self</span><span class="p">.</span><span class="n">environment</span><span class="p">.</span><span class="n">name</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">loadDotEnv</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&quot;.env&quot;</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="p">......</span>
@@ -576,10 +579,6 @@
     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="kc">_</span> <span class="n">route</span><span class="p">:</span> <span class="n">Route</span><span class="p">)</span> <span class="p">{</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">routes</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">route</span><span class="p">)</span>
     <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">make</span><span class="p">()</span>
-    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -587,49 +586,29 @@
 <p>其中</p>
 <ul>
 <li><code>environment</code>：主要用于存放程序当前运行环境相关的数据。</li>
-<li><code>providers</code>：主要用于管理各种类型的 <code>Provider</code> 。</li>
-<li><code>services</code>：主要用于管理各种类型的服务组件。</li>
 <li><code>routes</code>：主要用于管理 API 路由。</li>
 </ul>
-<p>接下来，我们来看下 <code>App</code> 目录中的 <code>app.swift</code> 文件。</p>
-<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">app</span><span class="p">(</span><span class="kc">_</span> <span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">Application</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">environment</span> <span class="p">=</span> <span class="n">environment</span>
-    <span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">environment</span><span class="p">)</span>
-
-    <span class="c1">// 此处构造出了 Application 实例对象</span>
-    <span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">environment</span><span class="p">:</span> <span class="n">environment</span><span class="p">)</span>
-
-    <span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">app</span>
-<span class="p">}</span>
+<p>接下来，我们来看下 <code>Run</code> 目录中的 <code>main.swift</code> 文件。</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nv">env</span> <span class="p">=</span> <span class="k">try</span> <span class="n">Environment</span><span class="p">.</span><span class="n">detect</span><span class="p">()</span>
+<span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">env</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="k">defer</span> <span class="p">{</span> <span class="n">app</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+<span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 
 
 <p>还有 <code>configure.swift</code> 文件。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
-<span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-    <span class="c1">// Register providers first</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">provider</span><span class="p">(</span><span class="n">FluentProvider</span><span class="p">())</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="c1">// Serves files from `Public/` directory</span>
+    <span class="c1">// app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))</span>
 
-    <span class="c1">// Register middleware</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
-        <span class="c1">// Serves files from `Public/` directory</span>
-        <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
-    <span class="p">}</span>
+    <span class="c1">// Configure SQLite database</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">sqlite</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="s">&quot;db.sqlite&quot;</span><span class="p">)),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
 
-    <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">sqlite</span><span class="p">(</span>
-        <span class="n">configuration</span><span class="p">:</span> <span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">storage</span><span class="p">:</span> <span class="p">.</span><span class="n">connection</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s">&quot;db.sqlite&quot;</span><span class="p">))),</span>
-        <span class="n">threadPool</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">poolConfiguration</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">logger</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">on</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">()</span>
-    <span class="p">)</span>
-
-    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Migrations</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">c</span> <span class="k">in</span>
-        <span class="kd">var</span> <span class="nv">migrations</span> <span class="p">=</span> <span class="n">Migrations</span><span class="p">()</span>
-        <span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">(),</span> <span class="n">to</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">migrations</span>
-    <span class="p">}</span>
+    <span class="c1">// Configure migrations</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">())</span>
 
     <span class="k">try</span> <span class="n">routes</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 <span class="p">}</span>
@@ -654,7 +633,7 @@
 </pre></div>
 
 
-<p>从中可以看出，<code>Application</code> 管理着各类基础组件（比如：Provider、Middleware、Database、Route 等等），并贯穿于程序的整个生命周期。</p>
+<p>从中可以看出，<code>Application</code> 管理着各类基础组件（比如：Environment、Logger、Route 等等），并贯穿于程序的整个生命周期。</p>
                 
                   
                 

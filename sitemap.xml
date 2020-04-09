@@ -46,11 +46,6 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://vapor4.swiftmic.com/base/provider/</loc>
-     <lastmod>2020-04-09</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://vapor4.swiftmic.com/base/middleware/</loc>
      <lastmod>2020-04-09</lastmod>
      <changefreq>daily</changefreq>
