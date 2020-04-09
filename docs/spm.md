@@ -11,7 +11,7 @@
 首先看下 package 配置文件。它位于项目根目录中，并被命名为 ```Package.swift``` 。
 
 ```
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
@@ -24,12 +24,24 @@ let package = Package(
         .library(name: "App", targets: ["App"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+        // 💧 A server-side Swift web framework.
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-rc.1"),
     ],
     targets: [
-        .target(name: "App", dependencies: ["Fluent"]),
-        .target(name: "Run", dependencies: ["App"]),
-        .testTarget(name: "AppTests", dependencies: ["App"])
+        .target(name: "App", dependencies: [
+            .product(name: "Fluent", package: "fluent"),
+            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+            .product(name: "Vapor", package: "vapor"),
+        ]),
+        .target(name: "Run", dependencies: [
+            .target(name: "App"),
+        ]),
+        .testTarget(name: "AppTests", dependencies: [
+            .target(name: "App"),
+            .product(name: "XCTVapor", package: "vapor"),
+        ])
     ]
 )
 ```
@@ -39,7 +51,7 @@ let package = Package(
 第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。
 
 ```
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 ```
 
 ### Package Name
@@ -52,7 +64,7 @@ let package = Package(
 
 ### Products
 
-`products` 字段代表 `package` 构建的时候要生成的 `targets`。示例中，有两个 targets，一个是 library，另一个是 executable 。
+`products` 字段代表 `package` 构建的时候要生成的 `targets`。示例中，有两种 target，一个是 library，另一个是 executable 。
 
 ### Dependencies
 
@@ -69,15 +81,24 @@ let package = Package(
 Targets 包含了所有的 modules、executables 以及 tests 。
 
 ```
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
     ......
     targets: [
-        .target(name: "App", dependencies: ["Fluent"]),
-        .target(name: "Run", dependencies: ["App"]),
-        .testTarget(name: "AppTests", dependencies: ["App"])
+        .target(name: "App", dependencies: [
+            .product(name: "Fluent", package: "fluent"),
+            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+            .product(name: "Vapor", package: "vapor"),
+        ]),
+        .target(name: "Run", dependencies: [
+            .target(name: "App"),
+        ]),
+        .testTarget(name: "AppTests", dependencies: [
+            .target(name: "App"),
+            .product(name: "XCTVapor", package: "vapor"),
+        ])
     ]
 )
 ```
@@ -86,7 +107,7 @@ let package = Package(
 
 > 提示
 > 
-> Executable targets (包含 `main.swift` 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 `App` 和 `Run` 两个 target。任何包含在 `App` 中的代码都可以在 `AppTests` 中被测试验证。
+> Executable targets (包含 `main.swift` 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 `App` 和 `Run` 两种 target。任何包含在 `App` 中的代码都可以在 `AppTests` 中被测试验证。
 
 ## 目录结构
 
