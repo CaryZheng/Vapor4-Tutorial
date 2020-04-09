@@ -3,8 +3,8 @@ site_description: 'Vapor 4 速成指南'
 site_author: 'Cary Zheng'
 site_url: 'https://vapor4.swiftmic.com'
 
-repo_name: 'CaryZheng/Vapor-Chinese'
-repo_url: 'https://github.com/CaryZheng/Vapor-Chinese'
+repo_name: 'CaryZheng/Vapor4-Tutorial'
+repo_url: 'https://github.com/CaryZheng/Vapor4-Tutorial'
 
 copyright: 'Copyright &copy; 2019 CaryZheng'
 
