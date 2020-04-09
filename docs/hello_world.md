@@ -130,14 +130,11 @@ Opening Xcode project...
 
 ``` swift
 // Called before your application initializes.
-func configure(_ app: Application) throws {
+public func configure(_ app: Application) throws {
     ......
 
-    // Register middleware
-    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-        // Serves files from `Public/` directory
-        middlewares.use(app.make(FileMiddleware.self))
-    }
+    // Serves files from `Public/` directory
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
     ......
 }
