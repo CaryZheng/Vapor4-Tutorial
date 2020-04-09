@@ -11,13 +11,14 @@ import Fluent
 class UserController {
     
     /// 创建用户
-    func createUser(req: Request) throws -> EventLoopFuture<UserResponse> {
+    func createUser(req: Request) throws -> EventLoopFuture<String> {
         let userInput = try req.content.decode(UserInput.self)
         
         let user = User(username: userInput.username)
         
         return user.save(on: req.db).map {
-            return UserResponse(id: user.id!, username: user.username)
+            let userResponse = UserResponse(id: user.id!, username: user.username)
+            return ResponseWrapper(protocolCode: .success, obj: userResponse).makeResponse()
         }
     }
     
