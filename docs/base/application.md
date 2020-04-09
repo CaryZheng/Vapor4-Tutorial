@@ -7,28 +7,43 @@
 ``` swift
 public final class Application {
     public var environment: Environment
-    public var services: Services
-    public let sync: Lock
-    public var userInfo: [AnyHashable: Any]
+    public let eventLoopGroupProvider: EventLoopGroupProvider
+    public let eventLoopGroup: EventLoopGroup
+    public var storage: Storage
     public private(set) var didShutdown: Bool
-    internal let eventLoopGroup: EventLoopGroup
     public var logger: Logger
     private var isBooted: Bool
-
-    public var providers: [Provider] {
-        return self.services.providers
-    }
     
-    public init(environment: Environment = .development) {
+    public init(
+        _ environment: Environment = .development,
+        _ eventLoopGroupProvider: EventLoopGroupProvider = .createNew
+    ) {
+        Backtrace.install()
         self.environment = environment
-        self.services = .init()
-        self.sync = .init()
-        self.userInfo = [:]
+        self.eventLoopGroupProvider = eventLoopGroupProvider
+        switch eventLoopGroupProvider {
+        case .shared(let group):
+            self.eventLoopGroup = group
+        case .createNew:
+            self.eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
+        }
+        self.locks = .init()
         self.didShutdown = false
-        self.eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
         self.logger = .init(label: "codes.vapor.application")
+        self.storage = .init(logger: self.logger)
+        self.lifecycle = .init()
         self.isBooted = false
-        self.registerDefaultServices()
+        self.core.initialize()
+        self.views.initialize()
+        self.sessions.initialize()
+        self.sessions.use(.memory)
+        self.responder.initialize()
+        self.responder.use(.default)
+        self.commands.use(self.server.command, as: "serve", isDefault: true)
+        self.commands.use(RoutesCommand(), as: "routes")
+        // Load specific .env first since values are not overridden.
+        self.loadDotEnv(named: ".env.\(self.environment.name)")
+        self.loadDotEnv(named: ".env")
     }
 
     ......
@@ -38,62 +53,38 @@ extension Application: RoutesBuilder {
     public func add(_ route: Route) {
         self.routes.add(route)
     }
-    
-    public var routes: Routes {
-        return self.make()
-    }
 }
 ```
 
 其中
 
 * `environment`：主要用于存放程序当前运行环境相关的数据。
-* `providers`：主要用于管理各种类型的 `Provider` 。
-* `services`：主要用于管理各种类型的服务组件。
 * `routes`：主要用于管理 API 路由。
 
-接下来，我们来看下 `App` 目录中的 `app.swift` 文件。
+接下来，我们来看下 `Run` 目录中的 `main.swift` 文件。
 
 ``` swift
-public func app(_ environment: Environment) throws -> Application {
-    var environment = environment
-    try LoggingSystem.bootstrap(from: &environment)
-
-    // 此处构造出了 Application 实例对象
-    let app = Application(environment: environment)
-
-    try configure(app)
-    return app
-}
+var env = try Environment.detect()
+try LoggingSystem.bootstrap(from: &env)
+let app = Application(env)
+defer { app.shutdown() }
+try configure(app)
+try app.run()
 ```
 
 还有 `configure.swift` 文件。
 
 ``` swift
 // Called before your application initializes.
-func configure(_ app: Application) throws {
-    // Register providers first
-    app.provider(FluentProvider())
+public func configure(_ app: Application) throws {
+    // Serves files from `Public/` directory
+    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    // Register middleware
-    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-        // Serves files from `Public/` directory
-        middlewares.use(app.make(FileMiddleware.self))
-    }
-    
-    app.databases.sqlite(
-        configuration: .init(storage: .connection(.file(path: "db.sqlite"))),
-        threadPool: app.make(),
-        poolConfiguration: app.make(),
-        logger: app.make(),
-        on: app.make()
-    )
-    
-    app.register(Migrations.self) { c in
-        var migrations = Migrations()
-        migrations.add(CreateTodo(), to: .sqlite)
-        return migrations
-    }
+    // Configure SQLite database
+    app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+
+    // Configure migrations
+    app.migrations.add(CreateTodo())
     
     try routes(app)
 }
@@ -118,4 +109,4 @@ func routes(_ app: Application) throws {
 }
 ```
 
-从中可以看出，`Application` 管理着各类基础组件（比如：Provider、Middleware、Database、Route 等等），并贯穿于程序的整个生命周期。
+从中可以看出，`Application` 管理着各类基础组件（比如：Environment、Logger、Route 等等），并贯穿于程序的整个生命周期。

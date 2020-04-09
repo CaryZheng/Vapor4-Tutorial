@@ -10,10 +10,7 @@
 
 ```swift
 // Register middleware
-app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-    // Serves files from `Public/` directory
-    middlewares.use(app.make(FileMiddleware.self))
-}
+app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 ```
 
 比如，我们将一张测试图片（比如：`sample.png`）存放到 `Public` 目录中，在本地服务已启动的情况下（假设所占端口为 `8080`），访问 `http://localhost:8080/sample.png` 地址可直接显示 `Public/` 目录下的 `sample.png` 图片。
@@ -122,17 +119,10 @@ public final class MyMiddleware: Middleware {
 
 ### 使用
 
-在 `configure.swift` 文件中添加如下代码，`MyMiddleware` 中间件将立即生效：
+在 `configure.swift` 文件中添加如下代码：
 
 ```
-app.register(MyMiddleware.self) { app in
-    return MyMiddleware()
-}
-
-// Register middleware
-app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-    middlewares.use(app.make(MyMiddleware.self))
-}
+app.middleware.use(MyMiddleware())
 ```
 
-此时启动服务后，访问任意一个接口，返回的 `Reponse` 中的头信息中都将包含 `My-Key` 的信息。
+此时启动服务后，`MyMiddleware` 中间件将立即生效，访问任意一个接口，返回的 `Reponse` 中的头信息中都将包含 `My-Key` 的信息。

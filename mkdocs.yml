@@ -46,7 +46,6 @@ nav:
   - Application: base/application.md
   - Controller: base/controller.md
   - Routing: base/routing.md
-  - Provider: base/provider.md
   - Middleware: base/middleware.md
 - 数据库:
   - MySQL: database/mysql.md
