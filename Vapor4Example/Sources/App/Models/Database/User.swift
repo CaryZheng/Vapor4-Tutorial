@@ -8,16 +8,16 @@
 import Fluent
 import Vapor
 
-final class User: Model, Content {
+final class User: Model {
     static let schema = "user"
     
-    @ID(key: "id")
+    @ID(custom: "id")
     var id: Int?
 
     @Field(key: "username")
     var username: String
 
-    init() { }
+    init() {}
 
     init(id: Int? = nil, username: String) {
         self.id = id

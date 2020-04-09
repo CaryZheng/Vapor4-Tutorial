@@ -11,21 +11,24 @@ import Fluent
 class UserController {
     
     /// 创建用户
-    func createUser(req: Request) throws -> EventLoopFuture<User> {
-        let user = try req.content.decode(User.self)
-        return user.save(on: req.db).map { user }
+    func createUser(req: Request) throws -> EventLoopFuture<UserResponse> {
+        let userInput = try req.content.decode(UserInput.self)
+        
+        let user = User(username: userInput.username)
+        
+        return user.save(on: req.db).map {
+            return UserResponse(id: user.id!, username: user.username)
+        }
     }
     
     /// 查找用户
     func findUser(req: Request) -> EventLoopFuture<String> {
-        let userId = req.parameters.get("userId") as Int?
-        
-        // 参数错误
-        if nil == userId {
+        guard let userId = req.parameters.get("userId") as Int? else {
+            // 参数错误
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
         }
         
-        return User.find(userId!, on: req.db).map { user -> String in
+        return User.find(userId, on: req.db).map { user -> String in
             guard let user = user else {
                 return ResponseWrapper<DefaultResponseObj>(protocolCode: .failAccountNoExisted).makeResponse()
             }
@@ -53,10 +56,8 @@ class UserController {
     
     /// 删除用户
     func deleteUser(req: Request) -> EventLoopFuture<String> {
-        let userId = req.parameters.get("userId") as Int?
-        
-        // 参数错误
-        if nil == userId {
+        guard let userId = req.parameters.get("userId") as Int? else {
+            // 参数错误
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
         }
         

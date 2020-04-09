@@ -2,7 +2,7 @@
 
 ## 安装 Xcode
 
-因为 Vapor 4 需要 Swift 5.1（或以上） 版本，所以需要先安装 Xcode 11（或以上）。
+因为 Vapor 4 需要 Swift 5.2（或以上） 版本，所以需要先安装 Xcode 11.4（或以上）。
 
 通过以下命令来确认当前 Swift 版本。
 
@@ -13,8 +13,8 @@ swift --version
 将显示对应的 Swift 版本信息。
 
 ```
-Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)
-Target: x86_64-apple-darwin19.0.0
+Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
+Target: x86_64-apple-darwin19.4.0
 ```
 
 ## 安装 Toolbox

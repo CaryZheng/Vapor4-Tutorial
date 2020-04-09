@@ -113,7 +113,6 @@ Opening Xcode project...
 │   │   ├── Controllers
 │   │   ├── Migrations
 │   │   ├── Models
-│   │   ├── app.swift
 │   │   ├── configure.swift
 │   │   └── routes.swift
 │   └── Run
@@ -161,7 +160,6 @@ func configure(_ app: Application) throws {
 * Controllers：用于存放具体业务逻辑的实现代码。
 * Migrations：用于存放数据库迁移相关的代码。
 * Models：用于存放数据模型相关的代码。
-* app.swift：用于服务初始化相关的代码文件。
 * configure.swift：用于服务配置相关的代码文件。
 * routes.swift：用于 API 请求的路由控制。
 
@@ -180,7 +178,7 @@ Vapor 项目所依赖的库是通过 [SPM（Swift Package Manager）](https://gi
 示例如下
 
 ``` swift
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
@@ -194,14 +192,23 @@ let package = Package(
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-beta"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-beta"),
-        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-beta"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-rc.1"),
     ],
     targets: [
-        .target(name: "App", dependencies: ["Fluent", "FluentSQLiteDriver", "Vapor"]),
-        .target(name: "Run", dependencies: ["App"]),
-        .testTarget(name: "AppTests", dependencies: ["App"])
+        .target(name: "App", dependencies: [
+            .product(name: "Fluent", package: "fluent"),
+            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+            .product(name: "Vapor", package: "vapor"),
+        ]),
+        .target(name: "Run", dependencies: [
+            .target(name: "App"),
+        ]),
+        .testTarget(name: "AppTests", dependencies: [
+            .target(name: "App"),
+            .product(name: "XCTVapor", package: "vapor"),
+        ])
     ]
 )
 ```
@@ -214,13 +221,20 @@ let package = Package(
 
 ``` swift
 import App
+import Vapor
 
-try app(.detect()).run()
+var env = try Environment.detect()
+try LoggingSystem.bootstrap(from: &env)
+let app = Application(env)
+defer { app.shutdown() }
+try configure(app)
+try app.run()
+
 ```
 
-只有简短的两行代码，第一行 `import App` 是用来导入 `App` library 的，然后再执行 `try app(.detect()).run()` 运行服务。
+`import App` 和 `import Vapor` 是用来导入 `App` 和 `Vapor` library 的，通过执行 `try app.run()` 运行服务。
 
-其中，`.detect()` 方法是用来检测当前运行环境，源码如下
+其中，`Environment.detect()` 方法是用来检测当前运行环境，源码如下
 
 ``` swift
 public static func detect(arguments: [String] = CommandLine.arguments) throws -> Environment {
@@ -229,53 +243,27 @@ public static func detect(arguments: [String] = CommandLine.arguments) throws ->
 }
 ```
 
-`detect()` 将返回一个 `Environment` 实例，并作为参数传递给 `app()` 方法，`app()` 方法定义在 `app.swift` 中，源码如下
-
-``` swift
-public func app(_ environment: Environment) throws -> Application {
-    var environment = environment
-    try LoggingSystem.bootstrap(from: &environment)
-    let app = Application(environment: environment)
-    try configure(app)
-    return app
-}
-```
-
-从中可以看出，根据 `environment` 参数，先初始化了日志系统 `LoggingSystem`，然后创建了 `Application` 实例对象，最后再调用 `configure()` 方法来初始化配置。
+从代码中可以看出，根据 `env` 参数，先初始化了日志系统 `LoggingSystem`，然后创建了 `Application` 实例对象，最后再调用 `configure()` 方法来初始化配置。
 
 `configure()` 方法定义在 `configure.swift` 中，源码如下
 
 ``` swift
 // Called before your application initializes.
-func configure(_ app: Application) throws {
-    // Register providers first
-    app.provider(FluentProvider())
+public func configure(_ app: Application) throws {
+    // Serves files from `Public/` directory
+    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    // Register middleware
-    app.register(extension: MiddlewareConfiguration.self) { middlewares, app in
-        // Serves files from `Public/` directory
-        middlewares.use(app.make(FileMiddleware.self))
-    }
-    
-    app.databases.sqlite(
-        configuration: .init(storage: .connection(.file(path: "db.sqlite"))),
-        threadPool: app.make(),
-        poolConfiguration: app.make(),
-        logger: app.make(),
-        on: app.make()
-    )
-    
-    app.register(Migrations.self) { c in
-        var migrations = Migrations()
-        migrations.add(CreateTodo(), to: .sqlite)
-        return migrations
-    }
+    // Configure SQLite database
+    app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+
+    // Configure migrations
+    app.migrations.add(CreateTodo())
     
     try routes(app)
 }
 ```
 
-从源码中可见，`configure()` 方法内部注册了 `provider`（比如：`FluentProvider`）、`middleware`（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Provider`、`Middleware` 等等，后续章节将进行详细介绍。）
+从源码中可见，`configure()` 方法内部注册了 `middleware`（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Middleware` 等，后续章节将进行详细介绍。）
 
 接下来，我们看下 `routes()` 方法的实现，它是定义在 `routes.swift` 文件中，源码如下
 
@@ -349,17 +337,16 @@ struct TodoController {
 }
 ```
 
-回到 `main.swift` 文件，当 `app()` 方法执行完毕后，最后将执行 `run()` 方法来启动服务。
+回到 `main.swift` 文件，当 `app` 实例初始化后，最后将执行 `run()` 方法来启动服务。
 
 ``` swift
-try app(.detect()).run()
+try app.run()
 ```
 
 `run()` 源码如下
 
 ``` swift
 public func run() throws {
-    defer { self.shutdown() }
     do {
         try self.start()
         try self.running?.onStop.wait()
