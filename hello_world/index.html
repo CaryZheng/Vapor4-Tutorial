@@ -847,7 +847,6 @@ Opening Xcode project...
 │   │   ├── Controllers
 │   │   ├── Migrations
 │   │   ├── Models
-│   │   ├── app.swift
 │   │   ├── configure.swift
 │   │   └── routes.swift
 │   └── Run
@@ -887,7 +886,6 @@ Opening Xcode project...
 <li>Controllers：用于存放具体业务逻辑的实现代码。</li>
 <li>Migrations：用于存放数据库迁移相关的代码。</li>
 <li>Models：用于存放数据模型相关的代码。</li>
-<li>app.swift：用于服务初始化相关的代码文件。</li>
 <li>configure.swift：用于服务配置相关的代码文件。</li>
 <li>routes.swift：用于 API 请求的路由控制。</li>
 </ul>
@@ -898,7 +896,7 @@ Opening Xcode project...
 <h3 id="packageswift">Package.swift<a class="headerlink" href="#packageswift" title="Permanent link">&para;</a></h3>
 <p>Vapor 项目所依赖的库是通过 <a href="https://github.com/apple/swift-package-manager">SPM（Swift Package Manager）</a> 来进行管理的。</p>
 <p>示例如下</p>
-<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.1</span>
+<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.2</span>
 <span class="kd">import</span> <span class="nc">PackageDescription</span>
 
 <span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
@@ -912,14 +910,23 @@ Opening Xcode project...
     <span class="p">],</span>
     <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
         <span class="c1">// 💧 A server-side Swift web framework.</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
     <span class="p">],</span>
     <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="s">&quot;Vapor&quot;</span><span class="p">]),</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">]),</span>
-        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">])</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">])</span>
     <span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -929,13 +936,19 @@ Opening Xcode project...
 <p>接下来我们简单分析下 Vapor 示例项目启动的过程。</p>
 <p>首先来看下 <code>main.swift</code> 文件，这个是整个程序执行的入口。</p>
 <div class="codehilite"><pre><span></span><span class="kd">import</span> <span class="nc">App</span>
+<span class="kd">import</span> <span class="nc">Vapor</span>
 
-<span class="k">try</span> <span class="n">app</span><span class="p">(.</span><span class="n">detect</span><span class="p">()).</span><span class="n">run</span><span class="p">()</span>
+<span class="kd">var</span> <span class="nv">env</span> <span class="p">=</span> <span class="k">try</span> <span class="n">Environment</span><span class="p">.</span><span class="n">detect</span><span class="p">()</span>
+<span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">env</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="k">defer</span> <span class="p">{</span> <span class="n">app</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+<span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 
 
-<p>只有简短的两行代码，第一行 <code>import App</code> 是用来导入 <code>App</code> library 的，然后再执行 <code>try app(.detect()).run()</code> 运行服务。</p>
-<p>其中，<code>.detect()</code> 方法是用来检测当前运行环境，源码如下</p>
+<p><code>import App</code> 和 <code>import Vapor</code> 是用来导入 <code>App</code> 和 <code>Vapor</code> library 的，通过执行 <code>try app.run()</code> 运行服务。</p>
+<p>其中，<code>Environment.detect()</code> 方法是用来检测当前运行环境，源码如下</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">detect</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">=</span> <span class="n">CommandLine</span><span class="p">.</span><span class="n">arguments</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">Environment</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nv">commandInput</span> <span class="p">=</span> <span class="n">CommandInput</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">arguments</span><span class="p">)</span>
     <span class="k">return</span> <span class="k">try</span> <span class="n">Environment</span><span class="p">.</span><span class="n">detect</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">commandInput</span><span class="p">)</span>
@@ -943,50 +956,25 @@ Opening Xcode project...
 </pre></div>
 
 
-<p><code>detect()</code> 将返回一个 <code>Environment</code> 实例，并作为参数传递给 <code>app()</code> 方法，<code>app()</code> 方法定义在 <code>app.swift</code> 中，源码如下</p>
-<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">app</span><span class="p">(</span><span class="kc">_</span> <span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">Application</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">environment</span> <span class="p">=</span> <span class="n">environment</span>
-    <span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">environment</span><span class="p">)</span>
-    <span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">environment</span><span class="p">:</span> <span class="n">environment</span><span class="p">)</span>
-    <span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">app</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>从中可以看出，根据 <code>environment</code> 参数，先初始化了日志系统 <code>LoggingSystem</code>，然后创建了 <code>Application</code> 实例对象，最后再调用 <code>configure()</code> 方法来初始化配置。</p>
+<p>从代码中可以看出，根据 <code>env</code> 参数，先初始化了日志系统 <code>LoggingSystem</code>，然后创建了 <code>Application</code> 实例对象，最后再调用 <code>configure()</code> 方法来初始化配置。</p>
 <p><code>configure()</code> 方法定义在 <code>configure.swift</code> 中，源码如下</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
-<span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-    <span class="c1">// Register providers first</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">provider</span><span class="p">(</span><span class="n">FluentProvider</span><span class="p">())</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="c1">// Serves files from `Public/` directory</span>
+    <span class="c1">// app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))</span>
 
-    <span class="c1">// Register middleware</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="kd">extension</span><span class="p">:</span> <span class="n">MiddlewareConfiguration</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">middlewares</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span>
-        <span class="c1">// Serves files from `Public/` directory</span>
-        <span class="n">middlewares</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">FileMiddleware</span><span class="p">.</span><span class="kc">self</span><span class="p">))</span>
-    <span class="p">}</span>
+    <span class="c1">// Configure SQLite database</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">sqlite</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="s">&quot;db.sqlite&quot;</span><span class="p">)),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
 
-    <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">sqlite</span><span class="p">(</span>
-        <span class="n">configuration</span><span class="p">:</span> <span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">storage</span><span class="p">:</span> <span class="p">.</span><span class="n">connection</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s">&quot;db.sqlite&quot;</span><span class="p">))),</span>
-        <span class="n">threadPool</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">poolConfiguration</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">logger</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">(),</span>
-        <span class="n">on</span><span class="p">:</span> <span class="n">app</span><span class="p">.</span><span class="n">make</span><span class="p">()</span>
-    <span class="p">)</span>
-
-    <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Migrations</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">c</span> <span class="k">in</span>
-        <span class="kd">var</span> <span class="nv">migrations</span> <span class="p">=</span> <span class="n">Migrations</span><span class="p">()</span>
-        <span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">(),</span> <span class="n">to</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">migrations</span>
-    <span class="p">}</span>
+    <span class="c1">// Configure migrations</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">())</span>
 
     <span class="k">try</span> <span class="n">routes</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 
 
-<p>从源码中可见，<code>configure()</code> 方法内部注册了 <code>provider</code>（比如：<code>FluentProvider</code>）、<code>middleware</code>（比如：<code>FileMiddleware</code>）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 <code>Provider</code>、<code>Middleware</code> 等等，后续章节将进行详细介绍。）</p>
+<p>从源码中可见，<code>configure()</code> 方法内部注册了 <code>middleware</code>（比如：<code>FileMiddleware</code>）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 <code>Middleware</code> 等，后续章节将进行详细介绍。）</p>
 <p>接下来，我们看下 <code>routes()</code> 方法的实现，它是定义在 <code>routes.swift</code> 文件中，源码如下</p>
 <div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
     <span class="n">app</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
@@ -1052,14 +1040,13 @@ Opening Xcode project...
 </pre></div>
 
 
-<p>回到 <code>main.swift</code> 文件，当 <code>app()</code> 方法执行完毕后，最后将执行 <code>run()</code> 方法来启动服务。</p>
-<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="n">app</span><span class="p">(.</span><span class="n">detect</span><span class="p">()).</span><span class="n">run</span><span class="p">()</span>
+<p>回到 <code>main.swift</code> 文件，当 <code>app</code> 实例初始化后，最后将执行 <code>run()</code> 方法来启动服务。</p>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 
 
 <p><code>run()</code> 源码如下</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">{</span>
-    <span class="k">defer</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
     <span class="k">do</span> <span class="p">{</span>
         <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
         <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">running</span><span class="p">?.</span><span class="n">onStop</span><span class="p">.</span><span class="n">wait</span><span class="p">()</span>
