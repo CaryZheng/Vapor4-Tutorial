@@ -1,10 +1,10 @@
 # Hello World
 
-本章教程教将带你创建第一个 Vapor 项目。
+本章教程教将带你创建第一个 `Vapor` 项目。
 
 ## 创建项目
 
-通过 vapor 命令行工具创建项目，项目名称命名为 `ExampleHello`。（注：当前 Vapor 4 还处于 Beta 阶段）
+通过 `vapor` 命令行工具创建项目，项目名称命名为 `ExampleHello`。
 
 ```
 vapor new ExampleHello -branch=4
@@ -48,7 +48,7 @@ Initializing git repository [Done]
 
 ## 运行项目
 
-此时，我们先不分析代码，先将该 vapor 项目 run 起来，看看最终效果。
+此时，我们先不分析代码，先将该 `vapor` 项目 `run` 起来，看看最终效果。
 
 步骤如下：
 
@@ -66,7 +66,7 @@ build 成功后将输出如下信息。
 Building Project [Done]
 ```
 
-* 通过如下命令 run 项目。
+* 通过如下命令 `run` 项目。
 
 ```
 vapor run
@@ -79,7 +79,7 @@ Running app ...
 [ NOTICE ] Server starting on http://127.0.0.1:8080
 ```
 
-然后访问 `http://127.0.0.1:8080` 地址，如果返回 `It works!`，则意味着你的第一个 vapor 项目已经 run 成功了。
+然后访问 `http://127.0.0.1:8080` 地址，如果返回 `It works!`，则意味着你的第一个 vapor 项目已经 `run` 成功了。
 
 ## 生成 Xcode 项目
 
@@ -94,7 +94,7 @@ y/n> y
 Opening Xcode project...
 ```
 
-可以选择 Xcode 中的 `Run` scheme 进行编译运行。
+可以选择 `Xcode` 中的 `Run` scheme 进行编译运行。
 
 如图所示
 
@@ -124,7 +124,7 @@ Opening Xcode project...
 
 ### Public
 
-该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。
+该目录主要存放一些可公开访问的资源文件，比如图片文件、`CSS` 文件以及 `JavaScript` 文件等。
 
 首先，需修改 `configure.swift` 文件来开启使用 `FileMiddleware` 中间件。
 
@@ -170,7 +170,7 @@ public func configure(_ app: Application) throws {
 
 ### Package.swift
 
-Vapor 项目所依赖的库是通过 [SPM（Swift Package Manager）](https://github.com/apple/swift-package-manager) 来进行管理的。
+`Vapor` 项目所依赖的库是通过 [SPM（Swift Package Manager）](https://github.com/apple/swift-package-manager) 来进行管理的。
 
 示例如下
 
