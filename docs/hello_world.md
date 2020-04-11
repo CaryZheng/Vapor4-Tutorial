@@ -4,10 +4,10 @@
 
 ## 创建项目
 
-通过 vapor 命令行工具创建项目，项目名称命名为 `Vapor4Example`。（注：当前 Vapor 4 还处于 Beta 阶段）
+通过 vapor 命令行工具创建项目，项目名称命名为 `ExampleHello`。（注：当前 Vapor 4 还处于 Beta 阶段）
 
 ```
-vapor new Vapor4Example -branch=4
+vapor new ExampleHello -branch=4
 ```
 
 创建成功后，将输出如下信息。
@@ -40,8 +40,8 @@ Initializing git repository [Done]
 		                       \_\/  /_/--\ |_|   \_\_/ |_| \
 		                         a web framework for Swift
 
-		                  Project "Vapor4Example" has been created.
-		           Type `cd Vapor4Example` to enter the project directory.
+		                  Project "ExampleHello" has been created.
+		           Type `cd ExampleHello` to enter the project directory.
 		           Use `vapor cloud deploy` to host your project for free!
 		                                   Enjoy!
 ```
@@ -52,7 +52,7 @@ Initializing git repository [Done]
 
 步骤如下：
 
-* 执行 `cd Vapor4Example` 进入到刚创建好的项目目录中。
+* 执行 `cd ExampleHello` 进入到刚创建好的项目目录中。
 
 * 通过如下命令 build 项目代码。
 
@@ -355,3 +355,7 @@ public func run() throws {
 ```
 
 至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。
+
+## 源码
+
+可参考源码：[ExampleHello](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/ExampleHello)
