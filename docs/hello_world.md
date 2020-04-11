@@ -356,6 +356,6 @@ public func run() throws {
 
 至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。
 
-## 源码
+## 示例代码
 
-可参考源码：[ExampleHello](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/ExampleHello)
+可参考：[ExampleHello](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code/ExampleHello)
