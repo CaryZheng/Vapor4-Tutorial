@@ -428,6 +428,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    示例代码
+  </a>
+  
+</li>
+      
       
       
       
@@ -716,6 +723,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    示例代码
+  </a>
+  
+</li>
+      
       
       
       
@@ -736,10 +750,10 @@
                 
                 
                 <h1 id="hello-world">Hello World<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h1>
-<p>本章教程教将带你创建第一个 Vapor 项目。</p>
+<p>本章教程教将带你创建第一个 <code>Vapor</code> 项目。</p>
 <h2 id="_1">创建项目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>通过 vapor 命令行工具创建项目，项目名称命名为 <code>Vapor4Example</code>。（注：当前 Vapor 4 还处于 Beta 阶段）</p>
-<div class="codehilite"><pre><span></span>vapor new Vapor4Example -branch=4
+<p>通过 <code>vapor</code> 命令行工具创建项目，项目名称命名为 <code>ExampleHello</code>。</p>
+<div class="codehilite"><pre><span></span>vapor new ExampleHello -branch=4
 </pre></div>
 
 
@@ -771,19 +785,19 @@ Initializing git repository [Done]
                                \_\/  /_/--\ |_|   \_\_/ |_| \
                                  a web framework for Swift
 
-                          Project &quot;Vapor4Example&quot; has been created.
-                   Type `cd Vapor4Example` to enter the project directory.
+                          Project &quot;ExampleHello&quot; has been created.
+                   Type `cd ExampleHello` to enter the project directory.
                    Use `vapor cloud deploy` to host your project for free!
                                            Enjoy!
 </pre></div>
 
 
 <h2 id="_2">运行项目<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>此时，我们先不分析代码，先将该 vapor 项目 run 起来，看看最终效果。</p>
+<p>此时，我们先不分析代码，先将该 <code>vapor</code> 项目 <code>run</code> 起来，看看最终效果。</p>
 <p>步骤如下：</p>
 <ul>
 <li>
-<p>执行 <code>cd Vapor4Example</code> 进入到刚创建好的项目目录中。</p>
+<p>执行 <code>cd ExampleHello</code> 进入到刚创建好的项目目录中。</p>
 </li>
 <li>
 <p>通过如下命令 build 项目代码。</p>
@@ -799,7 +813,7 @@ Initializing git repository [Done]
 
 
 <ul>
-<li>通过如下命令 run 项目。</li>
+<li>通过如下命令 <code>run</code> 项目。</li>
 </ul>
 <div class="codehilite"><pre><span></span>vapor run
 </pre></div>
@@ -811,7 +825,7 @@ Initializing git repository [Done]
 </pre></div>
 
 
-<p>然后访问 <code>http://127.0.0.1:8080</code> 地址，如果返回 <code>It works!</code>，则意味着你的第一个 vapor 项目已经 run 成功了。</p>
+<p>然后访问 <code>http://127.0.0.1:8080</code> 地址，如果返回 <code>It works!</code>，则意味着你的第一个 vapor 项目已经 <code>run</code> 成功了。</p>
 <h2 id="xcode">生成 Xcode 项目<a class="headerlink" href="#xcode" title="Permanent link">&para;</a></h2>
 <p>执行 <code>vapor xcode</code> 命令，将会自动生成一个完整的 Xcode 项目。</p>
 <div class="codehilite"><pre><span></span>$ vapor xcode
@@ -823,7 +837,7 @@ Opening Xcode project...
 </pre></div>
 
 
-<p>可以选择 Xcode 中的 <code>Run</code> scheme 进行编译运行。</p>
+<p>可以选择 <code>Xcode</code> 中的 <code>Run</code> scheme 进行编译运行。</p>
 <p>如图所示</p>
 <p><img alt="xcode" src="../img/xcode.png" /></p>
 <h2 id="_3">目录结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -846,7 +860,7 @@ Opening Xcode project...
 
 
 <h3 id="public">Public<a class="headerlink" href="#public" title="Permanent link">&para;</a></h3>
-<p>该目录主要存放一些可公开访问的资源文件，比如图片文件、CSS 文件以及 JavaScript 文件等。</p>
+<p>该目录主要存放一些可公开访问的资源文件，比如图片文件、<code>CSS</code> 文件以及 <code>JavaScript</code> 文件等。</p>
 <p>首先，需修改 <code>configure.swift</code> 文件来开启使用 <code>FileMiddleware</code> 中间件。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Called before your application initializes.</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
@@ -879,7 +893,7 @@ Opening Xcode project...
 <h4 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h4>
 <p>该目录主要是用于存放测试相关的代码。</p>
 <h3 id="packageswift">Package.swift<a class="headerlink" href="#packageswift" title="Permanent link">&para;</a></h3>
-<p>Vapor 项目所依赖的库是通过 <a href="https://github.com/apple/swift-package-manager">SPM（Swift Package Manager）</a> 来进行管理的。</p>
+<p><code>Vapor</code> 项目所依赖的库是通过 <a href="https://github.com/apple/swift-package-manager">SPM（Swift Package Manager）</a> 来进行管理的。</p>
 <p>示例如下</p>
 <div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.2</span>
 <span class="kd">import</span> <span class="nc">PackageDescription</span>
@@ -1044,6 +1058,8 @@ Opening Xcode project...
 
 
 <p>至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。</p>
+<h2 id="_4">示例代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>可参考：<a href="https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code/ExampleHello">ExampleHello</a></p>
                 
                   
                 
