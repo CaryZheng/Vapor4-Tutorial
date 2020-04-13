@@ -34,10 +34,17 @@ struct UserController {
         }
     }
 
-//    func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
-////        return Todo.find(req.parameters.get("todoID"), on: req.db)
-////            .unwrap(or: Abort(.notFound))
-////            .flatMap { $0.delete(on: req.db) }
-////            .map { .ok }
-//    }
+    /// 删除用户
+    func delete(req: Request) throws -> EventLoopFuture<String> {
+        guard let userId = req.parameters.get("userId") as Int? else {
+            // 参数错误
+            return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
+        }
+        
+        let user = User()
+        user.id = userId
+        return user.delete(force: false, on: req.db).map {
+            return ResponseWrapper<DefaultResponseObj>(protocolCode: .success).makeResponse()
+        }
+    }
 }
