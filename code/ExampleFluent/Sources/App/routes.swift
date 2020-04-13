@@ -16,4 +16,10 @@ func routes(_ app: Application) throws {
     app.get(["user", "all"], use: userController.fetchAll)
     app.get("user", ":userId", use: userController.fetch)
     app.on(.DELETE, "user", ":userId", use: userController.delete)
+    
+    let articleController = ArticleController()
+    app.post("article", use: articleController.createArticle)
+    app.get("article", ":articleId", use: articleController.fetchArticleDetail)
+    app.get("user", "article", ":userId" , use: articleController.fetchUserArticleList)
+    app.on(.DELETE, "article", ":articleId", use: articleController.delete)
 }

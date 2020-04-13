@@ -43,7 +43,7 @@ struct UserController {
         
         let user = User()
         user.id = userId
-        return user.delete(force: false, on: req.db).map {
+        return user.delete(on: req.db).map {
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .success).makeResponse()
         }
     }
