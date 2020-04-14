@@ -21,5 +21,6 @@ func routes(_ app: Application) throws {
     app.post("article", use: articleController.createArticle)
     app.get("article", ":articleId", use: articleController.fetchArticleDetail)
     app.get("user", "article", ":userId" , use: articleController.fetchUserArticleList)
+    app.get("articleAuthor", ":articleId" , use: articleController.fetchArticleUserDetail)
     app.on(.DELETE, "article", ":articleId", use: articleController.delete)
 }

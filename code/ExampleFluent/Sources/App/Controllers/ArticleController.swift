@@ -3,6 +3,11 @@ import Vapor
 
 struct ArticleController {
     
+    struct ArticleUser: Content {
+        var user: User
+        var article: Article
+    }
+    
     /// 发布文章
     func createArticle(req: Request) throws -> EventLoopFuture<String> {
         let article = try req.content.decode(Article.self)
@@ -18,7 +23,7 @@ struct ArticleController {
             // 参数错误
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
         }
-        
+                        
         return Article.find(articleId, on: req.db).map { article -> String in
             guard let article = article else {
                 return ResponseWrapper<DefaultResponseObj>(protocolCode: .failArticleNoExisted).makeResponse()
@@ -40,13 +45,25 @@ struct ArticleController {
         }
     }
     
-//    /// 查询文章作者详情
-//    func fetchArticleUserDetail(req: Request) throws -> EventLoopFuture<String> {
-//        guard let articleId = req.parameters.get("articleId") as Int? else {
-//            // 参数错误
-//            return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
-//        }
-//    }
+    /// 查询文章作者详情
+    func fetchArticleUserDetail(req: Request) throws -> EventLoopFuture<String> {
+        guard let articleId = req.parameters.get("articleId") as Int? else {
+            // 参数错误
+            return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
+        }
+        
+        return Article.find(articleId, on: req.db).flatMap { article -> EventLoopFuture<String> in
+            guard let article = article else {
+                return ResponseWrapper<DefaultResponseObj>(protocolCode: .failArticleNoExisted).makeFutureResponse(req: req)
+            }
+            
+            return User.find(article.authorId, on: req.db).map { user -> String in
+                let articleUser = ArticleUser(user: user!, article: article)
+                
+                return ResponseWrapper(protocolCode: .success, obj: articleUser).makeResponse()
+            }
+        }
+    }
     
     /// 删除文章
     func delete(req: Request) throws -> EventLoopFuture<String> {
