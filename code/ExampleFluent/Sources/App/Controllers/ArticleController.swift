@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import MySQLKit
 
 struct ArticleController {
     
@@ -52,17 +53,41 @@ struct ArticleController {
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .failParamError).makeFutureResponse(req: req)
         }
         
-        return Article.find(articleId, on: req.db).flatMap { article -> EventLoopFuture<String> in
-            guard let article = article else {
-                return ResponseWrapper<DefaultResponseObj>(protocolCode: .failArticleNoExisted).makeFutureResponse(req: req)
+        let sql = """
+            SELECT * FROM user WHERE id =
+                (SELECT authorId FROM article WHERE id = \(articleId));
+        """
+        return (req.db as! MySQLDatabase).query(sql).map { rows in
+            print("rows = \(rows)")
+                        
+            var results: [User] = []
+            
+            for row in rows {
+                do {
+                    let userResult = try row.decode(model: User.self)
+                    results.append(userResult)
+                    
+                    print("name = \(userResult.name), userId = \(String(describing: userResult.id))")
+                } catch {
+                    print("fetchArticleUserDetail error")
+                }
             }
             
-            return User.find(article.authorId, on: req.db).map { user -> String in
-                let articleUser = ArticleUser(user: user!, article: article)
-                
-                return ResponseWrapper(protocolCode: .success, obj: articleUser).makeResponse()
-            }
+            return ResponseWrapper(protocolCode: .success, obj: results).makeResponse()
         }
+        
+        
+//        return Article.find(articleId, on: req.db).flatMap { article -> EventLoopFuture<String> in
+//            guard let article = article else {
+//                return ResponseWrapper<DefaultResponseObj>(protocolCode: .failArticleNoExisted).makeFutureResponse(req: req)
+//            }
+//
+//            return User.find(article.authorId, on: req.db).map { user -> String in
+//                let articleUser = ArticleUser(user: user!, article: article)
+//
+//                return ResponseWrapper(protocolCode: .success, obj: articleUser).makeResponse()
+//            }
+//        }
     }
     
     /// 删除文章
