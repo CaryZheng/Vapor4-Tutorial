@@ -2,7 +2,7 @@
 
 ## 创建 MySQL 数据库
 
-```
+```sql
 -- 创建数据库
 CREATE DATABASE swift_fluent_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -234,7 +234,7 @@ func fetchUserTop10(req: Request) throws -> EventLoopFuture<String> {
 
 * Request
 
-```
+```shell
 curl --location --request POST 'localhost:8080/user' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -244,7 +244,7 @@ curl --location --request POST 'localhost:8080/user' \
 
 * Response
 
-```
+```shell
 {
     "msg": "success",
     "obj": {
@@ -259,13 +259,13 @@ curl --location --request POST 'localhost:8080/user' \
 
 * Request
 
-```
+```shell
 curl --location --request GET 'localhost:8080/user/5'
 ```
 
 * Response
 
-```
+```shell
 {
     "msg": "success",
     "obj": {
@@ -280,7 +280,7 @@ curl --location --request GET 'localhost:8080/user/5'
 
 * Request
 
-```
+```shell
 curl --location --request PUT 'localhost:8080/user' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -291,7 +291,7 @@ curl --location --request PUT 'localhost:8080/user' \
 
 * Response
 
-```
+```shell
 {
     "msg": "success",
     "obj": {
@@ -306,14 +306,14 @@ curl --location --request PUT 'localhost:8080/user' \
 
 * Request
 
-```
+```shell
 curl --location --request DELETE 'localhost:8080/user/5' \
 --data-raw ''
 ```
 
 * Response
 
-```
+```shell
 {
     "msg": "success",
     "code": 200
