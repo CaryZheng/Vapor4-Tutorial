@@ -8,7 +8,7 @@ public func configure(_ app: Application) throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     // Configure MySQL database
-    app.databases.use(.mysql(hostname: "127.0.0.1", port: 3306, username: "YourName", password: "YourPassword", database: "swift_fluent_test", tlsConfiguration: nil), as: .mysql)
+    app.databases.use(.mysql(hostname: "127.0.0.1", port: 3306, username: "root", password: "YourPassword", database: "swift_fluent_test", tlsConfiguration: nil), as: .mysql)
     
     try routes(app)
 }
