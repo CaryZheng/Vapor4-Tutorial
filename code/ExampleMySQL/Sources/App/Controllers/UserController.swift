@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import MySQLKit
 
 struct UserController {
     /// 查询所有用户信息
@@ -45,6 +46,16 @@ struct UserController {
         user.id = userId
         return user.delete(on: req.db).map {
             return ResponseWrapper<DefaultResponseObj>(protocolCode: .success).makeResponse()
+        }
+    }
+    
+    /// 查询前10个用户信息
+    func fetchUserTop10(req: Request) throws -> EventLoopFuture<String> {
+        let sql = """
+            SELECT * FROM user LIMIT 10;
+        """
+        return (req.db as! MySQLDatabase).sql().raw(SQLQueryString(sql)).all(decoding: User.self).map { users in
+            return ResponseWrapper(protocolCode: .success, obj: users).makeResponse()
         }
     }
 }

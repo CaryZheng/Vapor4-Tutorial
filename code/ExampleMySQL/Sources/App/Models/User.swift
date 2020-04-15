@@ -7,18 +7,14 @@ final class User: Model, Content {
     @ID(custom: "id")
     var id: Int?
 
-    @Field(key: "name")
-    var name: String
-    
-    @Field(key: "address")
-    var address: String?
+    @Field(key: "username")
+    var username: String
 
     init() {}
 
-    init(id: Int? = nil, title: String, address: String?) {
+    init(id: Int? = nil, username: String) {
         self.id = id
-        self.name = title
-        self.address = address
+        self.username = username
     }
 }
 

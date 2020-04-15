@@ -3,14 +3,14 @@ CREATE DATABASE swift_fluent_test DEFAULT CHARACTER SET utf8 COLLATE utf8_genera
 
 USE swift_fluent_test;
 
--- 创建表
+-- 创建user表
 CREATE TABLE user (
 	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL COMMENT '用户名',
-	address VARCHAR(255) NULL COMMENT '地址',
+	username VARCHAR(255) NOT NULL COMMENT '用户名',
 	PRIMARY KEY(id)
 );
 
+-- 创建article表
 CREATE TABLE article (
 	id INT NOT NULL AUTO_INCREMENT,
 	title VARCHAR(255) NOT NULL	COMMENT '标题',

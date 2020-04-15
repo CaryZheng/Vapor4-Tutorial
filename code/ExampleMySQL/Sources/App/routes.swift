@@ -15,6 +15,7 @@ func routes(_ app: Application) throws {
 //    app.get("user", "all", use: userController.fetchAll)
     app.get(["user", "all"], use: userController.fetchAll)
     app.get("user", ":userId", use: userController.fetch)
+    app.get(["user", "top10"], use: userController.fetchUserTop10)
     app.on(.DELETE, "user", ":userId", use: userController.delete)
     
     let articleController = ArticleController()

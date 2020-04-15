@@ -1,12 +1,38 @@
 # MySQL
 
+## 创建 MySQL 数据库
+
+```
+-- 创建数据库
+CREATE DATABASE swift_fluent_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE swift_fluent_test;
+
+-- 创建user表
+CREATE TABLE user (
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(255) NOT NULL COMMENT '用户名',
+	PRIMARY KEY(id)
+);
+
+-- 创建article表
+CREATE TABLE article (
+	id INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR(255) NOT NULL	COMMENT '标题',
+	content LONGTEXT NOT NULL	COMMENT '正文',
+	authorId INT NOT NULL	COMMENT '作者Id',
+	cover VARCHAR(255) NULL COMMENT '封面',
+	PRIMARY KEY(id)
+);
+```
+
 ## 配置
 
 编辑 `Package.swift` 文件，增加 `MySQL` 相关依赖。
 
 ```swift
 dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-rc"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-rc"),
         .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.0.0-rc"),
     ],
@@ -59,7 +85,7 @@ public func configure(_ app: Application) throws {
 import Fluent
 import Vapor
 
-final class User: Model {
+final class User: Model, Content {
     static let schema = "user"
     
     @ID(custom: "id")
@@ -70,9 +96,9 @@ final class User: Model {
 
     init() {}
 
-    init(id: Int? = nil, username: String) {
+    init(id: Int? = nil, title: String) {
         self.id = id
-        self.username = username
+        self.username = title
     }
 }
 ```
@@ -173,6 +199,32 @@ func routes(_ app: Application) throws {
     ......
 }
 ```
+
+## 使用原生 SQL
+
+编辑 `routes.swift` 文件，增加如下代码：
+
+```swift
+app.get(["user", "top10"], use: userController.fetchUserTop10)
+```
+
+编辑 `UserController.swift` 文件，增加如下代码：
+
+```swift
+/// 查询前10个用户信息
+func fetchUserTop10(req: Request) throws -> EventLoopFuture<String> {
+    let sql = """
+        SELECT * FROM user LIMIT 10;
+    """
+    return (req.db as! MySQLDatabase).sql().raw(SQLQueryString(sql)).all(decoding: User.self).map { users in
+        print("user = \(users)")
+        
+        return ResponseWrapper(protocolCode: .success, obj: users).makeResponse()
+    }
+}
+```
+
+`raw` 查询也支持 `all()`、`first()`、`run()` 方法。
 
 ## 测试
 

@@ -4,10 +4,10 @@ import MySQLKit
 
 struct ArticleController {
     
-    struct ArticleUser: Content {
-        var user: User
-        var article: Article
-    }
+//    struct ArticleUser: Content {
+//        var user: User
+//        var article: Article
+//    }
     
     /// 发布文章
     func createArticle(req: Request) throws -> EventLoopFuture<String> {
@@ -67,7 +67,7 @@ struct ArticleController {
                     let userResult = try row.decode(model: User.self)
                     results.append(userResult)
                     
-                    print("name = \(userResult.name), userId = \(String(describing: userResult.id))")
+                    print("name = \(userResult.username), userId = \(String(describing: userResult.id))")
                 } catch {
                     print("fetchArticleUserDetail error")
                 }
