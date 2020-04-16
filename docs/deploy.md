@@ -15,7 +15,7 @@ sudo apt-get install nginx
 
 如果 `Nginx` 安装成功的话，访问对应服务器 `ip` 地址，将显示如下内容：
 
-![nginx_install_success](../img/nginx_install_success.png)
+![nginx_install_success](./img/nginx_install_success.png)
 
 ### 配置
 

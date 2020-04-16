@@ -1,6 +1,6 @@
 # SPM
 
-`Swift Package Manager`（简称：`SPM`）用于构建项目源码以及各种依赖。它类似于 Cocoapods、Ruby gems、和 NPM 。大多数情况下，Vapor 应用直接使用 [Vapor Toolbox](toolbox.md) 即可，toolbox 内部将会与 SPM 进行交互。不过，理解基础概念还是很重要的。
+`Swift Package Manager`（简称：`SPM`）用于构建项目源码以及各种依赖。它类似于 `Cocoapods`、`Ruby gems`、和 `NPM` 。大多数情况下，`Vapor` 应用直接使用 `Vapor Toolbox` 即可，`toolbox` 内部将会与 `SPM` 进行交互。不过，理解基础概念还是很重要的。
 
 > 提示
 > 
