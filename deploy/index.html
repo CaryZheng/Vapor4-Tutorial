@@ -489,9 +489,79 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        部署
+      </label>
+    
     <a href="./" title="部署" class="md-nav__link md-nav__link--active">
       部署
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    安装 Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    运行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    测试
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -513,6 +583,63 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    安装 Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    运行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    测试
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -527,7 +654,114 @@
                 
                 
                 <h1 id="_1">部署<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
+<p>目前 <code>Swift</code> 官方支持 <code>macOS</code> 和 <code>Ubuntu</code> 操作系统，本教程使用的是 <code>Ubuntu</code>。</p>
+<h2 id="nginx">Nginx<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h2>
+<h3 id="_2">安装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>通过 <code>APT</code> 方式安装：</p>
+<div class="codehilite"><pre><span></span>sudo apt-get update
+sudo apt-get install nginx
+</pre></div>
+
+
+<p>如果 <code>Nginx</code> 安装成功的话，访问对应服务器 <code>ip</code> 地址，将显示如下内容：</p>
+<p><img alt="nginx_install_success" src="../img/nginx_install_success.png" /></p>
+<h3 id="_3">配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>/etc/nginx/sites-available/</code> 目录下存放了 <code>Nginx</code> 相关的配置文件，可以新建一个文件，比如命名为 <code>hello</code> 。</p>
+<p>编辑如下：</p>
+<div class="codehilite"><pre><span></span>server {
+    server_name hello.com;
+    listen 80;
+
+    root /home/vapor/Hello/Public/;
+
+    location @proxy {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_pass_header Server;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass_header Server;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 10s;
+    }
+}
+</pre></div>
+
+
+<p>配置成功后，执行 <code>nginx -s reload</code> 命令使得刚刚的配置生效。</p>
+<h2 id="docker">安装 Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
+<p><code>Docker</code> 安装步骤可参考：<a href="https://docs.docker.com/engine/install/ubuntu/">Docker官网</a></p>
+<h2 id="_4">运行<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><code>Vapor</code> 项目初始化成功后会有个 <code>web.Dockerfile</code> 文件，内容类似如下：</p>
+<div class="codehilite"><pre><span></span><span class="c1"># ================================</span>
+<span class="c1"># Build image</span>
+<span class="c1"># ================================</span>
+FROM vapor/swift:5.2 as build
+WORKDIR /build
+
+<span class="c1"># Copy entire repo into container</span>
+COPY . .
+
+<span class="c1"># Install sqlite3</span>
+RUN apt-get update -y <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> apt-get install -y libsqlite3-dev
+
+<span class="c1"># Compile with optimizations</span>
+RUN swift build <span class="se">\</span>
+    --enable-test-discovery <span class="se">\</span>
+    -c release <span class="se">\</span>
+    -Xswiftc -g
+
+<span class="c1"># ================================</span>
+<span class="c1"># Run image</span>
+<span class="c1"># ================================</span>
+FROM vapor/ubuntu:18.04
+WORKDIR /run
+
+<span class="c1"># Copy build artifacts</span>
+COPY --from<span class="o">=</span>build /build/.build/release /run
+<span class="c1"># Copy Swift runtime libraries</span>
+COPY --from<span class="o">=</span>build /usr/lib/swift/ /usr/lib/swift/
+
+ENTRYPOINT <span class="o">[</span><span class="s2">&quot;./Run&quot;</span>, <span class="s2">&quot;serve&quot;</span>, <span class="s2">&quot;--env&quot;</span>, <span class="s2">&quot;production&quot;</span>, <span class="s2">&quot;--hostname&quot;</span>, <span class="s2">&quot;0.0.0.0&quot;</span>, <span class="s2">&quot;--port&quot;</span>, <span class="s2">&quot;80&quot;</span><span class="o">]</span>
+</pre></div>
+
+
+<p>通过如下命令，根据 <code>dockerfile</code> 文件构建 <code>docker</code> 镜像。</p>
+<div class="codehilite"><pre><span></span>docker build -f &lt;dockerfile文件路径&gt; -t vapor/hello .
+</pre></div>
+
+
+<ul>
+<li><strong>-f 参数</strong>：指定 dockerfile 文件路径。</li>
+<li><strong>-t 参数</strong>：镜像名字。</li>
+</ul>
+<p>构建成功后，执行 <code>docker images</code> 命令，将显示类似如下内容，其中 <code>vapor/hello</code> 就是我们刚刚构建好的镜像。</p>
+<div class="codehilite"><pre><span></span>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+vapor/hello         latest              e742283e65de        <span class="m">36</span> minutes ago      464MB
+vapor/ubuntu        <span class="m">18</span>.04               0577b24788a4        <span class="m">2</span> weeks ago         141MB
+vapor/swift         <span class="m">5</span>.2                 c9cfd6d5eeb2        <span class="m">2</span> weeks ago         <span class="m">1</span>.68GB
+</pre></div>
+
+
+<p>接下来，基于 <code>vapor/helllo</code> 镜像实例化容器。</p>
+<div class="codehilite"><pre><span></span>docker run -d -p <span class="m">8080</span>:80 --name vapr-hello-zzb vapor/hello
+</pre></div>
+
+
+<ul>
+<li><strong>-d 参数</strong>：表示后台运行。</li>
+<li><strong>-p 参数</strong>：端口映射关系。</li>
+<li><strong>-name 参数</strong>：指定容器实例名字。</li>
+</ul>
+<p>实例化成功后，通过 <code>docker ps</code> 可查看当前实例运行情况。</p>
+<div class="codehilite"><pre><span></span>CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+f26da06871a4        vapor/hello         <span class="s2">&quot;./Run serve --env p…&quot;</span>   <span class="m">14</span> minutes ago      Up <span class="m">14</span> minutes       <span class="m">0</span>.0.0.0:8080-&gt;80/tcp   vapr-hello-zzb
+</pre></div>
+
+
+<h2 id="_5">测试<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>此时，访问服务器 <code>ip</code> 地址，将显示如下 <code>It works!</code> 内容，表示 <code>Nginx</code> 已将 <code>80</code> 端口的请求转发到 <code>8080</code> 端口的 <code>docker</code> 实例上了，大功告成。</p>
                 
                   
                 
