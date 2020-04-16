@@ -1,8 +1,8 @@
 # 序
 
-[Vapor](https://vapor.codes) 是基于 Swift 实现的 Web 框架，可运行于 macOS 和 Ubuntu 系统上。
+[Vapor](https://vapor.codes) 是基于 `Swift` 实现的 `Web` 框架，可运行于 `macOS` 和 `Ubuntu` 系统上。
 
-本教程主要是针对 Vapor 4 的速成指南。（注：逐步更新中）
+本教程主要是针对 `Vapor 4` 的速成指南。（注：逐步更新中）
 
 ## Contact
 
@@ -22,7 +22,7 @@ Swift 技术博客：[www.carymic.com](https://www.carymic.com)
 
 ## 代码
 
-教程示例代码：[Example](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code)
+教程示例代码：[Examples](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code)
 
 ## 声明
 
