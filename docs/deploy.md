@@ -124,4 +124,6 @@ f26da06871a4        vapor/hello         "./Run serve --env p…"   14 minutes ag
 
 ## 测试
 
-此时，访问服务器 `ip` 地址，将显示如下 `It works!` 内容，表示 `Nginx` 已将 `80` 端口的请求转发到 `8080` 端口的 `docker` 实例上了，大功告成。
+此时，访问服务器 `ip` 地址，将显示 `It works!` 内容，表示 `Nginx` 已将 `80` 端口的请求转发到 `8080` 端口的 `docker` 实例上了。
+
+至此，已大功告成。
