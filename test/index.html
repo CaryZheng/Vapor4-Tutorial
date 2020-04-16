@@ -477,9 +477,59 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        测试
+      </label>
+    
     <a href="./" title="测试" class="md-nav__link md-nav__link--active">
       测试
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    开始
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    执行测试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    补充
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -513,6 +563,43 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    开始
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    执行测试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    补充
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -527,7 +614,101 @@
                 
                 
                 <h1 id="_1">测试<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
+<p><code>Vapor</code> 包含了一个测试模块 <code>XCTVapor</code>，该测试模块是基于 <code>XCTest</code> 构建的，可用于模拟 HTTP 请求进行测试。</p>
+<h2 id="_2">开始<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>编辑 <code>Package.swift</code> 文件。</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
+    <span class="p">......</span>
+    <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">......</span>
+        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>所有测试用例均存放于 <code>Tests</code> -&gt; <code>AppTest</code> 目录中，默认会生成 <code>AppTests.swift</code> 文件。</p>
+<p>导入 <code>XCTVapor</code> 模块，然后创建一个继承于 <code>XCTestCase</code> 的 <code>class</code>（这里命名为 <code>AppTests</code>）。</p>
+<div class="codehilite"><pre><span></span><span class="kd">import</span> <span class="nc">XCTVapor</span>
+
+<span class="kr">final</span> <span class="kd">class</span> <span class="nc">AppTests</span><span class="p">:</span> <span class="n">XCTestCase</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">testStub</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>每个 <code>function</code> 需要以 <code>test</code> 作为前缀来命名，这样执行测试的时候会自动覆盖到这些 <code>function</code> 。</p>
+<h2 id="_3">执行测试<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>在 <code>Xcode</code> 中，输入快捷键 <code>cmd+u</code> 即可。</li>
+<li>命令行界面中，执行 <code>swift test --enable-test-discovery</code> 命令即可。</li>
+</ul>
+<h2 id="_4">示例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>初始化一个 <code>.testing</code> 测试环境的 <code>Application</code> 实例，并通过调用 <code>configure</code> 方法进行相关配置。</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(.</span><span class="n">testing</span><span class="p">)</span>
+<span class="k">defer</span> <span class="p">{</span> <span class="n">app</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+<span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+
+
+<p>模拟一个 <code>HTTP</code> 请求测试 <code>hello</code> 接口。</p>
+<p><code>hello</code> 接口定义如下：</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>测试代码如下：</p>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">test</span><span class="p">(.</span><span class="n">GET</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">res</span> <span class="k">in</span>
+    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="p">.</span><span class="n">ok</span><span class="p">)</span>
+    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">string</span><span class="p">,</span> <span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>第一个参数表示 <code>HTTP</code> Method，第二个参数表示 API 请求路径，结尾闭包中是对 <code>response</code> 的处理，并通过 <code>XCTAssert</code> 方法进行验证。</p>
+<p>对于更复杂的 <code>request</code>，可以通过 <code>beforeRequest</code> 闭包来修改 <code>header</code> 和 <code>body</code> 内容。<code>response</code> 也有类似的操作。</p>
+<p>示例代码如下：</p>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">test</span><span class="p">(.</span><span class="n">GET</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">res</span> <span class="k">in</span>
+    <span class="n">XCTAssertContent</span><span class="p">([</span><span class="n">Todo</span><span class="p">].</span><span class="kc">self</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="bp">count</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}.</span><span class="n">test</span><span class="p">(.</span><span class="n">POST</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">beforeRequest</span><span class="p">:</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">try</span> <span class="n">req</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">Todo</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&quot;Test My App&quot;</span><span class="p">))</span>
+<span class="p">},</span> <span class="n">afterResponse</span><span class="p">:</span>  <span class="p">{</span> <span class="n">res</span> <span class="k">in</span>
+    <span class="n">XCTAssertContent</span><span class="p">(</span><span class="n">Todo</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">XCTAssertNotNil</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">title</span><span class="p">,</span> <span class="s">&quot;Test My App&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="n">test</span><span class="p">(.</span><span class="n">GET</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">res</span> <span class="k">in</span>
+    <span class="n">XCTAssertContent</span><span class="p">([</span><span class="n">Todo</span><span class="p">].</span><span class="kc">self</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="bp">count</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2 id="_5">补充<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><code>Vapor</code> testing API 支持两种方式发送用于测试的 <code>request</code>，一种是通过内部模拟直接响应 <code>respond</code>，另一种是通过一个 HTTP Server 来测试。</p>
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="n">testable</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="p">.</span><span class="n">inMemory</span><span class="p">).</span><span class="n">test</span><span class="p">(...)</span>
+
+<span class="c1">// Run tests through a live HTTP server.</span>
+<span class="n">app</span><span class="p">.</span><span class="n">testable</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="p">.</span><span class="n">running</span><span class="p">).</span><span class="n">test</span><span class="p">(...)</span>
+</pre></div>
+
+
+<p>默认是 <code>inMemory</code> 方式，<code>running</code> 方式默认使用的是 <code>8080</code> 端口，不过也支持指定特定端口号。</p>
+<div class="codehilite"><pre><span></span>.running(port: 8090)
+</pre></div>
                 
                   
                 

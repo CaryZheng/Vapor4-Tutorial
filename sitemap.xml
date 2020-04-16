@@ -2,72 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://vapor4.swiftmic.com/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/install/install_mac/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/install/install_linux/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/hello_world/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/toolbox/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/spm/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/base/application/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/base/controller/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/base/routing/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/base/middleware/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/database/mysql/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/database/redis/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/test/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/deploy/</loc>
-     <lastmod>2020-04-15</lastmod>
+     <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
