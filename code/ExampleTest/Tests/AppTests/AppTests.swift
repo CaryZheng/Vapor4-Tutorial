@@ -3,7 +3,7 @@ import Fluent
 import XCTVapor
 
 final class AppTests: XCTestCase {
-    func testCreateTodo() throws {
+    func testStub() throws {
         let app = Application(.testing)
         defer { app.shutdown() }
         try configure(app)
@@ -12,6 +12,11 @@ final class AppTests: XCTestCase {
         app.databases.use(.sqlite(.memory), as: .test, isDefault: true)
         // run migrations automatically
         try app.autoMigrate().wait()
+        
+        try app.test(.GET, "hello") { res in
+            XCTAssertEqual(res.status, .ok)
+            XCTAssertEqual(res.body.string, "Hello, world!")
+        }
 
         try app.test(.GET, "todos") { res in
             XCTAssertContent([Todo].self, res) {
