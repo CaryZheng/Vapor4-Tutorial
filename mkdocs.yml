@@ -36,11 +36,8 @@ markdown_extensions:
 
 nav:
 - 序: index.md
-- 安装 Vapor:
-  - macOS: install/install_mac.md
-  - Linux: install/install_linux.md
+- 开发环境: install_vapor.md
 - Hello World: hello_world.md
-- Toolbox: toolbox.md
 - SPM: spm.md
 - 基础组件:
   - Application: base/application.md

@@ -108,7 +108,7 @@ vapor/swift         5.2                 c9cfd6d5eeb2        2 weeks ago         
 接下来，基于 `vapor/helllo` 镜像实例化容器。
 
 ```shell
-docker run -d -p 8080:80 --name vapr-hello-zzb vapor/hello
+docker run -d -p 8080:80 --name vapor-hello-zzb vapor/hello
 ```
 
 * **-d 参数**：表示后台运行。
@@ -119,7 +119,7 @@ docker run -d -p 8080:80 --name vapr-hello-zzb vapor/hello
 
 ```shell
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
-f26da06871a4        vapor/hello         "./Run serve --env p…"   14 minutes ago      Up 14 minutes       0.0.0.0:8080->80/tcp   vapr-hello-zzb
+f26da06871a4        vapor/hello         "./Run serve --env p…"   14 minutes ago      Up 14 minutes       0.0.0.0:8080->80/tcp   vapor-hello-zzb
 ```
 
 ## 测试
