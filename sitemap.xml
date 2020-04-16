@@ -6,22 +6,12 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://vapor4.swiftmic.com/install/install_mac/</loc>
-     <lastmod>2020-04-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://vapor4.swiftmic.com/install/install_linux/</loc>
+     <loc>https://vapor4.swiftmic.com/install_vapor/</loc>
      <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://vapor4.swiftmic.com/hello_world/</loc>
-     <lastmod>2020-04-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://vapor4.swiftmic.com/toolbox/</loc>
      <lastmod>2020-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>

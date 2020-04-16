@@ -13,7 +13,7 @@
         <meta name="description" content="Vapor 4 速成指南">
       
       
-        <link rel="canonical" href="https://vapor4.swiftmic.com/toolbox/">
+        <link rel="canonical" href="https://vapor4.swiftmic.com/install_vapor/">
       
       
         <meta name="author" content="Cary Zheng">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Toolbox - Vapor 4 速成指南</title>
+        <title>开发环境 - Vapor 4 速成指南</title>
       
     
     
@@ -116,7 +116,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#toolbox" tabindex="1" class="md-skip">
+      <a href="#_1" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -142,7 +142,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Toolbox
+                开发环境
               
             </span>
           
@@ -263,47 +263,70 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-    <label class="md-nav__link" for="nav-2">
-      安装 Vapor
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        安装 Vapor
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        开发环境
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../install/install_mac/" title="macOS" class="md-nav__link">
-      macOS
+    
+    <a href="./" title="开发环境" class="md-nav__link md-nav__link--active">
+      开发环境
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../install/install_linux/" title="Linux" class="md-nav__link">
-      Linux
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#xcode" class="md-nav__link">
+    安装 Xcode
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolbox" class="md-nav__link">
+    安装 Toolbox
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常用命令介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    Ubuntu
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -316,27 +339,6 @@
     <a href="../hello_world/" title="Hello World" class="md-nav__link">
       Hello World
     </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Toolbox" class="md-nav__link md-nav__link--active">
-      Toolbox
-    </a>
-    
   </li>
 
     
@@ -359,13 +361,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-5">
       基础组件
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-5">
         基础组件
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -431,13 +433,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       数据库
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         数据库
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -513,6 +515,43 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#xcode" class="md-nav__link">
+    安装 Xcode
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolbox" class="md-nav__link">
+    安装 Toolbox
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常用命令介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    Ubuntu
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -523,11 +562,111 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/CaryZheng/Vapor4-Tutorial/edit/master/docs/toolbox.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/CaryZheng/Vapor4-Tutorial/edit/master/docs/install_vapor.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="toolbox">Toolbox<a class="headerlink" href="#toolbox" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
+                <h1 id="_1">开发环境<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>目前 <code>Swift</code> 官方支持 <code>macOS</code> 和 <code>Ubuntu</code> 操作系统，本教程讲解的是如何在 <code>macOS</code> 搭建 <code>Vapor</code> 开发环境。</p>
+<h2 id="xcode">安装 Xcode<a class="headerlink" href="#xcode" title="Permanent link">&para;</a></h2>
+<p>因为 <code>Vapor 4</code> 需要 <code>Swift 5.2（或以上）</code> 版本，所以需要先安装 <code>Xcode 11.4（或以上）</code>。</p>
+<p>通过以下命令来确认当前 Swift 版本。</p>
+<div class="codehilite"><pre><span></span>swift --version
+</pre></div>
+
+
+<p>将显示对应的 Swift 版本信息。</p>
+<div class="codehilite"><pre><span></span>Apple Swift version <span class="m">5</span>.2 <span class="o">(</span>swiftlang-1103.0.32.1 clang-1103.0.32.29<span class="o">)</span>
+Target: x86_64-apple-darwin19.4.0
+</pre></div>
+
+
+<h2 id="toolbox">安装 Toolbox<a class="headerlink" href="#toolbox" title="Permanent link">&para;</a></h2>
+<p>执行以下命令。</p>
+<div class="codehilite"><pre><span></span>brew install vapor/tap/vapor
+</pre></div>
+
+
+<p>安装成功后，执行以下命令，将显示可用的命令列表。</p>
+<div class="codehilite"><pre><span></span>$ vapor -help
+Usage: vapor <span class="nb">command</span>
+
+Join our team chat <span class="k">if</span> you have questions, need help,
+or want to contribute: http://vapor.team
+
+Commands:
+       new Creates a new Vapor application from a template.
+           Use --template<span class="o">=</span>repo/template <span class="k">for</span> github templates
+           Use --template<span class="o">=</span>full-url-here.git <span class="k">for</span> non github templates
+           Use --web to create a new web app
+           Use --auth to create a new authenticated API app
+           Use --api <span class="o">(</span>default<span class="o">)</span> to create a new API
+     build Compiles the application.
+       run Runs the compiled application.
+     fetch Fetches the application<span class="s1">&#39;s dependencies.</span>
+<span class="s1">    update Updates your dependencies.</span>
+<span class="s1">     clean Cleans temporary files--usually fixes</span>
+<span class="s1">           a plethora of bizarre build errors.</span>
+<span class="s1">      test Runs the application&#39;</span>s tests.
+     xcode Generates an Xcode project <span class="k">for</span> development.
+           Additionally links commonly used libraries.
+   version Displays Vapor CLI version
+     cloud Commands <span class="k">for</span> interacting with Vapor Cloud.
+    heroku Commands to <span class="nb">help</span> deploy to Heroku.
+  provider Commands to <span class="nb">help</span> manage providers.
+
+Use <span class="sb">`</span>vapor <span class="nb">command</span> --help<span class="sb">`</span> <span class="k">for</span> more information on a command.
+</pre></div>
+
+
+<h2 id="_2">常用命令介绍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>初始化 <code>Vapor</code> 新项目</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor new &lt;项目名&gt; -branch<span class="o">=</span><span class="m">4</span>
+</pre></div>
+
+
+<ul>
+<li>编译项目</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor build
+</pre></div>
+
+
+<ul>
+<li>运行项目</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor run
+</pre></div>
+
+
+<ul>
+<li>更新相关依赖库</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor update
+</pre></div>
+
+
+<ul>
+<li>生成 <code>Xcode</code> 项目</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor xcode
+</pre></div>
+
+
+<ul>
+<li>清理 <code>Vapor</code> 项目</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor clean
+</pre></div>
+
+
+<blockquote>
+<p>注意</p>
+<p><code>clean</code> 命令会删除项目中的临时文件。如果遇到比较奇怪的编译错误，也可以尝试 <code>clean</code> 下。</p>
+</blockquote>
+<h2 id="ubuntu">Ubuntu<a class="headerlink" href="#ubuntu" title="Permanent link">&para;</a></h2>
+<p>基于 <code>Ubuntu</code> 的 <code>Vapor</code> 环境，具体步骤可参考：<a href="https://docs.vapor.codes/4.0/install/ubuntu/">Vapor 官网</a></p>
                 
                   
                 
@@ -548,7 +687,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../hello_world/" title="Hello World" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." title="序" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -557,19 +696,19 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Hello World
+                序
               </span>
             </div>
           </a>
         
         
-          <a href="../spm/" title="SPM" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../hello_world/" title="Hello World" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                SPM
+                Hello World
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
