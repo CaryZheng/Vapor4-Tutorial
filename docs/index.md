@@ -22,7 +22,7 @@ Swift 技术博客：[www.carymic.com](https://www.carymic.com)
 
 ## 代码
 
-教程示例代码：[Vapor4Example](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/Vapor4Example)
+教程示例代码：[Example](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code)
 
 ## 声明
 
