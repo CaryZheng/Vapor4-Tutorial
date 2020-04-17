@@ -658,9 +658,9 @@
 
 <p>通过 <code>app</code>（<code>Application</code> 类实例）可以对路由进行相关的配置。</p>
 <h2 id="_1">监听指定路径<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>app.get(&quot;hello&quot;) { req in
-    return &quot;Hello, world!&quot;
-}
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -682,37 +682,37 @@
 
 <p>同理，<code>POST</code>、<code>PUT</code>、<code>DELETE</code> 等操作行为也是类似的。</p>
 <p>示例如下</p>
-<div class="codehilite"><pre><span></span>// Method: POST, Path: test1
-app.post(&quot;test1&quot;) { req in
-    return &quot;Method: POST, Path: test1&quot;
-}
+<div class="codehilite"><pre><span></span><span class="c1">// Method: POST, Path: test1</span>
+<span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;test1&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Method: POST, Path: test1&quot;</span>
+<span class="p">}</span>
 
-// Method: PUT, Path: test2
-app.put(&quot;test2&quot;) { req in
-    return &quot;Method: PUT, Path: test2&quot;
-}
+<span class="c1">// Method: PUT, Path: test2</span>
+<span class="n">app</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;test2&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Method: PUT, Path: test2&quot;</span>
+<span class="p">}</span>
 
-// Method: DELETE, Path: test3
-app.delete(&quot;test3&quot;) { req in
-    return &quot;Method: DELETE, Path: test3&quot;
-}
+<span class="c1">// Method: DELETE, Path: test3</span>
+<span class="n">app</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;test3&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;Method: DELETE, Path: test3&quot;</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <h2 id="_2">监听指定路径集合<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>有时候定义的路径都是在某一个特定路径名下的（比如 <code>v1</code>），这时候就需要路由组来进行管理了。</p>
-<div class="codehilite"><pre><span></span>// 路由组
-app.group(&quot;v1&quot;) { builder in
+<div class="codehilite"><pre><span></span><span class="c1">// 路由组</span>
+<span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;v1&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">builder</span> <span class="k">in</span>
 
-    // 此处定义的所有请求路径都是在路由组（&quot;v1&quot;）下面的。
-    builder.get(&quot;name&quot;) { req in
-        return &quot;Handle path: v1/name&quot;
-    }
+    <span class="c1">// 此处定义的所有请求路径都是在路由组（&quot;v1&quot;）下面的。</span>
+    <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;Handle path: v1/name&quot;</span>
+    <span class="p">}</span>
 
-    builder.get(&quot;avatar&quot;) { req in
-        return &quot;Handle path: v1/avatar&quot;
-    }
-}
+    <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;avatar&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="s">&quot;Handle path: v1/avatar&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 

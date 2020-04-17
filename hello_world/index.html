@@ -717,14 +717,14 @@
 <p>本章教程教将带你创建第一个 <code>Vapor</code> 项目。</p>
 <h2 id="_1">创建项目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>通过 <code>vapor</code> 命令行工具创建项目，项目名称命名为 <code>ExampleHello</code>。</p>
-<div class="codehilite"><pre><span></span>vapor new ExampleHello -branch=4
+<div class="codehilite"><pre><span></span>vapor new ExampleHello -branch<span class="o">=</span><span class="m">4</span>
 </pre></div>
 
 
 <p>创建成功后，将输出如下信息。</p>
-<div class="codehilite"><pre><span></span>Cloning Template [Done]
-Updating Package Name [Done]
-Initializing git repository [Done]
+<div class="codehilite"><pre><span></span>Cloning Template <span class="o">[</span>Done<span class="o">]</span>
+Updating Package Name <span class="o">[</span>Done<span class="o">]</span>
+Initializing git repository <span class="o">[</span>Done<span class="o">]</span>
 
                                              **
                                            **~~**
@@ -745,13 +745,13 @@ Initializing git repository [Done]
                                         *************
 
                                _       __    ___   ___   ___
-                              \ \  /  / /\  | |_) / / \ | |_)
-                               \_\/  /_/--\ |_|   \_\_/ |_| \
-                                 a web framework for Swift
+                              <span class="se">\ \ </span> /  / /<span class="se">\ </span> <span class="p">|</span> <span class="p">|</span>_<span class="o">)</span> / / <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span>
+                               <span class="se">\_\/</span>  /_/--<span class="se">\ </span><span class="p">|</span>_<span class="p">|</span>   <span class="se">\_\_</span>/ <span class="p">|</span>_<span class="p">|</span> <span class="se">\</span>
+                                 a web framework <span class="k">for</span> Swift
 
-                          Project &quot;ExampleHello&quot; has been created.
-                   Type `cd ExampleHello` to enter the project directory.
-                   Use `vapor cloud deploy` to host your project for free!
+                          Project <span class="s2">&quot;ExampleHello&quot;</span> has been created.
+                   Type <span class="sb">`</span><span class="nb">cd</span> ExampleHello<span class="sb">`</span> to enter the project directory.
+                   Use <span class="sb">`</span>vapor cloud deploy<span class="sb">`</span> to host your project <span class="k">for</span> free!
                                            Enjoy!
 </pre></div>
 
@@ -772,7 +772,7 @@ Initializing git repository [Done]
 
 
 <p>build 成功后将输出如下信息。</p>
-<div class="codehilite"><pre><span></span>Building Project [Done]
+<div class="codehilite"><pre><span></span>Building Project <span class="o">[</span>Done<span class="o">]</span>
 </pre></div>
 
 
@@ -785,7 +785,7 @@ Initializing git repository [Done]
 
 <p>这时候将输出如下信息。</p>
 <div class="codehilite"><pre><span></span>Running app ...
-[ NOTICE ] Server starting on http://127.0.0.1:8080
+<span class="o">[</span> NOTICE <span class="o">]</span> Server starting on http://127.0.0.1:8080
 </pre></div>
 
 
@@ -793,8 +793,8 @@ Initializing git repository [Done]
 <h2 id="xcode">生成 Xcode 项目<a class="headerlink" href="#xcode" title="Permanent link">&para;</a></h2>
 <p>执行 <code>vapor xcode</code> 命令，将会自动生成一个完整的 Xcode 项目。</p>
 <div class="codehilite"><pre><span></span>$ vapor xcode
-Generating Xcode Project [Done]
-Select the `Run` scheme to run.
+Generating Xcode Project <span class="o">[</span>Done<span class="o">]</span>
+Select the <span class="sb">`</span>Run<span class="sb">`</span> scheme to run.
 Open Xcode project?
 y/n&gt; y
 Opening Xcode project...

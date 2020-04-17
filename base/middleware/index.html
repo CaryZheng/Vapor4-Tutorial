@@ -721,7 +721,7 @@
 <p>调用 <code>next.respond(to: request)</code> 将会唤起路由相关的回调，并对请求进行处理。然后通过 <code>response.headers.add(name: "My-Key", value: "Test123456")</code> 来给的 <code>Response</code> 的 <code>Header</code> 信息中添加一组 <code>Key-Value</code> 数据（示例中 Key 是 <code>My-Key</code>，Value 是 <code>Test123456</code>）。</p>
 <h3 id="_3">使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>在 <code>configure.swift</code> 文件中添加如下代码：</p>
-<div class="codehilite"><pre><span></span>app.middleware.use(MyMiddleware())
+<div class="codehilite"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">MyMiddleware</span><span class="p">())</span>
 </pre></div>
 
 

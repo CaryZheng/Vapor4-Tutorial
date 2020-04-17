@@ -681,45 +681,45 @@
 </blockquote>
 <h2 id="package-manifest">Package Manifest<a class="headerlink" href="#package-manifest" title="Permanent link">&para;</a></h2>
 <p>首先看下 package 配置文件。它位于项目根目录中，并被命名为 <code>Package.swift</code> 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
-import PackageDescription
+<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.2</span>
+<span class="kd">import</span> <span class="nc">PackageDescription</span>
 
-let package = Package(
-    name: &quot;app&quot;,
-    platforms: [
-       .macOS(.v10_15)
-    ],
-    products: [
-        .executable(name: &quot;Run&quot;, targets: [&quot;Run&quot;]),
-        .library(name: &quot;App&quot;, targets: [&quot;App&quot;]),
-    ],
-    dependencies: [
-        // 💧 A server-side Swift web framework.
-        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-    ],
-    targets: [
-        .target(name: &quot;App&quot;, dependencies: [
-            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
-            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
-            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
-        ]),
-        .target(name: &quot;Run&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-        ]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
-        ])
-    ]
-)
+<span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s">&quot;app&quot;</span><span class="p">,</span>
+    <span class="n">platforms</span><span class="p">:</span> <span class="p">[</span>
+       <span class="p">.</span><span class="n">macOS</span><span class="p">(.</span><span class="n">v10_15</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">products</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">executable</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Run&quot;</span><span class="p">]),</span>
+        <span class="p">.</span><span class="n">library</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="c1">// 💧 A server-side Swift web framework.</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 
 
 <h3 id="tools-version">Tools Version<a class="headerlink" href="#tools-version" title="Permanent link">&para;</a></h3>
 <p>第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
+<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.2</span>
 </pre></div>
 
 
@@ -738,26 +738,26 @@ let package = Package(
 </blockquote>
 <h3 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h3>
 <p>Targets 包含了所有的 modules、executables 以及 tests 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
-import PackageDescription
+<div class="codehilite"><pre><span></span><span class="c1">// swift-tools-version:5.2</span>
+<span class="kd">import</span> <span class="nc">PackageDescription</span>
 
-let package = Package(
-    ......
-    targets: [
-        .target(name: &quot;App&quot;, dependencies: [
-            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
-            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
-            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
-        ]),
-        .target(name: &quot;Run&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-        ]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
-        ])
-    ]
-)
+<span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
+    <span class="p">......</span>
+    <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
+            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+        <span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 
 
@@ -771,7 +771,7 @@ let package = Package(
 <div class="codehilite"><pre><span></span>.
 ├── Sources
 │   ├── App
-│   │   └── (Source code)
+│   │   └── <span class="o">(</span>Source code<span class="o">)</span>
 │   └── Run
 │       └── main.swift
 ├── Tests
@@ -784,32 +784,32 @@ let package = Package(
 <h2 id="packageresolved">Package.resolved<a class="headerlink" href="#packageresolved" title="Permanent link">&para;</a></h2>
 <p>第一次构建成功后，<code>SPM</code> 将会自动创建一个 <code>Package.resolved</code> 文件。<code>Package.resolved</code> 保存了当前项目所有用到的 dependency 版本。</p>
 <p><code>Package.resolved</code> 示例如下：</p>
-<div class="codehilite"><pre><span></span>{
-  &quot;object&quot;: {
-    &quot;pins&quot;: [
-      {
-        &quot;package&quot;: &quot;async-http-client&quot;,
-        &quot;repositoryURL&quot;: &quot;https://github.com/swift-server/async-http-client.git&quot;,
-        &quot;state&quot;: {
-          &quot;branch&quot;: null,
-          &quot;revision&quot;: &quot;51dc885a30ca704b02fa803099b0a9b5b38067b6&quot;,
-          &quot;version&quot;: &quot;1.0.0&quot;
-        }
-      },
-      {
-        &quot;package&quot;: &quot;async-kit&quot;,
-        &quot;repositoryURL&quot;: &quot;https://github.com/vapor/async-kit.git&quot;,
-        &quot;state&quot;: {
-          &quot;branch&quot;: null,
-          &quot;revision&quot;: &quot;d9fd2be441af6d1428b62ab694848396e7072a14&quot;,
-          &quot;version&quot;: &quot;1.0.0-beta.1&quot;
-        }
-      },
+<div class="codehilite"><pre><span></span><span class="o">{</span>
+  <span class="s2">&quot;object&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;pins&quot;</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">&quot;package&quot;</span>: <span class="s2">&quot;async-http-client&quot;</span>,
+        <span class="s2">&quot;repositoryURL&quot;</span>: <span class="s2">&quot;https://github.com/swift-server/async-http-client.git&quot;</span>,
+        <span class="s2">&quot;state&quot;</span>: <span class="o">{</span>
+          <span class="s2">&quot;branch&quot;</span>: null,
+          <span class="s2">&quot;revision&quot;</span>: <span class="s2">&quot;51dc885a30ca704b02fa803099b0a9b5b38067b6&quot;</span>,
+          <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0&quot;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">&quot;package&quot;</span>: <span class="s2">&quot;async-kit&quot;</span>,
+        <span class="s2">&quot;repositoryURL&quot;</span>: <span class="s2">&quot;https://github.com/vapor/async-kit.git&quot;</span>,
+        <span class="s2">&quot;state&quot;</span>: <span class="o">{</span>
+          <span class="s2">&quot;branch&quot;</span>: null,
+          <span class="s2">&quot;revision&quot;</span>: <span class="s2">&quot;d9fd2be441af6d1428b62ab694848396e7072a14&quot;</span>,
+          <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0-beta.1&quot;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
       ......
-    ]
-  },
-  &quot;version&quot;: 1
-}
+    <span class="o">]</span>
+  <span class="o">}</span>,
+  <span class="s2">&quot;version&quot;</span>: <span class="m">1</span>
+<span class="o">}</span>
 </pre></div>
 
 

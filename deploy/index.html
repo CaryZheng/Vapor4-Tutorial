@@ -632,23 +632,23 @@ sudo apt-get install nginx
 <h3 id="_3">配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><code>/etc/nginx/sites-available/</code> 目录下存放了 <code>Nginx</code> 相关的配置文件，可以新建一个文件，比如命名为 <code>hello</code> 。</p>
 <p>编辑如下：</p>
-<div class="codehilite"><pre><span></span>server {
-    server_name hello.com;
-    listen 80;
+<div class="codehilite"><pre><span></span>server <span class="o">{</span>
+    server_name hello.com<span class="p">;</span>
+    listen <span class="m">80</span><span class="p">;</span>
 
-    root /home/vapor/Hello/Public/;
+    root /home/vapor/Hello/Public/<span class="p">;</span>
 
-    location @proxy {
-        proxy_pass http://127.0.0.1:8080;
-        proxy_pass_header Server;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass_header Server;
-        proxy_connect_timeout 3s;
-        proxy_read_timeout 10s;
-    }
-}
+    location @proxy <span class="o">{</span>
+        proxy_pass http://127.0.0.1:8080<span class="p">;</span>
+        proxy_pass_header Server<span class="p">;</span>
+        proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
+        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+        proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+        proxy_pass_header Server<span class="p">;</span>
+        proxy_connect_timeout 3s<span class="p">;</span>
+        proxy_read_timeout 10s<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
