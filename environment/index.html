@@ -13,7 +13,7 @@
         <meta name="description" content="Vapor 4 速成指南">
       
       
-        <link rel="canonical" href="https://vapor4.swiftmic.com/spm/">
+        <link rel="canonical" href="https://vapor4.swiftmic.com/environment/">
       
       
         <meta name="author" content="Cary Zheng">
@@ -42,7 +42,7 @@
     
     
       
-        <title>SPM - Vapor 4 速成指南</title>
+        <title>多环境配置 - Vapor 4 速成指南</title>
       
     
     
@@ -116,7 +116,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#spm" tabindex="1" class="md-skip">
+      <a href="#_1" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -142,7 +142,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                SPM
+                多环境配置
               
             </span>
           
@@ -287,118 +287,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        SPM
-      </label>
-    
-    <a href="./" title="SPM" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../spm/" title="SPM" class="md-nav__link">
       SPM
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">目录</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#package-manifest" class="md-nav__link">
-    Package Manifest
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tools-version" class="md-nav__link">
-    Tools Version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#package-name" class="md-nav__link">
-    Package Name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#platforms" class="md-nav__link">
-    Platforms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#products" class="md-nav__link">
-    Products
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    Dependencies
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#targets" class="md-nav__link">
-    Targets
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    目录结构
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#packageresolved" class="md-nav__link">
-    Package.resolved
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    遇到问题
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -526,11 +419,70 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../environment/" title="多环境配置" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        多环境配置
+      </label>
+    
+    <a href="./" title="多环境配置" class="md-nav__link md-nav__link--active">
       多环境配置
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    .env 文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    指定环境
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    验证
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    扩展
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -579,77 +531,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#package-manifest" class="md-nav__link">
-    Package Manifest
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tools-version" class="md-nav__link">
-    Tools Version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#package-name" class="md-nav__link">
-    Package Name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#platforms" class="md-nav__link">
-    Platforms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#products" class="md-nav__link">
-    Products
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    Dependencies
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#targets" class="md-nav__link">
-    Targets
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    目录结构
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#packageresolved" class="md-nav__link">
-    Package.resolved
+  <a href="#env" class="md-nav__link">
+    .env 文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    遇到问题
+    指定环境
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    验证
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    扩展
   </a>
   
 </li>
@@ -670,153 +574,138 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/CaryZheng/Vapor4-Tutorial/edit/master/docs/spm.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/CaryZheng/Vapor4-Tutorial/edit/master/docs/environment.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="spm">SPM<a class="headerlink" href="#spm" title="Permanent link">&para;</a></h1>
-<p><code>Swift Package Manager</code>（简称：<code>SPM</code>）用于构建项目源码以及各种依赖。它类似于 <code>Cocoapods</code>、<code>Ruby gems</code>、和 <code>NPM</code> 。大多数情况下，<code>Vapor</code> 应用直接使用 <code>Vapor Toolbox</code> 即可，<code>toolbox</code> 内部将会与 <code>SPM</code> 进行交互。不过，理解基础概念还是很重要的。</p>
+                <h1 id="_1">多环境配置<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>一般项目都会配置多个环境，比如开发环境、测试环境、生产环境等等。<code>Vapor</code> 也支持各个环境的配置。</p>
+<h2 id="env">.env 文件<a class="headerlink" href="#env" title="Permanent link">&para;</a></h2>
+<p><code>Vapor</code> 默认支持 3 种环境，分别为 <code>production</code>、<code>development</code> 和 <code>testing</code>。在项目根目录下创建不同的 <code>.env</code> 文件，可表示对应环境的配置。比如：<code>.env.development</code>、<code>.env.testing</code> 和 <code>.env.production</code> 。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>production</td>
+<td>prod</td>
+<td>生产环境</td>
+</tr>
+<tr>
+<td>development</td>
+<td>dev</td>
+<td>开发环境</td>
+</tr>
+<tr>
+<td>testing</td>
+<td>test</td>
+<td>测试环境</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">指定环境<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>通过执行如下命令可指定对应环境。</p>
 <blockquote>
-<p>提示</p>
-<p>想了解更多关于 SPM ，可访问 <a href="https://swift.org/package-manager/">Swift.org</a></p>
+<p>注意</p>
+<p>本教程使用的是 <code>Vapor Toolbox Beta</code> 版）</p>
 </blockquote>
-<h2 id="package-manifest">Package Manifest<a class="headerlink" href="#package-manifest" title="Permanent link">&para;</a></h2>
-<p>首先看下 package 配置文件。它位于项目根目录中，并被命名为 <code>Package.swift</code> 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
-import PackageDescription
-
-let package = Package(
-    name: &quot;app&quot;,
-    platforms: [
-       .macOS(.v10_15)
-    ],
-    products: [
-        .executable(name: &quot;Run&quot;, targets: [&quot;Run&quot;]),
-        .library(name: &quot;App&quot;, targets: [&quot;App&quot;]),
-    ],
-    dependencies: [
-        // 💧 A server-side Swift web framework.
-        .package(url: &quot;https://github.com/vapor/vapor.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-        .package(url: &quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;, from: &quot;4.0.0-rc.1&quot;),
-    ],
-    targets: [
-        .target(name: &quot;App&quot;, dependencies: [
-            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
-            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
-            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
-        ]),
-        .target(name: &quot;Run&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-        ]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
-        ])
-    ]
-)
+<ul>
+<li>生产环境</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor-beta run serve --env production
 </pre></div>
 
 
-<h3 id="tools-version">Tools Version<a class="headerlink" href="#tools-version" title="Permanent link">&para;</a></h3>
-<p>第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
+<p>或</p>
+<div class="codehilite"><pre><span></span>vapor-beta run serve -e prod
 </pre></div>
 
 
-<h3 id="package-name">Package Name<a class="headerlink" href="#package-name" title="Permanent link">&para;</a></h3>
-<p><code>name</code> 字段代表当前 <code>package</code> 的名字。</p>
-<h3 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h3>
-<p><code>platforms</code> 字段代表当前支持的最低系统版本号。比如， <code>.macOS(.v10_15)</code> 表示当前支持的系统版本号是 v10.15 及以上。</p>
-<h3 id="products">Products<a class="headerlink" href="#products" title="Permanent link">&para;</a></h3>
-<p><code>products</code> 字段代表 <code>package</code> 构建的时候要生成的 <code>targets</code>。示例中，有两种 target，一个是 library，另一个是 executable 。</p>
-<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
-<p><code>dependencies</code> 字段代表需要依赖的 SPM package。所有 Vapor 应用都依赖于 Vapor package ，但是你也可以添加其它想要的 dependency 。</p>
-<p>上面这个示例可见，<a href="https://github.com/vapor/vapor">Vapor</a> 4.0 或以上版本是这个 package 的 dependency 。当在 package 中添加了 dependency 后，接下来你必须设置 targets 。</p>
-<blockquote>
-<p>提示</p>
-<p>只要修改了 package manifest，都需要调用 <code>vapor update</code> 来让变更内容生效。</p>
-</blockquote>
-<h3 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h3>
-<p>Targets 包含了所有的 modules、executables 以及 tests 。</p>
-<div class="codehilite"><pre><span></span>// swift-tools-version:5.2
-import PackageDescription
-
-let package = Package(
-    ......
-    targets: [
-        .target(name: &quot;App&quot;, dependencies: [
-            .product(name: &quot;Fluent&quot;, package: &quot;fluent&quot;),
-            .product(name: &quot;FluentSQLiteDriver&quot;, package: &quot;fluent-sqlite-driver&quot;),
-            .product(name: &quot;Vapor&quot;, package: &quot;vapor&quot;),
-        ]),
-        .target(name: &quot;Run&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-        ]),
-        .testTarget(name: &quot;AppTests&quot;, dependencies: [
-            .target(name: &quot;App&quot;),
-            .product(name: &quot;XCTVapor&quot;, package: &quot;vapor&quot;),
-        ])
-    ]
-)
+<ul>
+<li>测试环境</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor-beta run serve --env testing
 </pre></div>
 
 
-<p>虽然可以添加任意多的 targets 来组织代码，但大部分 Vapor 应用有 3 个 target 就足够了。每个 target 声明了它依赖的 module 。为了在代码中可以 <code>import</code> 这些 modules ，你必须添加 module 名字。一个 target 可以依赖于工程中其它的 target 或者暴露出来的 modules 。</p>
-<blockquote>
-<p>提示</p>
-<p>Executable targets (包含 <code>main.swift</code> 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 <code>App</code> 和 <code>Run</code> 两种 target。任何包含在 <code>App</code> 中的代码都可以在 <code>AppTests</code> 中被测试验证。</p>
-</blockquote>
-<h2 id="_1">目录结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>以下是典型的 SPM package 目录结构。</p>
-<div class="codehilite"><pre><span></span>.
-├── Sources
-│   ├── App
-│   │   └── (Source code)
-│   └── Run
-│       └── main.swift
-├── Tests
-│   └── AppTests
-└── Package.swift
+<p>或</p>
+<div class="codehilite"><pre><span></span>vapor-beta run serve -e <span class="nb">test</span>
 </pre></div>
 
 
-<p>每个 <code>.target</code> 对应 <code>Sources</code> 中的一个文件夹。每个 <code>.testTarget</code> 对应 <code>Tests</code> 中的一个文件夹。</p>
-<h2 id="packageresolved">Package.resolved<a class="headerlink" href="#packageresolved" title="Permanent link">&para;</a></h2>
-<p>第一次构建成功后，<code>SPM</code> 将会自动创建一个 <code>Package.resolved</code> 文件。<code>Package.resolved</code> 保存了当前项目所有用到的 dependency 版本。</p>
-<p><code>Package.resolved</code> 示例如下：</p>
-<div class="codehilite"><pre><span></span>{
-  &quot;object&quot;: {
-    &quot;pins&quot;: [
-      {
-        &quot;package&quot;: &quot;async-http-client&quot;,
-        &quot;repositoryURL&quot;: &quot;https://github.com/swift-server/async-http-client.git&quot;,
-        &quot;state&quot;: {
-          &quot;branch&quot;: null,
-          &quot;revision&quot;: &quot;51dc885a30ca704b02fa803099b0a9b5b38067b6&quot;,
-          &quot;version&quot;: &quot;1.0.0&quot;
-        }
-      },
-      {
-        &quot;package&quot;: &quot;async-kit&quot;,
-        &quot;repositoryURL&quot;: &quot;https://github.com/vapor/async-kit.git&quot;,
-        &quot;state&quot;: {
-          &quot;branch&quot;: null,
-          &quot;revision&quot;: &quot;d9fd2be441af6d1428b62ab694848396e7072a14&quot;,
-          &quot;version&quot;: &quot;1.0.0-beta.1&quot;
-        }
-      },
-      ......
-    ]
-  },
-  &quot;version&quot;: 1
-}
+<ul>
+<li>开发环境</li>
+</ul>
+<div class="codehilite"><pre><span></span>vapor-beta run serve --env development
 </pre></div>
 
 
-<h2 id="_2">遇到问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>如果你遇到 SPM 相关的问题，可以尝试 clean 下工程项目试试。</p>
-<div class="codehilite"><pre><span></span>vapor clean
+<p>或</p>
+<div class="codehilite"><pre><span></span>vapor-beta run serve -e dev
 </pre></div>
+
+
+<p>另外，也可以通过代码直接指定环境。</p>
+<ul>
+<li>代码（原始）</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nv">env</span> <span class="p">=</span> <span class="k">try</span> <span class="n">Environment</span><span class="p">.</span><span class="n">detect</span><span class="p">()</span>
+
+<span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">env</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="k">defer</span> <span class="p">{</span> <span class="n">app</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+<span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<ul>
+<li>代码（改造后）</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nv">env</span> <span class="p">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;testing&quot;</span><span class="p">,</span> <span class="n">arguments</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;vapor&quot;</span><span class="p">])</span>
+
+<span class="k">try</span> <span class="n">LoggingSystem</span><span class="p">.</span><span class="n">bootstrap</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">env</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">app</span> <span class="p">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="k">defer</span> <span class="p">{</span> <span class="n">app</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span> <span class="p">}</span>
+<span class="k">try</span> <span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<h2 id="_3">验证<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>如果在 <code>.env</code> 文件中定义了一个 <code>Key-Value</code> 数据，比如 <code>Key</code> 为 <code>name</code>。</p>
+<ul>
+<li>.env.production</li>
+</ul>
+<div class="codehilite"><pre><span></span>name=SwiftMic_production
+</pre></div>
+
+
+<ul>
+<li>.env.testing</li>
+</ul>
+<div class="codehilite"><pre><span></span>name=SwiftMic_testing
+</pre></div>
+
+
+<ul>
+<li>.env.development</li>
+</ul>
+<div class="codehilite"><pre><span></span>name=SwiftMic_development
+</pre></div>
+
+
+<p>启动时指定对应环境，就可以获取到该环境下的 <code>Value</code>。代码如下：</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nv">nameValue</span> <span class="p">=</span> <span class="n">Environment</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="_4">扩展<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>除了 <code>Vapor</code> 默认支持的 3 种环境外，也可以按需自定义新的环境。比如新增一个 <code>staging</code> 环境，只需要创建新文件 <code>.env.staging</code> 即可。</p>
                 
                   
                 
@@ -837,7 +726,7 @@ let package = Package(
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../hello_world/" title="Hello World" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../database/redis/" title="Redis" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -846,19 +735,19 @@ let package = Package(
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Hello World
+                Redis
               </span>
             </div>
           </a>
         
         
-          <a href="../base/application/" title="Application" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../test/" title="测试" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                Application
+                测试
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

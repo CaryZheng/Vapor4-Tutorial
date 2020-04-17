@@ -51,6 +51,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://vapor4.swiftmic.com/environment/</loc>
+     <lastmod>2020-04-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://vapor4.swiftmic.com/test/</loc>
      <lastmod>2020-04-17</lastmod>
      <changefreq>daily</changefreq>
