@@ -718,6 +718,22 @@
 </pre></div>
 
 
+<p>另外，代码中可以通过如下方式来区分当前运行环境。</p>
+<div class="codehilite"><pre><span></span><span class="k">switch</span> <span class="n">app</span><span class="p">.</span><span class="n">environment</span> <span class="p">{</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">production</span><span class="p">:</span>
+    <span class="bp">print</span><span class="p">(</span><span class="s">&quot;production&quot;</span><span class="p">)</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">testing</span><span class="p">:</span>
+    <span class="bp">print</span><span class="p">(</span><span class="s">&quot;testing&quot;</span><span class="p">)</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">development</span><span class="p">:</span>
+    <span class="bp">print</span><span class="p">(</span><span class="s">&quot;development&quot;</span><span class="p">)</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">custom</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;staging&quot;</span><span class="p">):</span>
+    <span class="bp">print</span><span class="p">(</span><span class="s">&quot;staging&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+    <span class="bp">print</span><span class="p">(</span><span class="s">&quot;other&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <h2 id="_4">扩展<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>除了 <code>Vapor</code> 默认支持的 3 种环境外，也可以按需自定义新的环境。比如新增一个 <code>staging</code> 环境，只需要创建新文件 <code>.env.staging</code> 即可。</p>
 <h2 id="_5">源码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
