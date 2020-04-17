@@ -48,5 +48,6 @@ nav:
   - MySQL: database/mysql.md
   - Redis: database/redis.md
 - 多环境配置: environment.md
+- 日志: logger.md
 - 测试: test.md
 - 部署: deploy.md
