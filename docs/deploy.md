@@ -23,7 +23,7 @@ sudo apt-get install nginx
 
 编辑如下：
 
-```
+```shell
 server {
     server_name hello.com;
     listen 80;

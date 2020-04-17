@@ -6,13 +6,13 @@
 
 通过 `vapor` 命令行工具创建项目，项目名称命名为 `ExampleHello`。
 
-```
+```shell
 vapor new ExampleHello -branch=4
 ```
 
 创建成功后，将输出如下信息。
 
-```
+```shell
 Cloning Template [Done]
 Updating Package Name [Done]
 Initializing git repository [Done]
@@ -56,25 +56,25 @@ Initializing git repository [Done]
 
 * 通过如下命令 build 项目代码。
 
-```
+```shell
 vapor build
 ```
 
 build 成功后将输出如下信息。
 
-```
+```shell
 Building Project [Done]
 ```
 
 * 通过如下命令 `run` 项目。
 
-```
+```shell
 vapor run
 ```
 
 这时候将输出如下信息。
 
-```
+```shell
 Running app ...
 [ NOTICE ] Server starting on http://127.0.0.1:8080
 ```
@@ -85,7 +85,7 @@ Running app ...
 
 执行 `vapor xcode` 命令，将会自动生成一个完整的 Xcode 项目。
 
-```
+```shell
 $ vapor xcode
 Generating Xcode Project [Done]
 Select the `Run` scheme to run.
@@ -105,7 +105,7 @@ Opening Xcode project...
 接下来将分析下项目的目录结构，如下所示。
 
 
-```
+```shell
 .
 ├── Public
 ├── Sources

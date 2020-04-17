@@ -44,7 +44,7 @@ func routes(_ app: Application) throws {
 
 ## 监听指定路径
 
-```
+```swift
 app.get("hello") { req in
     return "Hello, world!"
 }
@@ -56,13 +56,13 @@ app.get("hello") { req in
 
 * Request
 
-```
+```shell
 curl -X GET http://localhost:8080/hello
 ```
 
 * Response
 
-```
+```shell
 Hello, world!
 ```
 
@@ -70,7 +70,7 @@ Hello, world!
 
 示例如下
 
-```
+```swift
 // Method: POST, Path: test1
 app.post("test1") { req in
     return "Method: POST, Path: test1"
@@ -91,7 +91,7 @@ app.delete("test3") { req in
 
 有时候定义的路径都是在某一个特定路径名下的（比如 `v1`），这时候就需要路由组来进行管理了。
 
-```
+```swift
 // 路由组
 app.group("v1") { builder in
     
@@ -112,13 +112,13 @@ app.group("v1") { builder in
 
 * Request
 
-```
+```shell
 curl -X GET http://localhost:8080/v1/name
 ```
 
 * Response
 
-```
+```shell
 Handle path: v1/name
 ```
 
@@ -126,12 +126,12 @@ Handle path: v1/name
 
 * Request
 
-```
+```shell
 curl -X GET http://localhost:8080/v1/avatar
 ```
 
 * Response
 
-```
+```shell
 Handle path: v1/avatar
 ```

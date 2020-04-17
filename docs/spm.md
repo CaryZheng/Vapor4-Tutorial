@@ -10,7 +10,7 @@
 
 首先看下 package 配置文件。它位于项目根目录中，并被命名为 ```Package.swift``` 。
 
-```
+```swift
 // swift-tools-version:5.2
 import PackageDescription
 
@@ -50,7 +50,7 @@ let package = Package(
 
 第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。
 
-```
+```swift
 // swift-tools-version:5.2
 ```
 
@@ -80,7 +80,7 @@ let package = Package(
 
 Targets 包含了所有的 modules、executables 以及 tests 。
 
-```
+```swift
 // swift-tools-version:5.2
 import PackageDescription
 
@@ -113,7 +113,7 @@ let package = Package(
 
 以下是典型的 SPM package 目录结构。
 
-```
+```shell
 .
 ├── Sources
 │   ├── App
@@ -133,7 +133,7 @@ let package = Package(
 
 `Package.resolved` 示例如下：
 
-```
+```shell
 {
   "object": {
     "pins": [
@@ -166,6 +166,6 @@ let package = Package(
 
 如果你遇到 SPM 相关的问题，可以尝试 clean 下工程项目试试。
 
-```
+```shell
 vapor clean
 ```

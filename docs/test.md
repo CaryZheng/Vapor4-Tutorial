@@ -110,6 +110,6 @@ app.testable(method: .running).test(...)
 
 默认是 `inMemory` 方式，`running` 方式默认使用的是 `8080` 端口，不过也支持指定特定端口号。
 
-```
+```shell
 .running(port: 8090)
 ```

@@ -121,7 +121,7 @@ public final class MyMiddleware: Middleware {
 
 在 `configure.swift` 文件中添加如下代码：
 
-```
+```swift
 app.middleware.use(MyMiddleware())
 ```
 
