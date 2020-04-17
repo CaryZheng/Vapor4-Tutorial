@@ -113,3 +113,7 @@ let nameValue = Environment.get("name")
 ## 扩展
 
 除了 `Vapor` 默认支持的 3 种环境外，也可以按需自定义新的环境。比如新增一个 `staging` 环境，只需要创建新文件 `.env.staging` 即可。
+
+## 源码
+
+可参考源码：[ExampleEnvironment](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code/ExampleEnvironment)
