@@ -110,6 +110,23 @@ name=SwiftMic_development
 let nameValue = Environment.get("name")
 ```
 
+另外，代码中可以通过如下方式来区分当前运行环境。
+
+```swift
+switch app.environment {
+case .production:
+    print("production")
+case .testing:
+    print("testing")
+case .development:
+    print("development")
+case .custom(name: "staging"):
+    print("staging")
+default:
+    print("other")
+}
+```
+
 ## 扩展
 
 除了 `Vapor` 默认支持的 3 种环境外，也可以按需自定义新的环境。比如新增一个 `staging` 环境，只需要创建新文件 `.env.staging` 即可。
