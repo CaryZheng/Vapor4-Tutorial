@@ -104,3 +104,7 @@ LoggingSystem.bootstrap { label in
     StreamLogHandler.standardOutput(label: label)
 }
 ```
+
+## 源码
+
+可参考源码：[ExampleLogger](https://github.com/CaryZheng/Vapor4-Tutorial/tree/master/code/ExampleLogger)
