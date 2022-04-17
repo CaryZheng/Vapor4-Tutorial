@@ -170,13 +170,19 @@ public func configure(_ app: Application) throws {
 
 ![public_resource_sample](img/public_resource_sample.png)
 
-注意，如果你是通过 `Xcode` 打开并运行该 `Vapor` 项目的话，此时你会发现报如下错误：
+注意，如果你不是通过命令行，而是通过 `Xcode` 打开并运行该 `Vapor` 项目的话，此时你会发现报如下错误：
 
 ```	
 {"error":true,"reason":"Not Found"}
 ```
 
-这是因为 `Xcode` 默认的 `Working Directory` 是 `DerivedData` 目录，而非当前项目所在的目录。此时，可通过
+这是因为 `Xcode` 默认的 `Working Directory` 是 `DerivedData` 目录，而非当前项目所在目录。此时，可通过编辑 `Xcode` 中的 `Scheme` 来进行设置。
+
+![xcode_scheme](img/hello_world/xcode_scheme.png)
+
+找到 `Run` -> `Options` -> `Working Directory`，勾选 `Use custom working directory` 选项并将当前项目的根目录设置为 `Working Directory` 即可。
+
+![work_directory](img/hello_world/work_directory.png)
 
 ### Sources
 
@@ -207,33 +213,36 @@ public func configure(_ app: Application) throws {
 示例如下
 
 ``` swift
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
-    name: "app",
+    name: "ExampleHello",
     platforms: [
-       .macOS(.v10_15)
-    ],
-    products: [
-        .executable(name: "Run", targets: ["Run"]),
-        .library(name: "App", targets: ["App"]),
+       .macOS(.v12)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-rc.1"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-rc.1"),
-        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
     ],
     targets: [
-        .target(name: "App", dependencies: [
-            .product(name: "Fluent", package: "fluent"),
-            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-            .product(name: "Vapor", package: "vapor"),
-        ]),
-        .target(name: "Run", dependencies: [
-            .target(name: "App"),
-        ]),
+        .target(
+            name: "App",
+            dependencies: [
+                .product(name: "Fluent", package: "fluent"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+                .product(name: "Vapor", package: "vapor")
+            ],
+            swiftSettings: [
+                // Enable better optimizations when building in Release configuration. Despite the use of
+                // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
+                // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
+                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
+            ]
+        ),
+        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
@@ -261,7 +270,7 @@ try app.run()
 
 ```
 
-`import App` 和 `import Vapor` 是用来导入 `App` 和 `Vapor` library 的，通过执行 `try app.run()` 运行服务。
+`import App` 和 `import Vapor` 是用来导入 `App` 和 `Vapor` module 的，通过执行 `try app.run()` 运行服务。
 
 其中，`Environment.detect()` 方法是用来检测当前运行环境，源码如下
 
@@ -277,22 +286,28 @@ public static func detect(arguments: [String] = CommandLine.arguments) throws ->
 `configure()` 方法定义在 `configure.swift` 中，源码如下
 
 ``` swift
-// Called before your application initializes.
+// Configures your application
 public func configure(_ app: Application) throws {
-    // Serves files from `Public/` directory
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    // Serve files from /Public folder
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     // Configure SQLite database
     app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
 
     // Configure migrations
     app.migrations.add(CreateTodo())
-    
+
+    // Register routes
     try routes(app)
 }
 ```
 
-从源码中可见，`configure()` 方法内部注册了 `middleware`（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。（注：这里就不展开讨论这些 Vapor 组件了，比如 `Middleware` 等，后续章节将进行详细介绍。）
+从源码中可见，`configure()` 方法内部注册了 `middleware`（比如：`FileMiddleware`）、数据库相关的配置，以及 API 路由的配置。
+
+!!! note
+	
+	这里就不展开讨论这些 Vapor 组件了，比如 `Middleware` 等，后续章节将进行详细介绍。
+	
 
 接下来，我们看下 `routes()` 方法的实现，它是定义在 `routes.swift` 文件中，源码如下
 
@@ -301,15 +316,12 @@ func routes(_ app: Application) throws {
     app.get { req in
         return "It works!"
     }
-    
-    app.get("hello") { req in
+
+    app.get("hello") { req -> String in
         return "Hello, world!"
     }
 
-    let todoController = TodoController()
-    app.get("todos", use: todoController.index)
-    app.post("todos", use: todoController.create)
-    app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+    try app.register(collection: TodoController())
 }
 ```
 
@@ -326,41 +338,46 @@ app.get { req in
 同理，第二段代码
 
 ``` swift
-app.get("hello") { req in
+app.get("hello") { req -> String in
     return "Hello, world!"
 }
 ```
 
 监听了路径为 `hello` 的 `GET` 请求，当通过 `GET` 方式请求对应路径（比如：`http://127.0.0.1:8080/hello`）时，将返回一串文本 `Hello, world!` 。
 
-再看下第三段代码
+再看下第三段代码（位于 `TodoController.swift` 文件）
 
 ``` swift
-let todoController = TodoController()
-
-// 请求路径：todos，请求方法: GET，响应方法：index。
-app.get("todos", use: todoController.index)
-
-// 请求路径：todos，请求方法: POST，响应方法：create。
-app.post("todos", use: todoController.create)
-
-// 请求路径：todos，请求方法: DELETE，响应方法：delete。
-app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+func boot(routes: RoutesBuilder) throws {
+    let todos = routes.grouped("todos")
+    
+    // 请求路径：todos，请求方法: GET，响应方法：index。
+    todos.get(use: index)
+    
+    // 请求路径：todos，请求方法: POST，响应方法：create。
+    todos.post(use: create)
+    
+    // 请求路径：todos，请求方法: DELETE，响应方法：delete。
+    todos.group(":todoID") { todo in
+        todo.delete(use: delete)
+    }
+}
 ```
 
 路径为 `todos` 的请求（`GET`、`POST`、`DELETE`）都将被映射到 `TodoController` 中，在该 `Controller` 中可以处理相关的业务逻辑。
 
 ``` swift
 struct TodoController {
-    func index(req: Request) throws -> EventLoopFuture<[Todo]> {
+
+	func index(req: Request) async throws -> [Todo] {
         ......
     }
 
-    func create(req: Request) throws -> EventLoopFuture<Todo> {
+    func create(req: Request) async throws -> Todo {
         ......
     }
 
-    func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
+    func delete(req: Request) async throws -> HTTPStatus {
         ......
     }
 }
@@ -386,7 +403,7 @@ public func run() throws {
 }
 ```
 
-至此，我们对 Vapor 项目启动的执行过程有了大致的了解，后面将具体介绍 Vapor 的各个模块。
+至此，我们对 `Vapor` 项目启动的执行过程有了大致的了解，后面将具体介绍 `Vapor` 的各个模块。
 
 ## 示例代码
 
