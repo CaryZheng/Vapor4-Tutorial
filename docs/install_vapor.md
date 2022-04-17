@@ -12,52 +12,49 @@
 swift --version
 ```
 
-将显示对应的 Swift 版本信息。
+将显示对应的 `Swift` 版本信息。
 
 ```shell
-Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
-Target: x86_64-apple-darwin19.4.0
+swift-driver version: 1.45.2 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+Target: arm64-apple-macosx12.0
 ```
+
+!!! note
+
+    作者使用的是 `Swift 5.6` 版本，此处会展示你实际安装的 `Swift` 版本号。
 
 ## 安装 Toolbox
 
-执行以下命令。
+执行以下命令
 
 ```shell
-brew install vapor/tap/vapor
+brew install vapor
 ```
+
+!!! note
+
+	`brew` 安装方法可参考: [https://brew.sh](https://brew.sh/)
 
 安装成功后，执行以下命令，将显示可用的命令列表。
 
 ```shell
-$ vapor -help
-Usage: vapor command
+$ vapor --help
+Usage: vapor <command>
 
-Join our team chat if you have questions, need help,
-or want to contribute: http://vapor.team
+Vapor Toolbox (Server-side Swift web framework)
 
 Commands:
-       new Creates a new Vapor application from a template.
-           Use --template=repo/template for github templates
-           Use --template=full-url-here.git for non github templates
-           Use --web to create a new web app
-           Use --auth to create a new authenticated API app
-           Use --api (default) to create a new API
-     build Compiles the application.
-       run Runs the compiled application.
-     fetch Fetches the application's dependencies.
-    update Updates your dependencies.
-     clean Cleans temporary files--usually fixes
-           a plethora of bizarre build errors.
-      test Runs the application's tests.
-     xcode Generates an Xcode project for development.
-           Additionally links commonly used libraries.
-   version Displays Vapor CLI version
-     cloud Commands for interacting with Vapor Cloud.
-    heroku Commands to help deploy to Heroku.
-  provider Commands to help manage providers.
+       build Builds an app in the console.
+       clean Cleans temporary files.
+      heroku Commands for working with Heroku.
+         new Generates a new app.
+         run Runs an app from the console.
+             Equivalent to `swift run Run`.
+             The --enable-test-discovery flag is automatically set if needed.
+  supervisor Commands for working with supervisord.
+       xcode Opens an app in Xcode.
 
-Use `vapor command --help` for more information on a command.
+Use `vapor <command> [--help,-h]` for more information on a command.
 ```
 
 ## 常用命令介绍
@@ -65,7 +62,7 @@ Use `vapor command --help` for more information on a command.
 * 初始化 `Vapor` 新项目
 
 ```shell
-vapor new <项目名> -branch=4
+vapor new <项目名>
 ```
 
 * 编译项目
@@ -80,12 +77,6 @@ vapor build
 vapor run
 ```
 
-* 更新相关依赖库
-
-```shell
-vapor update
-```
-
 * 生成 `Xcode` 项目
 
 ```shell
@@ -98,10 +89,9 @@ vapor xcode
 vapor clean
 ```
 
-> 注意
-> 
-> `clean` 命令会删除项目中的临时文件。如果遇到比较奇怪的编译错误，也可以尝试 `clean` 下。
+!!! note
+	`clean` 命令会删除项目中的临时文件。如果遇到比较奇怪的编译错误，也可以尝试 `clean` 下。
 
 ## Ubuntu
 
-基于 `Ubuntu` 的 `Vapor` 环境，具体步骤可参考：[Vapor 官网](https://docs.vapor.codes/4.0/install/ubuntu/)
+基于 `Ubuntu` 的 `Vapor` 环境，具体步骤可参考：[Vapor 官网](https://docs.vapor.codes/4.0/install/linux/)

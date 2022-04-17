@@ -11,13 +11,13 @@ copyright: 'Copyright &copy; 2022 CaryZheng'
 theme:
   name: 'material'
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    # - media: "(prefers-color-scheme: light)"
+    - scheme: default
       toggle:
         icon: material/toggle-switch-off-outline 
         name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate 
+    # - media: "(prefers-color-scheme: dark)"
+    - scheme: slate 
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
@@ -37,6 +37,8 @@ extra:
 
 
 markdown_extensions:
+  - admonition
+  - pymdownx.details
   - pymdownx.superfences
   - toc:
       permalink: true
