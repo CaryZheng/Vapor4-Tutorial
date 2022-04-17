@@ -122,7 +122,7 @@ Opening project in Xcode.
 
 如图所示
 
-![xcode](img/xcode.png)
+![xcode](img/hello_world/xcode.png)
 
 ## 目录结构
 
@@ -382,6 +382,10 @@ struct TodoController {
     }
 }
 ```
+
+!!! note
+
+	如果想调试上述 `API`，请先执行 `vapor run migrate` 创建对应的数据库以及表。
 
 回到 `main.swift` 文件，当 `app` 实例初始化后，最后将执行 `run()` 方法来启动服务。
 
