@@ -2,16 +2,15 @@ import Fluent
 import FluentSQLiteDriver
 import Vapor
 
-// Called before your application initializes.
+// configures your application
 public func configure(_ app: Application) throws {
-    // Serves files from `Public/` directory
+    // Serve files from /Public folder
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    // Configure SQLite database
     app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
 
-    // Configure migrations
     app.migrations.add(CreateTodo())
-    
+
+    // register routes
     try routes(app)
 }

@@ -1,5 +1,2 @@
-.git
-.build
-DerivedData
-*.xcodeproj
-.swiftpm
+.build/
+.swiftpm/

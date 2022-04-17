@@ -7,44 +7,71 @@
 通过 `vapor` 命令行工具创建项目，项目名称命名为 `ExampleHello`。
 
 ```shell
-vapor new ExampleHello -branch=4
+vapor new ExampleHello
 ```
 
 创建成功后，将输出如下信息。
 
 ```shell
-Cloning Template [Done]
-Updating Package Name [Done]
-Initializing git repository [Done]
-
-		                                     **
-		                                   **~~**
-		                                 **~~~~~~**
-		                               **~~~~~~~~~~**
-		                             **~~~~~~~~~~~~~~**
-		                           **~~~~~~~~~~~~~~~~~~**
-		                         **~~~~~~~~~~~~~~~~~~~~~~**
-		                        **~~~~~~~~~~~~~~~~~~~~~~~~**
-		                       **~~~~~~~~~~~~~~~~~~~~~~~~~~**
-		                      **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
-		                      **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
-		                      **~~~~~~~~~~~~~~~~~~~~~++++~~~**
-		                       **~~~~~~~~~~~~~~~~~~~++++~~~**
-		                        ***~~~~~~~~~~~~~~~++++~~~***
-		                          ****~~~~~~~~~~++++~~****
-		                             *****~~~~~~~~~*****
-		                                *************
-		                       
-		                       _       __    ___   ___   ___
-		                      \ \  /  / /\  | |_) / / \ | |_)
-		                       \_\/  /_/--\ |_|   \_\_/ |_| \
-		                         a web framework for Swift
-
-		                  Project "ExampleHello" has been created.
-		           Type `cd ExampleHello` to enter the project directory.
-		           Use `vapor cloud deploy` to host your project for free!
-		                                   Enjoy!
+Cloning template...
+name: ExampleHello
+Would you like to use Fluent? (--fluent/--no-fluent)
+y/n> y
+fluent: Yes
+db: SQLite
+Would you like to use Leaf? (--leaf/--no-leaf)
+y/n> n
+leaf: No
+Generating project files
++ Package.swift
++ main.swift
++ configure.swift
++ routes.swift
++ Todo.swift
++ CreateTodo.swift
++ .gitkeep
++ TodoController.swift
++ AppTests.swift
++ .gitkeep
++ Dockerfile
++ docker-compose.yml
++ .gitignore
++ .dockerignore
+Creating git repository
+Adding first commit
+                                                                                                  
+                                     **               
+                                   **~~**             
+                                 **~~~~~~**           
+                               **~~~~~~~~~~**         
+                             **~~~~~~~~~~~~~~**       
+                           **~~~~~~~~~~~~~~~~~~**     
+                         **~~~~~~~~~~~~~~~~~~~~~~**   
+                        **~~~~~~~~~~~~~~~~~~~~~~~~**  
+                       **~~~~~~~~~~~~~~~~~~~~~~~~~~** 
+                      **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+                      **~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+                      **~~~~~~~~~~~~~~~~~~~~~++++~~~**
+                       **~~~~~~~~~~~~~~~~~~~++++~~~** 
+                        ***~~~~~~~~~~~~~~~++++~~~***  
+                          ****~~~~~~~~~~++++~~****    
+                             *****~~~~~~~~~*****      
+                                *************         
+                                                      
+                       _       __    ___   ___   ___  
+                      \ \  /  / /\  | |_) / / \ | |_) 
+                       \_\/  /_/--\ |_|   \_\_/ |_| \ 
+                         a web framework for Swift    
+                                                      
+                   Project ExampleHello has been created!
+                                      
+            Use cd 'ExampleHello' to enter the project directory
+          Then use open Package.swift to open the project in Xcode
 ```
+
+!!! note
+	
+	命令行中选择了 `fluent` 以及 `SQLite` 来做示例。当然，也可以在初始化项目后再另行添加。
 
 ## 运行项目
 
@@ -60,10 +87,12 @@ Initializing git repository [Done]
 vapor build
 ```
 
-build 成功后将输出如下信息。
+`build` 成功后将输出如下信息。
 
 ```shell
-Building Project [Done]
+...
+Build complete!
+Project built.
 ```
 
 * 通过如下命令 `run` 项目。
@@ -75,11 +104,10 @@ vapor run
 这时候将输出如下信息。
 
 ```shell
-Running app ...
 [ NOTICE ] Server starting on http://127.0.0.1:8080
 ```
 
-然后访问 `http://127.0.0.1:8080` 地址，如果返回 `It works!`，则意味着你的第一个 vapor 项目已经 `run` 成功了。
+然后访问 `http://127.0.0.1:8080` 地址，如果返回 `It works!`，则意味着你的第一个 `Vapor` 项目已经 `run` 成功了。
 
 ## 生成 Xcode 项目
 
@@ -87,11 +115,7 @@ Running app ...
 
 ```shell
 $ vapor xcode
-Generating Xcode Project [Done]
-Select the `Run` scheme to run.
-Open Xcode project?
-y/n> y
-Opening Xcode project...
+Opening project in Xcode.
 ```
 
 可以选择 `Xcode` 中的 `Run` scheme 进行编译运行。
@@ -129,22 +153,30 @@ Opening Xcode project...
 首先，需修改 `configure.swift` 文件来开启使用 `FileMiddleware` 中间件。
 
 ``` swift
-// Called before your application initializes.
+// configures your application
 public func configure(_ app: Application) throws {
     ......
 
-    // Serves files from `Public/` directory
+    // Serve files from /Public folder
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
     ......
 }
 ```
 
-然后，所有 `Public/` 目录下的资源文件均可直接被访问了。比如 `Public/` 目录下有一张图片（命名为 `sample.png`），在本地服务已启动的情况下（假设所占端口为 `8080`），访问 `http://localhost:8080/sample.png` 地址可直接显示 `Public/` 目录下的 `sample.png` 图片。
+然后，所有 `Public/` 目录下的资源文件均可直接被访问了。比如 `Public/` 目录下有一张图片（命名为 `sample.png`），在本地服务已启动的情况下（假设所占端口为 `8080`），访问 `http://127.0.0.1:8080/sample.png` 地址可直接显示 `Public/` 目录下的 `sample.png` 图片。
 
 效果如下
 
 ![public_resource_sample](img/public_resource_sample.png)
+
+注意，如果你是通过 `Xcode` 打开并运行该 `Vapor` 项目的话，此时你会发现报如下错误：
+
+```	
+{"error":true,"reason":"Not Found"}
+```
+
+这是因为 `Xcode` 默认的 `Working Directory` 是 `DerivedData` 目录，而非当前项目所在的目录。此时，可通过
 
 ### Sources
 

@@ -83,6 +83,10 @@ vapor run
 vapor xcode
 ```
 
+!!! note
+
+	也可以直接双击 `Package.swift` 文件，`macOS` 会直接通过 `Xcode` 打开该项目。
+
 * 清理 `Vapor` 项目
 
 ```shell
