@@ -2,11 +2,16 @@
 
 目前 `Swift` 官方支持 `macOS` 和 `Ubuntu` 操作系统，本教程讲解的是如何在 `macOS` 搭建 `Vapor` 开发环境。
 
+## 开发版本
+
+* `Swift` 版本：`5.6`
+* `Vapor` 版本：`4.0+`
+
 ## 安装 Xcode
 
-因为 `Vapor 4` 需要 `Swift 5.2（或以上）` 版本，所以需要先安装 `Xcode 11.4（或以上）`。
+![appstore_xcode](img/install_vapor/appstore_xcode.png)
 
-通过以下命令来确认当前 Swift 版本。
+安装好 `Xcode` 后，通过以下命令来确认当前 `Swift` 版本。
 
 ```shell
 swift --version
@@ -21,7 +26,7 @@ Target: arm64-apple-macosx12.0
 
 !!! note
 
-    作者使用的是 `Swift 5.6` 版本，此处会展示你实际安装的 `Swift` 版本号。
+    本教程使用的是 `Swift 5.6` 版本，此处会展示你实际安装的 `Swift` 版本号。
 
 ## 安装 Toolbox
 
