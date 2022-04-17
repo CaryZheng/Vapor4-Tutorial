@@ -6,31 +6,38 @@ site_url: 'https://vapor4.swiftmic.com'
 repo_name: 'CaryZheng/Vapor4-Tutorial'
 repo_url: 'https://github.com/CaryZheng/Vapor4-Tutorial'
 
-copyright: 'Copyright &copy; 2019 CaryZheng'
+copyright: 'Copyright &copy; 2022 CaryZheng'
 
 theme:
   name: 'material'
-  language: 'zh'
   palette:
-    primary: 'indigo'
-    accent: 'indigo'
-  favicon: 'favicon.ico'
-  logo: 'logo.png'
-
-google_analytics:
-  - 'UA-113865151-2'
-  - 'auto'
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  language: zh
+  favicon: favicon.ico
+  logo: logo.png
 
 extra:
+  analytics:
+    provider: google
+    property: UA-113865151-2
   social:
-    - type: globe
+    - icon: fontawesome/brands/medium
       link: https://www.carymic.com
-    - type: github-alt
+    - icon: fontawesome/brands/github
       link: https://github.com/CaryZheng
 
+
 markdown_extensions:
-  - codehilite:
-      guess_lang: false
+  - pymdownx.superfences
   - toc:
       permalink: true
 
