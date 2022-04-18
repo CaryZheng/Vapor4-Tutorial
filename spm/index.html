@@ -121,7 +121,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
@@ -130,7 +130,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
@@ -344,13 +344,6 @@
           <li class="md-nav__item">
   <a href="#platforms" class="md-nav__link">
     Platforms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#products" class="md-nav__link">
-    Products
   </a>
   
 </li>
@@ -671,13 +664,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#products" class="md-nav__link">
-    Products
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dependencies" class="md-nav__link">
     Dependencies
   </a>
@@ -741,34 +727,37 @@
 <p>想了解更多关于 SPM ，可访问 <a href="https://swift.org/package-manager/">Swift.org</a></p>
 </blockquote>
 <h2 id="package-manifest">Package Manifest<a class="headerlink" href="#package-manifest" title="Permanent link">&para;</a></h2>
-<p>首先看下 package 配置文件。它位于项目根目录中，并被命名为 <code>Package.swift</code> 。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.2</span>
+<p>首先看下 <code>package</code> 配置文件。它位于项目根目录中，并被命名为 <code>Package.swift</code> 。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.6</span>
 <span class="kd">import</span> <span class="nc">PackageDescription</span>
 
 <span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s">&quot;app&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s">&quot;ExampleHello&quot;</span><span class="p">,</span>
     <span class="n">platforms</span><span class="p">:</span> <span class="p">[</span>
-       <span class="p">.</span><span class="n">macOS</span><span class="p">(.</span><span class="n">v10_15</span><span class="p">)</span>
-    <span class="p">],</span>
-    <span class="n">products</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">.</span><span class="n">executable</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Run&quot;</span><span class="p">]),</span>
-        <span class="p">.</span><span class="n">library</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;App&quot;</span><span class="p">]),</span>
+       <span class="p">.</span><span class="n">macOS</span><span class="p">(.</span><span class="n">v12</span><span class="p">)</span>
     <span class="p">],</span>
     <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
         <span class="c1">// 💧 A server-side Swift web framework.</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-rc.1&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/vapor.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0&quot;</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0&quot;</span><span class="p">),</span>
     <span class="p">],</span>
     <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
-        <span class="p">]),</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
-        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">swiftSettings</span><span class="p">:</span> <span class="p">[</span>
+                <span class="c1">// Enable better optimizations when building in Release configuration. Despite the use of</span>
+                <span class="c1">// the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release</span>
+                <span class="c1">// builds. See &lt;https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production&gt; for details.</span>
+                <span class="p">.</span><span class="n">unsafeFlags</span><span class="p">([</span><span class="s">&quot;-cross-module-optimization&quot;</span><span class="p">],</span> <span class="p">.</span><span class="n">when</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="p">.</span><span class="n">release</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+        <span class="p">.</span><span class="n">executableTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">)]),</span>
         <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
             <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
@@ -777,38 +766,43 @@
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="tools-version">Tools Version<a class="headerlink" href="#tools-version" title="Permanent link">&para;</a></h3>
-<p>第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.2</span>
+<p>第一行表示需要使用的 <code>swift tools</code> 版本号。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.6</span>
 </code></pre></div>
 <h3 id="package-name">Package Name<a class="headerlink" href="#package-name" title="Permanent link">&para;</a></h3>
 <p><code>name</code> 字段代表当前 <code>package</code> 的名字。</p>
 <h3 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h3>
-<p><code>platforms</code> 字段代表当前支持的最低系统版本号。比如， <code>.macOS(.v10_15)</code> 表示当前支持的系统版本号是 v10.15 及以上。</p>
-<h3 id="products">Products<a class="headerlink" href="#products" title="Permanent link">&para;</a></h3>
-<p><code>products</code> 字段代表 <code>package</code> 构建的时候要生成的 <code>targets</code>。示例中，有两种 target，一个是 library，另一个是 executable 。</p>
+<p><code>platforms</code> 字段代表当前支持的最低系统版本号。比如， <code>.macOS(.v12)</code> 表示当前支持的系统版本号是 <code>v12</code> 及以上。</p>
 <h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
-<p><code>dependencies</code> 字段代表需要依赖的 SPM package。所有 Vapor 应用都依赖于 Vapor package ，但是你也可以添加其它想要的 dependency 。</p>
-<p>上面这个示例可见，<a href="https://github.com/vapor/vapor">Vapor</a> 4.0 或以上版本是这个 package 的 dependency 。当在 package 中添加了 dependency 后，接下来你必须设置 targets 。</p>
+<p><code>dependencies</code> 字段代表需要依赖的 <code>SPM</code> <code>package</code>。所有 <code>Vapor</code> 应用都依赖于 <code>Vapor</code> <code>package</code> ，当然你也可以添加其它想要的 <code>dependency</code> 。</p>
+<p>上面这个示例可见，<a href="https://github.com/vapor/vapor">Vapor</a> <code>4.0+</code> 版本是这个 <code>package</code> 的 <code>dependency</code> 。</p>
 <blockquote>
 <p>提示</p>
 <p>只要修改了 package manifest，都需要调用 <code>vapor update</code> 来让变更内容生效。</p>
 </blockquote>
 <h3 id="targets">Targets<a class="headerlink" href="#targets" title="Permanent link">&para;</a></h3>
-<p>Targets 包含了所有的 modules、executables 以及 tests 。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.2</span>
+<p><code>Targets</code> 包含了 <code>target</code>、<code>executableTarget</code> 以及 <code>testTarget</code> 。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// swift-tools-version:5.6</span>
 <span class="kd">import</span> <span class="nc">PackageDescription</span>
 
 <span class="kd">let</span> <span class="nv">package</span> <span class="p">=</span> <span class="n">Package</span><span class="p">(</span>
     <span class="p">......</span>
     <span class="n">targets</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
-            <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
-        <span class="p">]),</span>
-        <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
-        <span class="p">]),</span>
+        <span class="p">.</span><span class="n">target</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">),</span>
+                <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">swiftSettings</span><span class="p">:</span> <span class="p">[</span>
+                <span class="c1">// Enable better optimizations when building in Release configuration. Despite the use of</span>
+                <span class="c1">// the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release</span>
+                <span class="c1">// builds. See &lt;https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production&gt; for details.</span>
+                <span class="p">.</span><span class="n">unsafeFlags</span><span class="p">([</span><span class="s">&quot;-cross-module-optimization&quot;</span><span class="p">],</span> <span class="p">.</span><span class="n">when</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="p">.</span><span class="n">release</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+        <span class="p">.</span><span class="n">executableTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Run&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">)]),</span>
         <span class="p">.</span><span class="n">testTarget</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;AppTests&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">),</span>
             <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;XCTVapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
@@ -816,10 +810,10 @@
     <span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>虽然可以添加任意多的 targets 来组织代码，但大部分 Vapor 应用有 3 个 target 就足够了。每个 target 声明了它依赖的 module 。为了在代码中可以 <code>import</code> 这些 modules ，你必须添加 module 名字。一个 target 可以依赖于工程中其它的 target 或者暴露出来的 modules 。</p>
+<p>示例中，<code>App</code> 这个 <code>target</code> 里包含了 <code>Fluent</code>、<code>FluentSQLiteDriver</code> 以及 <code>Vapor</code> 这些依赖项。</p>
 <blockquote>
 <p>提示</p>
-<p>Executable targets (包含 <code>main.swift</code> 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 <code>App</code> 和 <code>Run</code> 两种 target。任何包含在 <code>App</code> 中的代码都可以在 <code>AppTests</code> 中被测试验证。</p>
+<p><code>executableTarget</code> (包含 <code>main.swift</code> 文件的 target) 不能被其它 <code>module</code> 导入。这就是为什么 <code>Vapor</code> 会有 <code>App</code> 和 <code>Run</code> 两种 target。任何包含在 <code>App</code> 中的代码都可以在 <code>AppTests</code> 中被测试验证。</p>
 </blockquote>
 <h2 id="_1">目录结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>以下是典型的 SPM package 目录结构。</p>
@@ -835,37 +829,39 @@
 </code></pre></div>
 <p>每个 <code>.target</code> 对应 <code>Sources</code> 中的一个文件夹。每个 <code>.testTarget</code> 对应 <code>Tests</code> 中的一个文件夹。</p>
 <h2 id="packageresolved">Package.resolved<a class="headerlink" href="#packageresolved" title="Permanent link">&para;</a></h2>
-<p>第一次构建成功后，<code>SPM</code> 将会自动创建一个 <code>Package.resolved</code> 文件。<code>Package.resolved</code> 保存了当前项目所有用到的 dependency 版本。</p>
+<p>第一次构建成功后，<code>SPM</code> 将会自动创建一个 <code>Package.resolved</code> 文件。<code>Package.resolved</code> 保存了当前项目所有用到的 <code>dependency</code> 版本，这样以后每次 <code>Build</code> 都将使用相同的版本号。</p>
 <p><code>Package.resolved</code> 示例如下：</p>
 <div class="highlight"><pre><span></span><code><span class="o">{</span>
-  <span class="s2">&quot;object&quot;</span>: <span class="o">{</span>
-    <span class="s2">&quot;pins&quot;</span>: <span class="o">[</span>
-      <span class="o">{</span>
-        <span class="s2">&quot;package&quot;</span>: <span class="s2">&quot;async-http-client&quot;</span>,
-        <span class="s2">&quot;repositoryURL&quot;</span>: <span class="s2">&quot;https://github.com/swift-server/async-http-client.git&quot;</span>,
-        <span class="s2">&quot;state&quot;</span>: <span class="o">{</span>
-          <span class="s2">&quot;branch&quot;</span>: null,
-          <span class="s2">&quot;revision&quot;</span>: <span class="s2">&quot;51dc885a30ca704b02fa803099b0a9b5b38067b6&quot;</span>,
-          <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0&quot;</span>
-        <span class="o">}</span>
-      <span class="o">}</span>,
-      <span class="o">{</span>
-        <span class="s2">&quot;package&quot;</span>: <span class="s2">&quot;async-kit&quot;</span>,
-        <span class="s2">&quot;repositoryURL&quot;</span>: <span class="s2">&quot;https://github.com/vapor/async-kit.git&quot;</span>,
-        <span class="s2">&quot;state&quot;</span>: <span class="o">{</span>
-          <span class="s2">&quot;branch&quot;</span>: null,
-          <span class="s2">&quot;revision&quot;</span>: <span class="s2">&quot;d9fd2be441af6d1428b62ab694848396e7072a14&quot;</span>,
-          <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0-beta.1&quot;</span>
-        <span class="o">}</span>
-      <span class="o">}</span>,
-      ......
-    <span class="o">]</span>
-  <span class="o">}</span>,
-  <span class="s2">&quot;version&quot;</span>: <span class="m">1</span>
+  <span class="s2">&quot;pins&quot;</span> : <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&quot;identity&quot;</span> : <span class="s2">&quot;async-http-client&quot;</span>,
+      <span class="s2">&quot;kind&quot;</span> : <span class="s2">&quot;remoteSourceControl&quot;</span>,
+      <span class="s2">&quot;location&quot;</span> : <span class="s2">&quot;https://github.com/swift-server/async-http-client.git&quot;</span>,
+      <span class="s2">&quot;state&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;revision&quot;</span> : <span class="s2">&quot;7a4dfe026f6ee0f8ad741b58df74c60af296365d&quot;</span>,
+        <span class="s2">&quot;version&quot;</span> : <span class="s2">&quot;1.9.0&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">&quot;identity&quot;</span> : <span class="s2">&quot;async-kit&quot;</span>,
+      <span class="s2">&quot;kind&quot;</span> : <span class="s2">&quot;remoteSourceControl&quot;</span>,
+      <span class="s2">&quot;location&quot;</span> : <span class="s2">&quot;https://github.com/vapor/async-kit.git&quot;</span>,
+      <span class="s2">&quot;state&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;revision&quot;</span> : <span class="s2">&quot;e2f741640364c1d271405da637029ea6a33f754e&quot;</span>,
+        <span class="s2">&quot;version&quot;</span> : <span class="s2">&quot;1.11.1&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>,
+    ......
+  <span class="o">]</span>,
+  <span class="s2">&quot;version&quot;</span> : <span class="m">1</span>
 <span class="o">}</span>
 </code></pre></div>
+<blockquote>
+<p>提示</p>
+<p>如果想更新 <code>dependency</code> 版本，可执行 <code>swift package update</code> 。</p>
+</blockquote>
 <h2 id="_2">遇到问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>如果你遇到 SPM 相关的问题，可以尝试 clean 下工程项目试试。</p>
+<p>如果你遇到 <code>SPM</code> 相关的问题，可以尝试 <code>clean</code> 下工程项目试试。</p>
 <div class="highlight"><pre><span></span><code>vapor clean
 </code></pre></div>
 

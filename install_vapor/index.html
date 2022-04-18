@@ -121,7 +121,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
@@ -130,7 +130,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
@@ -290,6 +290,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    开发版本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#xcode" class="md-nav__link">
     安装 Xcode
   </a>
@@ -297,14 +304,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#toolbox" class="md-nav__link">
-    安装 Toolbox
+  <a href="#vapor-toolbox" class="md-nav__link">
+    安装 Vapor Toolbox
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     常用命令介绍
   </a>
   
@@ -594,6 +601,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    开发版本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#xcode" class="md-nav__link">
     安装 Xcode
   </a>
@@ -601,14 +615,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#toolbox" class="md-nav__link">
-    安装 Toolbox
+  <a href="#vapor-toolbox" class="md-nav__link">
+    安装 Vapor Toolbox
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     常用命令介绍
   </a>
   
@@ -640,54 +654,56 @@
 
 <h1 id="_1">开发环境<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>目前 <code>Swift</code> 官方支持 <code>macOS</code> 和 <code>Ubuntu</code> 操作系统，本教程讲解的是如何在 <code>macOS</code> 搭建 <code>Vapor</code> 开发环境。</p>
+<h2 id="_2">开发版本<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>Swift</code> 版本：<code>5.6</code></li>
+<li><code>Vapor</code> 版本：<code>4.0+</code></li>
+</ul>
 <h2 id="xcode">安装 Xcode<a class="headerlink" href="#xcode" title="Permanent link">&para;</a></h2>
-<p>因为 <code>Vapor 4</code> 需要 <code>Swift 5.2（或以上）</code> 版本，所以需要先安装 <code>Xcode 11.4（或以上）</code>。</p>
-<p>通过以下命令来确认当前 Swift 版本。</p>
+<p><img alt="appstore_xcode" src="../img/install_vapor/appstore_xcode.png" /></p>
+<p>安装好 <code>Xcode</code> 后，通过以下命令来确认当前 <code>Swift</code> 版本。</p>
 <div class="highlight"><pre><span></span><code>swift --version
 </code></pre></div>
-<p>将显示对应的 Swift 版本信息。</p>
-<div class="highlight"><pre><span></span><code>Apple Swift version <span class="m">5</span>.2 <span class="o">(</span>swiftlang-1103.0.32.1 clang-1103.0.32.29<span class="o">)</span>
-Target: x86_64-apple-darwin19.4.0
+<p>将显示对应的 <code>Swift</code> 版本信息。</p>
+<div class="highlight"><pre><span></span><code>swift-driver version: <span class="m">1</span>.45.2 Apple Swift version <span class="m">5</span>.6 <span class="o">(</span>swiftlang-5.6.0.323.62 clang-1316.0.20.8<span class="o">)</span>
+Target: arm64-apple-macosx12.0
 </code></pre></div>
-<h2 id="toolbox">安装 Toolbox<a class="headerlink" href="#toolbox" title="Permanent link">&para;</a></h2>
-<p>执行以下命令。</p>
-<div class="highlight"><pre><span></span><code>brew install vapor/tap/vapor
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本教程使用的是 <code>Swift 5.6</code> 版本，此处会展示你实际安装的 <code>Swift</code> 版本号。</p>
+</div>
+<h2 id="vapor-toolbox">安装 Vapor Toolbox<a class="headerlink" href="#vapor-toolbox" title="Permanent link">&para;</a></h2>
+<p>执行以下命令</p>
+<div class="highlight"><pre><span></span><code>brew install vapor
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>brew</code> 安装方法可参考: <a href="https://brew.sh/">https://brew.sh</a></p>
+</div>
 <p>安装成功后，执行以下命令，将显示可用的命令列表。</p>
-<div class="highlight"><pre><span></span><code>$ vapor -help
-Usage: vapor <span class="nb">command</span>
+<div class="highlight"><pre><span></span><code>$ vapor --help
+Usage: vapor &lt;command&gt;
 
-Join our team chat <span class="k">if</span> you have questions, need help,
-or want to contribute: http://vapor.team
+Vapor Toolbox <span class="o">(</span>Server-side Swift web framework<span class="o">)</span>
 
 Commands:
-       new Creates a new Vapor application from a template.
-           Use --template<span class="o">=</span>repo/template <span class="k">for</span> github templates
-           Use --template<span class="o">=</span>full-url-here.git <span class="k">for</span> non github templates
-           Use --web to create a new web app
-           Use --auth to create a new authenticated API app
-           Use --api <span class="o">(</span>default<span class="o">)</span> to create a new API
-     build Compiles the application.
-       run Runs the compiled application.
-     fetch Fetches the application<span class="s1">&#39;s dependencies.</span>
-<span class="s1">    update Updates your dependencies.</span>
-<span class="s1">     clean Cleans temporary files--usually fixes</span>
-<span class="s1">           a plethora of bizarre build errors.</span>
-<span class="s1">      test Runs the application&#39;</span>s tests.
-     xcode Generates an Xcode project <span class="k">for</span> development.
-           Additionally links commonly used libraries.
-   version Displays Vapor CLI version
-     cloud Commands <span class="k">for</span> interacting with Vapor Cloud.
-    heroku Commands to <span class="nb">help</span> deploy to Heroku.
-  provider Commands to <span class="nb">help</span> manage providers.
+       build Builds an app <span class="k">in</span> the console.
+       clean Cleans temporary files.
+      heroku Commands <span class="k">for</span> working with Heroku.
+         new Generates a new app.
+         run Runs an app from the console.
+             Equivalent to <span class="sb">`</span>swift run Run<span class="sb">`</span>.
+             The --enable-test-discovery flag is automatically <span class="nb">set</span> <span class="k">if</span> needed.
+  supervisor Commands <span class="k">for</span> working with supervisord.
+       xcode Opens an app <span class="k">in</span> Xcode.
 
-Use <span class="sb">`</span>vapor <span class="nb">command</span> --help<span class="sb">`</span> <span class="k">for</span> more information on a command.
+Use <span class="sb">`</span>vapor &lt;command&gt; <span class="o">[</span>--help,-h<span class="o">]</span><span class="sb">`</span> <span class="k">for</span> more information on a command.
 </code></pre></div>
-<h2 id="_2">常用命令介绍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">常用命令介绍<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li>初始化 <code>Vapor</code> 新项目</li>
 </ul>
-<div class="highlight"><pre><span></span><code>vapor new &lt;项目名&gt; -branch<span class="o">=</span><span class="m">4</span>
+<div class="highlight"><pre><span></span><code>vapor new &lt;项目名&gt;
 </code></pre></div>
 <ul>
 <li>编译项目</li>
@@ -700,26 +716,25 @@ Use <span class="sb">`</span>vapor <span class="nb">command</span> --help<span c
 <div class="highlight"><pre><span></span><code>vapor run
 </code></pre></div>
 <ul>
-<li>更新相关依赖库</li>
-</ul>
-<div class="highlight"><pre><span></span><code>vapor update
-</code></pre></div>
-<ul>
 <li>生成 <code>Xcode</code> 项目</li>
 </ul>
 <div class="highlight"><pre><span></span><code>vapor xcode
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>也可以直接双击 <code>Package.swift</code> 文件，<code>macOS</code> 会直接通过 <code>Xcode</code> 打开该项目。</p>
+</div>
 <ul>
 <li>清理 <code>Vapor</code> 项目</li>
 </ul>
 <div class="highlight"><pre><span></span><code>vapor clean
 </code></pre></div>
-<blockquote>
-<p>注意</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><code>clean</code> 命令会删除项目中的临时文件。如果遇到比较奇怪的编译错误，也可以尝试 <code>clean</code> 下。</p>
-</blockquote>
+</div>
 <h2 id="ubuntu">Ubuntu<a class="headerlink" href="#ubuntu" title="Permanent link">&para;</a></h2>
-<p>基于 <code>Ubuntu</code> 的 <code>Vapor</code> 环境，具体步骤可参考：<a href="https://docs.vapor.codes/4.0/install/ubuntu/">Vapor 官网</a></p>
+<p>基于 <code>Ubuntu</code> 的 <code>Vapor</code> 环境，具体步骤可参考：<a href="https://docs.vapor.codes/4.0/install/linux/">Vapor 官网</a></p>
 
               
             </article>
