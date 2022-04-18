@@ -28,7 +28,7 @@ Target: arm64-apple-macosx12.0
 
     本教程使用的是 `Swift 5.6` 版本，此处会展示你实际安装的 `Swift` 版本号。
 
-## 安装 Toolbox
+## 安装 Vapor Toolbox
 
 执行以下命令
 

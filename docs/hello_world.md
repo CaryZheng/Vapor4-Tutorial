@@ -168,7 +168,7 @@ public func configure(_ app: Application) throws {
 
 效果如下
 
-![public_resource_sample](img/public_resource_sample.png)
+![public_resource_sample](img/hello_world/public_resource_sample.png)
 
 注意，如果你不是通过命令行，而是通过 `Xcode` 打开并运行该 `Vapor` 项目的话，此时你会发现报如下错误：
 

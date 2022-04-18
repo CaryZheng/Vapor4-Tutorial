@@ -8,36 +8,39 @@
 
 ## Package Manifest
 
-首先看下 package 配置文件。它位于项目根目录中，并被命名为 ```Package.swift``` 。
+首先看下 `package` 配置文件。它位于项目根目录中，并被命名为 ```Package.swift``` 。
 
 ```swift
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
-    name: "app",
+    name: "ExampleHello",
     platforms: [
-       .macOS(.v10_15)
-    ],
-    products: [
-        .executable(name: "Run", targets: ["Run"]),
-        .library(name: "App", targets: ["App"]),
+       .macOS(.v12)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0-rc.1"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0-rc.1"),
-        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0-rc.1"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
     ],
     targets: [
-        .target(name: "App", dependencies: [
-            .product(name: "Fluent", package: "fluent"),
-            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-            .product(name: "Vapor", package: "vapor"),
-        ]),
-        .target(name: "Run", dependencies: [
-            .target(name: "App"),
-        ]),
+        .target(
+            name: "App",
+            dependencies: [
+                .product(name: "Fluent", package: "fluent"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+                .product(name: "Vapor", package: "vapor")
+            ],
+            swiftSettings: [
+                // Enable better optimizations when building in Release configuration. Despite the use of
+                // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
+                // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
+                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
+            ]
+        ),
+        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
@@ -48,10 +51,10 @@ let package = Package(
 
 ### Tools Version
 
-第一行表示需要使用的 Swift tools 版本号，它指明了 Swift 的最低可用版本。
+第一行表示需要使用的 `swift tools` 版本号。
 
 ```swift
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 ```
 
 ### Package Name
@@ -60,17 +63,13 @@ let package = Package(
 
 ### Platforms
 
-`platforms` 字段代表当前支持的最低系统版本号。比如， `.macOS(.v10_15)` 表示当前支持的系统版本号是 v10.15 及以上。
-
-### Products
-
-`products` 字段代表 `package` 构建的时候要生成的 `targets`。示例中，有两种 target，一个是 library，另一个是 executable 。
+`platforms` 字段代表当前支持的最低系统版本号。比如， `.macOS(.v12)` 表示当前支持的系统版本号是 `v12` 及以上。
 
 ### Dependencies
 
-`dependencies` 字段代表需要依赖的 SPM package。所有 Vapor 应用都依赖于 Vapor package ，但是你也可以添加其它想要的 dependency 。
+`dependencies` 字段代表需要依赖的 `SPM` `package`。所有 `Vapor` 应用都依赖于 `Vapor` `package` ，当然你也可以添加其它想要的 `dependency` 。
 
-上面这个示例可见，[Vapor](https://github.com/vapor/vapor) 4.0 或以上版本是这个 package 的 dependency 。当在 package 中添加了 dependency 后，接下来你必须设置 targets 。
+上面这个示例可见，[Vapor](https://github.com/vapor/vapor) `4.0+` 版本是这个 `package` 的 `dependency` 。
 
 > 提示
 > 
@@ -78,23 +77,30 @@ let package = Package(
 
 ### Targets
 
-Targets 包含了所有的 modules、executables 以及 tests 。
+`Targets` 包含了 `target`、`executableTarget` 以及 `testTarget` 。
 
 ```swift
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
     ......
     targets: [
-        .target(name: "App", dependencies: [
-            .product(name: "Fluent", package: "fluent"),
-            .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-            .product(name: "Vapor", package: "vapor"),
-        ]),
-        .target(name: "Run", dependencies: [
-            .target(name: "App"),
-        ]),
+        .target(
+            name: "App",
+            dependencies: [
+                .product(name: "Fluent", package: "fluent"),
+                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+                .product(name: "Vapor", package: "vapor")
+            ],
+            swiftSettings: [
+                // Enable better optimizations when building in Release configuration. Despite the use of
+                // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
+                // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
+                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
+            ]
+        ),
+        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
@@ -103,11 +109,11 @@ let package = Package(
 )
 ```
 
-虽然可以添加任意多的 targets 来组织代码，但大部分 Vapor 应用有 3 个 target 就足够了。每个 target 声明了它依赖的 module 。为了在代码中可以 `import` 这些 modules ，你必须添加 module 名字。一个 target 可以依赖于工程中其它的 target 或者暴露出来的 modules 。
+示例中，`App` 这个 `target` 里包含了 `Fluent`、`FluentSQLiteDriver` 以及 `Vapor` 这些依赖项。
 
 > 提示
 > 
-> Executable targets (包含 `main.swift` 文件的 target) 不能被其它 modules 导入。这就是为什么 Vapor 会有 `App` 和 `Run` 两种 target。任何包含在 `App` 中的代码都可以在 `AppTests` 中被测试验证。
+> `executableTarget` (包含 `main.swift` 文件的 target) 不能被其它 `module` 导入。这就是为什么 `Vapor` 会有 `App` 和 `Run` 两种 target。任何包含在 `App` 中的代码都可以在 `AppTests` 中被测试验证。
 
 ## 目录结构
 
@@ -129,42 +135,44 @@ let package = Package(
 
 ## Package.resolved
 
-第一次构建成功后，`SPM` 将会自动创建一个 `Package.resolved` 文件。`Package.resolved` 保存了当前项目所有用到的 dependency 版本。
+第一次构建成功后，`SPM` 将会自动创建一个 `Package.resolved` 文件。`Package.resolved` 保存了当前项目所有用到的 `dependency` 版本，这样以后每次 `Build` 都将使用相同的版本号。
 
 `Package.resolved` 示例如下：
 
 ```shell
 {
-  "object": {
-    "pins": [
-      {
-        "package": "async-http-client",
-        "repositoryURL": "https://github.com/swift-server/async-http-client.git",
-        "state": {
-          "branch": null,
-          "revision": "51dc885a30ca704b02fa803099b0a9b5b38067b6",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "async-kit",
-        "repositoryURL": "https://github.com/vapor/async-kit.git",
-        "state": {
-          "branch": null,
-          "revision": "d9fd2be441af6d1428b62ab694848396e7072a14",
-          "version": "1.0.0-beta.1"
-        }
-      },
-      ......
-    ]
-  },
-  "version": 1
+  "pins" : [
+    {
+      "identity" : "async-http-client",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-server/async-http-client.git",
+      "state" : {
+        "revision" : "7a4dfe026f6ee0f8ad741b58df74c60af296365d",
+        "version" : "1.9.0"
+      }
+    },
+    {
+      "identity" : "async-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/async-kit.git",
+      "state" : {
+        "revision" : "e2f741640364c1d271405da637029ea6a33f754e",
+        "version" : "1.11.1"
+      }
+    },
+    ......
+  ],
+  "version" : 1
 }
 ```
 
+> 提示
+> 
+>  如果想更新 `dependency` 版本，可执行 `swift package update` 。
+
 ## 遇到问题
 
-如果你遇到 SPM 相关的问题，可以尝试 clean 下工程项目试试。
+如果你遇到 `SPM` 相关的问题，可以尝试 `clean` 下工程项目试试。
 
 ```shell
 vapor clean
