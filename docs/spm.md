@@ -51,7 +51,7 @@ let package = Package(
 
 ### Tools Version
 
-第一行表示需要使用的 `swift tools` 版本号。
+第一行表示当前使用的 `swift tools` 版本号。
 
 ```swift
 // swift-tools-version:5.6
