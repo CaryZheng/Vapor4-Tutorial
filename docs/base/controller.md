@@ -9,31 +9,39 @@
 ``` swift
 import Vapor
 
-struct TestController {
+struct TestController: RouteCollection {
+    
+    func boot(routes: RoutesBuilder) throws {
+        let userRoute = routes.grouped("user")
+        userRoute.get(":userId", use: findUser)
+        userRoute.post(use: createUser)
+        userRoute.put(use: updateUser)
+        userRoute.delete(":userId", use: deleteUser)
+    }
     
     func createUser(req: Request) -> String {
         return "Create SwiftMic test user"
     }
-    
+
     func updateUser(req: Request) -> String {
         return "Update SwiftMic test user"
     }
-    
+
     func findUser(req: Request) -> String {
         let userId = req.parameters.get("userId")
         if nil == userId || userId!.isEmpty {
             return "Require param: userId"
         }
-        
+
         return "Find SwiftMic test user: " + userId!
     }
-    
+
     func deleteUser(req: Request) -> String {
         let userId = req.parameters.get("userId")
         if nil == userId || userId!.isEmpty {
             return "Require param: userId"
         }
-        
+
         return "Delete SwiftMic test user: " + userId!
     }
 }
@@ -41,27 +49,39 @@ struct TestController {
 
 此处，`TestController` 结构体中定义了 4 个方法（`createUser`、`updateUser`、`findUser`、`deleteUser`），它们都接收了一个 `Request` 请求，处理完后返回一个 `Response`（此处为 `String` 类型）。
 
+!!! note
+
+	上述示例代码展示了 `controller` 的基本使用方式，并未接入任何数据库。数据库相关内容将会在后续教程中进行详细介绍。
+
 ## 绑定 Controller
 
-接下来，在 `routes.swift` 文件中进行绑定操作。
+在 `TestController.swift` 文件中的 `boot` 方法中设置路由与具体响应方法之间的绑定关系。
+
+```swift
+func boot(routes: RoutesBuilder) throws {
+    let routeBuilder = routes.grouped("test")
+    
+    // 请求路径：test，参数：<userId>, 请求方法: GET，响应方法：findUser。
+    routeBuilder.get(":userId", use: findUser)
+    
+    // 请求路径：test，请求方法: POST，响应方法：createUser。
+    routeBuilder.post(use: createUser)
+    
+    // 请求路径：test，请求方法: PUT，响应方法：updateUser。
+    routeBuilder.put(use: updateUser)
+    
+    // 请求路径：test，参数：<userId>, 请求方法: DELETE，响应方法：deleteUser。
+    routeBuilder.delete(":userId", use: deleteUser)
+}
+```
+
+接下来，在 `routes.swift` 文件中进行注册操作。
 
 ``` swift
 func routes(_ app: Application) throws {
     ......
     
-    let testController = TestController()
-
-    // 请求路径：test，请求方法: POST，响应方法：createUser。
-    app.post("test", use: testController.createUser)
-
-    // 请求路径：test，请求方法: PUT，响应方法：updateUser。
-    app.put("test", use: testController.updateUser)
-
-    // 请求路径：test，参数：<userId>, 请求方法: GET，响应方法：findUser。
-    app.get("test", ":userId", use: testController.findUser)
-
-    // 请求路径：test，参数：<userId>, 请求方法: DELETE，响应方法：deleteUser。
-    app.delete("test", ":userId", use: testController.deleteUser)
+    try app.register(collection: TestController())
 }
 ```
 
