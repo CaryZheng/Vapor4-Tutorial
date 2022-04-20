@@ -1,6 +1,6 @@
 # Controller
 
-`Controller` 可以使得代码结构更清晰，它是处理 request 和 response 的一系列方法集合。
+`Controller` 可以使得代码结构更清晰，它是处理 `request` 和 `response` 的一系列方法集合。
 
 ## 创建 Controller
 

@@ -1,6 +1,6 @@
 # Application
 
-`Application` 是 Vapor 中一个非常重要的类，负责管理各类基础组件（比如：Provider、Middleware、Database、Route 等等）。
+`Application` 是 `Vapor` 中一个非常重要的类，负责管理各类基础组件（比如：`Provider`、`Middleware`、`Database`、`Route` 等等）。
 
 `Application` 的部分源码如下
 
@@ -12,7 +12,7 @@ public final class Application {
     public var storage: Storage
     public private(set) var didShutdown: Bool
     public var logger: Logger
-    private var isBooted: Bool
+    var isBooted: Bool
     
     public init(
         _ environment: Environment = .development,
@@ -34,16 +34,20 @@ public final class Application {
         self.lifecycle = .init()
         self.isBooted = false
         self.core.initialize()
+        self.caches.initialize()
         self.views.initialize()
+        self.passwords.use(.bcrypt)
         self.sessions.initialize()
         self.sessions.use(.memory)
         self.responder.initialize()
         self.responder.use(.default)
-        self.commands.use(self.server.command, as: "serve", isDefault: true)
+        self.servers.initialize()
+        self.servers.use(.http)
+        self.clients.initialize()
+        self.clients.use(.http)
+        self.commands.use(self.servers.command, as: "serve", isDefault: true)
         self.commands.use(RoutesCommand(), as: "routes")
-        // Load specific .env first since values are not overridden.
-        self.loadDotEnv(named: ".env.\(self.environment.name)")
-        self.loadDotEnv(named: ".env")
+        DotEnvFile.load(for: environment, on: .shared(self.eventLoopGroup), fileio: self.fileio, logger: self.logger)
     }
 
     ......
@@ -102,11 +106,8 @@ func routes(_ app: Application) throws {
         return "Hello, world!"
     }
 
-    let todoController = TodoController()
-    app.get("todos", use: todoController.index)
-    app.post("todos", use: todoController.create)
-    app.on(.DELETE, "todos", ":todoID", use: todoController.delete)
+    try app.register(collection: TodoController())
 }
 ```
 
-从中可以看出，`Application` 管理着各类基础组件（比如：Environment、Logger、Route 等等），并贯穿于程序的整个生命周期。
+从中可以看出，`Application` 管理着各类基础组件（比如：`Environment`、`Logger`、`Route` 等等），并贯穿于程序的整个生命周期。
