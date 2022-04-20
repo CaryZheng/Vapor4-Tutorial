@@ -697,12 +697,20 @@
 
 
 <h1 id="controller">Controller<a class="headerlink" href="#controller" title="Permanent link">&para;</a></h1>
-<p><code>Controller</code> 可以使得代码结构更清晰，它是处理 request 和 response 的一系列方法集合。</p>
+<p><code>Controller</code> 可以使得代码结构更清晰，它是处理 <code>request</code> 和 <code>response</code> 的一系列方法集合。</p>
 <h2 id="controller_1">创建 Controller<a class="headerlink" href="#controller_1" title="Permanent link">&para;</a></h2>
 <p>首先，我们在 <code>Controllers</code> 目录下创建一个新的 <code>TestController.swift</code> 文件 ，代码如下</p>
 <div class="highlight"><pre><span></span><code><span class="kd">import</span> <span class="nc">Vapor</span>
 
-<span class="kd">struct</span> <span class="nc">TestController</span> <span class="p">{</span>
+<span class="kd">struct</span> <span class="nc">TestController</span><span class="p">:</span> <span class="n">RouteCollection</span> <span class="p">{</span>
+
+    <span class="kd">func</span> <span class="nf">boot</span><span class="p">(</span><span class="n">routes</span><span class="p">:</span> <span class="n">RoutesBuilder</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">userRoute</span> <span class="p">=</span> <span class="n">routes</span><span class="p">.</span><span class="n">grouped</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span>
+        <span class="n">userRoute</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">findUser</span><span class="p">)</span>
+        <span class="n">userRoute</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">use</span><span class="p">:</span> <span class="n">createUser</span><span class="p">)</span>
+        <span class="n">userRoute</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">use</span><span class="p">:</span> <span class="n">updateUser</span><span class="p">)</span>
+        <span class="n">userRoute</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">deleteUser</span><span class="p">)</span>
+    <span class="p">}</span>
 
     <span class="kd">func</span> <span class="nf">createUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
         <span class="k">return</span> <span class="s">&quot;Create SwiftMic test user&quot;</span>
@@ -732,24 +740,33 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>此处，<code>TestController</code> 结构体中定义了 4 个方法（<code>createUser</code>、<code>updateUser</code>、<code>findUser</code>、<code>deleteUser</code>），它们都接收了一个 <code>Request</code> 请求，处理完后返回一个 <code>Response</code>（此处为 <code>String</code> 类型）。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上述示例代码展示了 <code>controller</code> 的基本使用方式，并未接入任何数据库。数据库相关内容将会在后续教程中进行详细介绍。</p>
+</div>
 <h2 id="controller_2">绑定 Controller<a class="headerlink" href="#controller_2" title="Permanent link">&para;</a></h2>
-<p>接下来，在 <code>routes.swift</code> 文件中进行绑定操作。</p>
+<p>在 <code>TestController.swift</code> 文件中的 <code>boot</code> 方法中设置路由与具体响应方法之间的绑定关系。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">boot</span><span class="p">(</span><span class="n">routes</span><span class="p">:</span> <span class="n">RoutesBuilder</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">routeBuilder</span> <span class="p">=</span> <span class="n">routes</span><span class="p">.</span><span class="n">grouped</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+
+    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: GET，响应方法：findUser。</span>
+    <span class="n">routeBuilder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">findUser</span><span class="p">)</span>
+
+    <span class="c1">// 请求路径：test，请求方法: POST，响应方法：createUser。</span>
+    <span class="n">routeBuilder</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">use</span><span class="p">:</span> <span class="n">createUser</span><span class="p">)</span>
+
+    <span class="c1">// 请求路径：test，请求方法: PUT，响应方法：updateUser。</span>
+    <span class="n">routeBuilder</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">use</span><span class="p">:</span> <span class="n">updateUser</span><span class="p">)</span>
+
+    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: DELETE，响应方法：deleteUser。</span>
+    <span class="n">routeBuilder</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">deleteUser</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>接下来，在 <code>routes.swift</code> 文件中进行注册操作。</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
     <span class="p">......</span>
 
-    <span class="kd">let</span> <span class="nv">testController</span> <span class="p">=</span> <span class="n">TestController</span><span class="p">()</span>
-
-    <span class="c1">// 请求路径：test，请求方法: POST，响应方法：createUser。</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">createUser</span><span class="p">)</span>
-
-    <span class="c1">// 请求路径：test，请求方法: PUT，响应方法：updateUser。</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">updateUser</span><span class="p">)</span>
-
-    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: GET，响应方法：findUser。</span>
-    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">findUser</span><span class="p">)</span>
-
-    <span class="c1">// 请求路径：test，参数：&lt;userId&gt;, 请求方法: DELETE，响应方法：deleteUser。</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">deleteUser</span><span class="p">)</span>
+    <span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">TestController</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="api">测试 API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>

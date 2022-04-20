@@ -555,7 +555,7 @@
 
 
 <h1 id="application">Application<a class="headerlink" href="#application" title="Permanent link">&para;</a></h1>
-<p><code>Application</code> 是 Vapor 中一个非常重要的类，负责管理各类基础组件（比如：Provider、Middleware、Database、Route 等等）。</p>
+<p><code>Application</code> 是 <code>Vapor</code> 中一个非常重要的类，负责管理各类基础组件（比如：<code>Provider</code>、<code>Middleware</code>、<code>Database</code>、<code>Route</code> 等等）。</p>
 <p><code>Application</code> 的部分源码如下</p>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kr">final</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">var</span> <span class="nv">environment</span><span class="p">:</span> <span class="n">Environment</span>
@@ -564,7 +564,7 @@
     <span class="kd">public</span> <span class="kd">var</span> <span class="nv">storage</span><span class="p">:</span> <span class="n">Storage</span>
     <span class="kd">public</span> <span class="kd">private</span><span class="p">(</span><span class="kr">set</span><span class="p">)</span> <span class="kd">var</span> <span class="nv">didShutdown</span><span class="p">:</span> <span class="nb">Bool</span>
     <span class="kd">public</span> <span class="kd">var</span> <span class="nv">logger</span><span class="p">:</span> <span class="n">Logger</span>
-    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">isBooted</span><span class="p">:</span> <span class="nb">Bool</span>
+    <span class="kd">var</span> <span class="nv">isBooted</span><span class="p">:</span> <span class="nb">Bool</span>
 
     <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span>
         <span class="kc">_</span> <span class="n">environment</span><span class="p">:</span> <span class="n">Environment</span> <span class="p">=</span> <span class="p">.</span><span class="n">development</span><span class="p">,</span>
@@ -586,16 +586,20 @@
         <span class="kc">self</span><span class="p">.</span><span class="n">lifecycle</span> <span class="p">=</span> <span class="p">.</span><span class="kd">init</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">isBooted</span> <span class="p">=</span> <span class="kc">false</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">caches</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">views</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">passwords</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">bcrypt</span><span class="p">)</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">memory</span><span class="p">)</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">responder</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">responder</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="k">default</span><span class="p">)</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">commands</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">server</span><span class="p">.</span><span class="n">command</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="s">&quot;serve&quot;</span><span class="p">,</span> <span class="n">isDefault</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">servers</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">servers</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">http</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">clients</span><span class="p">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">clients</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">http</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">commands</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">servers</span><span class="p">.</span><span class="n">command</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="s">&quot;serve&quot;</span><span class="p">,</span> <span class="n">isDefault</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">commands</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">RoutesCommand</span><span class="p">(),</span> <span class="k">as</span><span class="p">:</span> <span class="s">&quot;routes&quot;</span><span class="p">)</span>
-        <span class="c1">// Load specific .env first since values are not overridden.</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">loadDotEnv</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&quot;.env.</span><span class="si">\(</span><span class="kc">self</span><span class="p">.</span><span class="n">environment</span><span class="p">.</span><span class="n">name</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">loadDotEnv</span><span class="p">(</span><span class="n">named</span><span class="p">:</span> <span class="s">&quot;.env&quot;</span><span class="p">)</span>
+        <span class="n">DotEnvFile</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="n">environment</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="p">.</span><span class="n">shared</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">eventLoopGroup</span><span class="p">),</span> <span class="n">fileio</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">fileio</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">logger</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="p">......</span>
@@ -645,13 +649,10 @@
         <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
     <span class="p">}</span>
 
-    <span class="kd">let</span> <span class="nv">todoController</span> <span class="p">=</span> <span class="n">TodoController</span><span class="p">()</span>
-    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">create</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">DELETE</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="s">&quot;:todoID&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">delete</span><span class="p">)</span>
+    <span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">TodoController</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>从中可以看出，<code>Application</code> 管理着各类基础组件（比如：Environment、Logger、Route 等等），并贯穿于程序的整个生命周期。</p>
+<p>从中可以看出，<code>Application</code> 管理着各类基础组件（比如：<code>Environment</code>、<code>Logger</code>、<code>Route</code> 等等），并贯穿于程序的整个生命周期。</p>
 
               
             </article>
