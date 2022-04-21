@@ -438,6 +438,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    带参数的路由
+  </a>
+  
+    <nav class="md-nav" aria-label="带参数的路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user1" class="md-nav__link">
+    测试 /user/1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userid2" class="md-nav__link">
+    测试 /user?id=2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    测试 body 解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -662,6 +696,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    带参数的路由
+  </a>
+  
+    <nav class="md-nav" aria-label="带参数的路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user1" class="md-nav__link">
+    测试 /user/1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userid2" class="md-nav__link">
+    测试 /user?id=2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    测试 body 解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -682,48 +750,26 @@
 
 <h1 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h1>
 <p>路由是用来管理控制 HTTP 请求入口的。</p>
-<p>先看下 <code>App</code> 目录下的 <code>routes.swift</code> 文件，源码如下。</p>
+<p>先看下 <code>App</code> 目录下的 <code>routes.swift</code> 文件，代码如下。</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">routes</span><span class="p">(</span><span class="kc">_</span> <span class="n">app</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
     <span class="n">app</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
         <span class="k">return</span> <span class="s">&quot;It works!&quot;</span>
     <span class="p">}</span>
 
-    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
         <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
     <span class="p">}</span>
 
-    <span class="kd">let</span> <span class="nv">todoController</span> <span class="p">=</span> <span class="n">TodoController</span><span class="p">()</span>
-    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">create</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">DELETE</span><span class="p">,</span> <span class="s">&quot;todos&quot;</span><span class="p">,</span> <span class="s">&quot;:todoID&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">todoController</span><span class="p">.</span><span class="n">delete</span><span class="p">)</span>
-
-    <span class="kd">let</span> <span class="nv">testController</span> <span class="p">=</span> <span class="n">TestController</span><span class="p">()</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">createUser</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">updateUser</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">findUser</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">testController</span><span class="p">.</span><span class="n">deleteUser</span><span class="p">)</span>
-
-    <span class="c1">// 路由组</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;v1&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">builder</span> <span class="k">in</span>
-
-        <span class="c1">// 此处定义的所有请求路径都是在路由组（&quot;v1&quot;）下面的。</span>
-        <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
-            <span class="k">return</span> <span class="s">&quot;Handle path: v1/name&quot;</span>
-        <span class="p">}</span>
-
-        <span class="n">builder</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;avatar&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
-            <span class="k">return</span> <span class="s">&quot;Handle path: v1/avatar&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="p">......</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>通过 <code>app</code>（<code>Application</code> 类实例）可以对路由进行相关的配置。</p>
 <h2 id="_1">监听指定路径<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
     <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>如上代码的作用是，监听了 "hello" 路径，当客户端发起 <code>/hello</code> 为路径的 <code>GET</code> 请求时，将会出发该回调方法的执行，最终返回 "Hello, world!" 给客户端展现。</p>
+<p>如上代码的作用是，监听了 "hello" 路径，当客户端发起 <code>/hello</code> 为路径的 <code>GET</code> 请求时，将会触发该回调方法的执行，最终返回 "Hello, world!" 给客户端展现。</p>
 <h3 id="hello">测试 <code>hello</code><a class="headerlink" href="#hello" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Request</li>
@@ -789,6 +835,69 @@
 <li>Response</li>
 </ul>
 <div class="highlight"><pre><span></span><code>Handle path: v1/avatar
+</code></pre></div>
+<h2 id="_3">带参数的路由<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>有时候请求的接口需要在 <code>URL</code> 上携带参数，比如 <code>/user/1</code>，可通过 <code>:&lt;参数名&gt;</code> 格式来定义该参数，并通过 <code>req.parameters.get(&lt;参数名&gt;)</code> 来获取传递过来的参数，代码如下。</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="s">&quot;:userId&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">userId</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;userId = </span><span class="si">\(</span><span class="n">userId</span> <span class="p">??</span> <span class="s">&quot;&quot;</span><span class="si">)</span><span class="s">&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="user1">测试 <code>/user/1</code><a class="headerlink" href="#user1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Request</li>
+</ul>
+<div class="highlight"><pre><span></span><code>curl --location --request GET <span class="s1">&#39;http://localhost:8080/user/1&#39;</span>
+</code></pre></div>
+<ul>
+<li>Response</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nv">userId</span> <span class="o">=</span> <span class="m">1</span>
+</code></pre></div>
+<p>如果希望接收 <code>/user?id=1</code> 这样格式的参数的话，可通过 <code>req.query["id"]</code> 来获取到对应的 <code>id</code> 参数，代码如下。</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">userId</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">query</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s">&quot;userId = </span><span class="si">\(</span><span class="n">userId</span> <span class="p">??</span> <span class="s">&quot;&quot;</span><span class="si">)</span><span class="s">&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="userid2">测试 <code>/user?id=2</code><a class="headerlink" href="#userid2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Request</li>
+</ul>
+<div class="highlight"><pre><span></span><code>curl --location --request GET <span class="s1">&#39;http://localhost:8080/user?id=2&#39;</span>
+</code></pre></div>
+<ul>
+<li>Response</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nv">userId</span> <span class="o">=</span> <span class="m">2</span>
+</code></pre></div>
+<p>另外，<code>POST</code> 请求参数往往是存放在 <code>http</code> 的 <code>body</code> 中的，可通过 <code>req.content.decode</code> 方法解析传递过来的 <code>body</code> 数据，代码如下。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">createUser</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">UserInput</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">userInput</span> <span class="p">=</span> <span class="k">try</span> <span class="n">req</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">UserInput</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">userInput</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>其中，<code>UserInput</code> 定义如下</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span> <span class="nc">UserInput</span><span class="p">:</span> <span class="n">Content</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">username</span><span class="p">:</span> <span class="nb">String</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="body">测试 body 解析<a class="headerlink" href="#body" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Request</li>
+</ul>
+<div class="highlight"><pre><span></span><code>curl --location --request POST <span class="s1">&#39;http://127.0.0.1:8080/test&#39;</span> <span class="se">\</span>
+--header <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\</span>
+--data-raw <span class="s1">&#39;{</span>
+<span class="s1">    &quot;username&quot;: &quot;SwiftMic1&quot;</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
+<ul>
+<li>Response</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span><span class="s2">&quot;username&quot;</span>:<span class="s2">&quot;SwiftMic1&quot;</span><span class="o">}</span>
 </code></pre></div>
 
               
